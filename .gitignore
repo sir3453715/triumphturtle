@@ -1,0 +1,14 @@
+.editorconfig
+.env
+.env.example
+.styleci.yml
+.idea/.gitignore
+.idea/deployment.xml
+.idea/dev.meihao.iml
+.idea/modules.xml
+.idea/php.xml
+.idea/phpunit.xml
+.idea/sshConfigs.xml
+.idea/webServers.xml
+vendor/*
+node_modules/*

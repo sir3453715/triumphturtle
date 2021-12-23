@@ -1,0 +1,50 @@
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+
+// Variables
+@import '../variables';
+
+// Bootstrap
+@import '../../../node_modules/bootstrap/scss/bootstrap';
+
+/**
+select2
+ */
+@import "~select2/dist/css/select2.css";
+
+// Template
+@import 'template/adminlte';
+
+@import '~@fortawesome/fontawesome-free/scss/fontawesome';
+@import '~@fortawesome/fontawesome-free/scss/regular';
+@import '~@fortawesome/fontawesome-free/scss/solid';
+@import '~@fortawesome/fontawesome-free/scss/brands';
+
+/**
+Slider
+ */
+@import "slick-carousel/slick/slick.css";
+@import "slick-carousel/slick/slick-theme.css";
+
+/**
+DataTables
+ */
+@import "~datatables.net-bs4/css/dataTables.bootstrap4.min.css";
+@import "~datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css";
+
+.required-error-message{
+    font-size: 13px;
+    font-weight: bolder;
+}
+.fc-event{
+    padding: 8px !important;
+    border-radius: 10px !important;
+}
+
+table.dataTable>tbody>tr.child ul.dtr-details{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+.dtr-data{
+    display: block;
+}

@@ -1,0 +1,32 @@
+{
+    "private": true,
+    "scripts": {
+        "dev": "npm run development",
+        "development": "mix",
+        "watch": "mix watch",
+        "watch-poll": "mix watch -- --watch-options-poll=1000",
+        "hot": "mix watch --hot",
+        "prod": "npm run production",
+        "production": "mix --production"
+    },
+    "dependencies": {
+        "select2": "^4.0.9",
+        "slick-carousel": "^1.8.1"
+    },
+    "devDependencies": {
+        "@fortawesome/fontawesome-free": "^5.15.1",
+        "axios": "^0.21",
+        "bootstrap": "^4.0.0",
+        "datatables.net-bs4": "^1.10.19",
+        "datatables.net-responsive-bs4": "^2.2.3",
+        "flag-icon-css": "^3.3.0",
+        "jquery": "^3.2",
+        "laravel-mix": "^6.0.13",
+        "lodash": "^4.17.19",
+        "popper.js": "^1.12",
+        "postcss": "^8.1.14",
+        "resolve-url-loader": "^3.1.2",
+        "sass": "^1.32.11",
+        "sass-loader": "^8.0.0"
+    }
+}
