@@ -1,5 +1,6 @@
 import './libs';
 import slick from 'slick-carousel';
+import 'select2/dist/js/i18n/zh-TW.js';
 
 require('./template/adminlte');
 
@@ -16,6 +17,9 @@ $(() => {
             });
         }
         $('.select2').select2({
+            width: '100%',
+            placeholder:"請選擇...",
+            language:'zh-TW',
             allowClear: true
         });
         $('.table').DataTable({
@@ -24,6 +28,9 @@ $(() => {
             searching: false,
             info: false,
             "ordering" : false,
+            "language": {
+                "emptyTable": "目前沒有資料"
+            }
         });
         $('a[data-toggle="pill"]').on('shown.bs.tab', function (e) {
             $('.table').DataTable({
