@@ -16,7 +16,7 @@ class ActionLog extends Model
      * @var array
      */
     protected $fillable = [
-        'user_id','action_table','change_column','action'
+        'user_id','action_table','change_column','action','action_id'
     ];
 
     public function user(){
@@ -26,17 +26,18 @@ class ActionLog extends Model
     public static function create_log( $model=null , $action='update' ){
         if($action == 'update'){
             $new_array=$model->getDirty();
-            $old_array = array();
+            $change_array = array();
             foreach ($new_array as $key=>$value){
-                $old_array["old_{$key}"]=$model->getOriginal($key);
+                $change_array[]='修改 '.$key.' 從 "'.$model->getOriginal($key).'" 改為 "'.$value.'"';
             }
-            $change_column = json_encode(array_merge($old_array,$new_array));
+            $change_column = json_encode($change_array);
         }else{
             $change_column = json_encode($model->toArray());
         }
-         $data=[
+        $data=[
             'user_id'=>Auth::id(),
             'action_table'=>get_class($model),
+            'action_id'=>$model->id,
             'change_column'=>$change_column,
             'action'=>$action,
         ];

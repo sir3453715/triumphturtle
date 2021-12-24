@@ -17,6 +17,7 @@ class CreateActionLogTable extends Migration
             $table->id();
             $table->integer('user_id')->comment('會員ID')->nullable();
             $table->string('action_table')->comment('更動資料表')->nullable();
+            $table->string('action_id')->comment('更動編號')->nullable();
             $table->text('change_column')->comment('更動項目')->nullable();
             $table->string('action')->comment('執行動作')->nullable();
             $table->timestamps();
