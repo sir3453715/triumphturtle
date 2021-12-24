@@ -91,7 +91,19 @@ return[
         [
             //網站歷史紀錄
             'name'         => 'admin web log',
-            'displayName'  => '網站歷史紀錄',
+            'displayName'  => '網站操作歷史紀錄',
+            'assignTo'     => ['manager'],
+        ],
+        [
+            //網站歷史紀錄
+            'name'         => 'admin login log',
+            'displayName'  => '登入紀錄',
+            'assignTo'     => ['manager'],
+        ],
+        [
+            //網站歷史紀錄
+            'name'         => 'admin action log',
+            'displayName'  => '操作紀錄',
             'assignTo'     => ['manager'],
         ],
     ],
