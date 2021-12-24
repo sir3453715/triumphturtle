@@ -8,12 +8,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">History Log</h1>
+                    <h1 class="m-0">歷史紀錄</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">History Log </li>
+                        <li class="breadcrumb-item"><a href="{{route('admin.index')}}">首頁</a></li>
+                        <li class="breadcrumb-item active">歷史紀錄</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -31,10 +31,10 @@
                     <div class="card-header p-0 pl-1 pt-2">
                         <ul class="nav nav-tabs" id="custom-tabs-one-tab" role="tablist">
                             <li class="nav-item">
-                                <a class="nav-link tab-item {{($current_tab=='login-log' || $current_tab=='')?'active':''}} " id="custom-tabs-one-login-log-tab" data-toggle="pill" data-value="login-log" href="#custom-tabs-one-login-log" role="tab" aria-controls="custom-tabs-one-login-log" aria-selected="true">Login Log (僅顯示前25筆)</a>
+                                <a class="nav-link tab-item {{($current_tab=='login-log' || $current_tab=='')?'active':''}} " id="custom-tabs-one-login-log-tab" data-toggle="pill" data-value="login-log" href="#custom-tabs-one-login-log" role="tab" aria-controls="custom-tabs-one-login-log" aria-selected="true">登入紀錄 (僅顯示前25筆)</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link tab-item {{($current_tab=='action-log')?'active':''}} " id="custom-tabs-one-action-log-tab" data-toggle="pill" data-value="action-log" href="#custom-tabs-one-action-log" role="tab" aria-controls="custom-tabs-one-action-log" aria-selected="false">Activity History Log</a>
+                                <a class="nav-link tab-item {{($current_tab=='action-log')?'active':''}} " id="custom-tabs-one-action-log-tab" data-toggle="pill" data-value="action-log" href="#custom-tabs-one-action-log" role="tab" aria-controls="custom-tabs-one-action-log" aria-selected="false">網站操作紀錄</a>
                             </li>
                         </ul>
                     </div>
@@ -44,10 +44,10 @@
                                 <table class="table table-bordered table-striped">
                                     <thead>
                                     <tr>
-                                        <th>User</th>
+                                        <th>會員</th>
                                         <th>IP</th>
-                                        <th>result</th>
-                                        <th>Time</th>
+                                        <th>結果</th>
+                                        <th>時間</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -72,11 +72,11 @@
                                 <table class="table table-bordered table-striped">
                                     <thead>
                                     <tr>
-                                        <th>User</th>
-                                        <th>Action Table</th>
-                                        <th>Action</th>
-                                        <th>Change Column</th>
-                                        <th>Time</th>
+                                        <th>會員</th>
+                                        <th>修改資料表</th>
+                                        <th>動作</th>
+                                        <th>修改欄位</th>
+                                        <th>時間</th>
                                     </tr>
                                     </thead>
                                     <tbody>

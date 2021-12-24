@@ -120,7 +120,7 @@
                     <div class="col-lg-4">
                         <div class="login-content card">
                             <div class="login-form">
-                                <h4 class="login-form-title">{{ 'Backend Login' }}</h4>
+                                <h4 class="login-form-title">後台登入</h4>
                                 <form method="POST" action="{{ route('login') }}">
                                     <input id="login_by" type="hidden"  name="login_by" value="admin">
                                     @csrf

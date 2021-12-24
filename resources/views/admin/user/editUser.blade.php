@@ -7,13 +7,13 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Edit User {{ $user->email }}</h1>
+                    <h1 class="m-0">修改會員 {{ $user->email }}</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="{{route('admin.index')}}">Home</a></li>
-                        <li class="breadcrumb-item"><a href="{{route('admin.user.index')}}">User</a></li>
-                        <li class="breadcrumb-item active">Edit User</li>
+                        <li class="breadcrumb-item"><a href="{{route('admin.index')}}">首頁</a></li>
+                        <li class="breadcrumb-item"><a href="{{route('admin.user.index')}}">會員管理</a></li>
+                        <li class="breadcrumb-item active">修改會員</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -61,20 +61,20 @@
                     <div class="col-md-2">
                         <div class="card card-info">
                             <div class="card-header">
-                                <h3 class="card-title">Action</h3>
+                                <h3 class="card-title">動作</h3>
                             </div>
                             <div class="card-body">
                                 <div class="form-group">
                                     <label for="status">角色</label>
                                     <select name="users_role" id="users-role" class="form-control select2">
                                         @foreach($roles as $role)
-                                            <option value="{{$role->id}}" {!! $html->selectSelected($role->id, $user_roles) !!}>{{$role->name}}</option>
+                                            <option value="{{$role->id}}" {!! $html->selectSelected($role->id, $user_roles) !!}>{{$role->display_name}}</option>
                                         @endforeach
                                     </select>
                                 </div>
                             </div>
                             <div class="card-footer">
-                                <button type="submit" class="btn btn-info">Submit</button>
+                                <button type="submit" class="btn btn-info">送出</button>
                             </div>
                         </div>
                     </div>

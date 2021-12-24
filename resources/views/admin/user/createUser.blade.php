@@ -9,13 +9,13 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Create User</h1>
+                    <h1 class="m-0">建立顧客</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="{{route('admin.index')}}">Home</a></li>
-                        <li class="breadcrumb-item"><a href="{{route('admin.user.index')}}">User</a></li>
-                        <li class="breadcrumb-item active">Create User </li>
+                        <li class="breadcrumb-item"><a href="{{route('admin.index')}}">首頁</a></li>
+                        <li class="breadcrumb-item"><a href="{{route('admin.user.index')}}">顧客管理</a></li>
+                        <li class="breadcrumb-item active">建立顧客</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -65,20 +65,20 @@
                     <div class="col-md-2">
                         <div class="card card-info">
                             <div class="card-header">
-                                <h3 class="card-title">Action</h3>
+                                <h3 class="card-title">動作</h3>
                             </div>
                             <div class="card-body">
                                 <div class="form-group">
                                     <label for="status">角色</label>
                                     <select name="users_role" id="users-role" class="form-control select2">
                                         @foreach($roles as $role)
-                                            <option value="{{$role->id}}" >{{$role->name}}</option>
+                                            <option value="{{$role->id}}" >{{$role->display_name}}</option>
                                         @endforeach
                                     </select>
                                 </div>
                             </div>
                             <div class="card-footer">
-                                <button type="submit" class="btn btn-info">Submit</button>
+                                <button type="submit" class="btn btn-info">送出</button>
                             </div>
                         </div>
                     </div>

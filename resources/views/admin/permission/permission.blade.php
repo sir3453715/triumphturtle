@@ -8,12 +8,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Permission</h1>
+                    <h1 class="m-0">權限管理</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="{{route('admin.index')}}">Home</a></li>
-                        <li class="breadcrumb-item active">Permission </li>
+                        <li class="breadcrumb-item"><a href="{{route('admin.index')}}">首頁</a></li>
+                        <li class="breadcrumb-item active">權限管理</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -32,8 +32,8 @@
                         <table class="table table-bordered">
                             <thead>
                             <tr>
-                                <th>Role Name</th>
-                                <th>Action</th>
+                                <th>角色</th>
+                                <th>動作</th>
                             </tr>
                             </thead>
                             <tbody>
