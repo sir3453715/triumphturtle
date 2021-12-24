@@ -26,5 +26,10 @@ return [
     'website-log-history'=>[
         'index'=>'網站紀錄列表',
     ],
+    'action'=>[
+        'create'=>'新增',
+        'update'=>'修改',
+        'delete'=>'刪除',
+    ]
 
 ];
