@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Admin\Menu;
 
 use App\Http\Controllers\Controller;
+use App\Models\Country;
+use App\Models\Order;
+use App\Models\SailingSchedule;
 use Facebook\Facebook;
 use Facebook\FacebookRequest;
 use Illuminate\Http\Request;
@@ -14,51 +17,87 @@ class OrderDetailController extends Controller
     /**
      * index
      */
-    function index(Request $request){
-
-//        session_start();
-//
-//        $fb = new Facebook([
-//            'app_id' => '1984625251687847',
-//            'app_secret' => 'f0008da5defcdfe4bb64e79a36b67561',
-//            'default_graph_version' => 'v2.10',
-//        ]);
-//
-//        $helper = $fb->getRedirectLoginHelper();
-//        $helper->getPersistentDataHandler()->set('state', $request->query->get('state'));
-//        $permissions = ['email','read_insights'];
-//        try {
-//            if (isset($_SESSION['facebook_access_token'])) {
-//                $accessToken = $_SESSION['facebook_access_token'];
-//            } else {
-//                $accessToken = $helper->getAccessToken();
-//                $_SESSION['facebook_access_token'] = $accessToken;
-//            }
-//            $page_token_request = $fb->get('/103242447732766?fields=access_token',$accessToken);
-//            $json = json_decode($page_token_request->getBody());
-//            $page_token = $json->access_token;
-//            $since = strtotime('-1 month');
-//            $until = strtotime(now());
-//
-//            $page_request = $fb->get('/103242447732766/insights?metric=page_messages_active_threads_unique&since='.$since.'&until='.$until.'&access_token='.$page_token);
-//            $page_data = json_decode($page_request->getBody());
-//
-//
-//        } catch(Facebook\Exceptions\FacebookResponseException $e) {
-//            echo 'Graph returned an error: ' . $e->getMessage();
-//            exit;
-//        } catch(Facebook\Exceptions\FacebookSDKException $e) {
-//            echo 'Facebook SDK returned an error: ' . $e->getMessage();
-//            exit;
-//        }
-
-
-        return view('admin.dashboard.dashboard',[
-//            'helper'=>$helper,
-//            'permissions'=>$permissions,
-//            'accessToken'=>$accessToken,
+    public function index(Request $request)
+    {
+        $orders = Order::whereNotNull('id');
+        $queried=['seccode'=>'','sender'=>'','pay_status'=>'','status'=>''];
+        if($request->get('seccode')) {
+            $queried['seccode'] = $request->get('seccode');
+            $orders = $orders->where('seccode','LIKE','%'.$request->get('seccode').'%');
+        }
+        if($request->get('pay_status')) {
+            $queried['pay_status'] = $request->get('pay_status');
+            $orders = $orders->where('pay_status','=',$request->get('pay_status'));
+        }
+        if($request->get('status')) {
+            $queried['status'] = $request->get('status');
+            $orders = $orders->where('status','=',$request->get('status'));
+        }
+        if($request->get('sender')) {
+            $queried['sender'] = $request->get('sender');
+            $orders = $orders->where(function ($query) use ($queried){
+                $query->orwhere('sender_name','LIKE','%'.$queried['sender'].'%');
+                $query->orwhere('sender_phone','LIKE','%'.$queried['sender'].'%');
+            });
+        }
+        $orders = $orders->paginate(30);
+        return view('admin.orderBoxes.orderDetail',[
+            'orders'=>$orders,
+            'queried'=>$queried,
         ]);
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
 
     }
 
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+
+    }
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+
+    }
 }
