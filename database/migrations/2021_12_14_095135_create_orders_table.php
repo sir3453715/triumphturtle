@@ -17,7 +17,9 @@ class CreateOrdersTable extends Migration
             $table->id();
             $table->integer('user_id')->comment('會員ID')->nullable(true);
             $table->integer('sailing_id')->comment('船班ID')->nullable(true);
-            $table->text('seccode')->comment('訂單編號')->nullable(true);
+            $table->string('seccode')->comment('訂單編號')->nullable(true);
+            $table->string('serial_number')->comment('流水編號')->nullable(true);
+            $table->integer('person_number')->comment('人次編號')->nullable(true);
             $table->integer('type')->comment('訂單類型(1:個人訂單 2:團購訂單)')->nullable(true);
             $table->integer('parent_id')->comment('團購主單ID')->nullable(true);
             $table->integer('status')->comment('訂單狀態(1:未入庫 2:已入庫 3:宅配派送中 4:取消)')->nullable(true);
