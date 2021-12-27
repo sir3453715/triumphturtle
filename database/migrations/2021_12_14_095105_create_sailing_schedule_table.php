@@ -23,7 +23,7 @@ class CreateSailingScheduleTable extends Migration
             $table->date('parcel_deadline')->comment('包裹進截止日')->nullable(true);
             $table->date('sailing_date')->comment('開船日')->nullable(true);
             $table->date('arrival_date')->comment('抵達目的地倉庫日')->nullable(true);
-            $table->integer('on_off')->comment('上架/下架(0:下架 1:上架)')->nullable(true);
+            $table->integer('on_off')->comment('上架/下架(1:下架 2:上架)')->nullable(true);
             $table->integer('price')->comment('原價')->nullable(true);
             $table->integer('minimum')->comment('低消')->nullable(true);
             $table->string('box_interval')->comment('箱數級距')->nullable(true);
