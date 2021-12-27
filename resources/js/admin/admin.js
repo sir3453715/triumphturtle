@@ -92,4 +92,36 @@ $(() => {
         }
     });
 
+
+    /**
+     * 上傳圖片預覽與刪除
+     */
+    $(document.body).on('change', 'input[type=file]', e => {
+        let reader = new FileReader(),
+            $this = $(e.currentTarget),
+            $preview = $this.siblings('.cus-upload-img');
+
+        if(!$this.val()) return;
+        if($preview.length) {
+            let file = e.currentTarget.files[0];
+            let isImage = $.inArray(file.type, ['image/jpeg','image/png']) !== -1;
+            if(isImage) {
+                reader.onload = function(_e) {
+                    $preview.attr('src', _e.target.result);
+                }
+                reader.readAsDataURL(e.currentTarget.files[0]);
+            }
+        }
+    });
+    $(document.body).on('click', '.reback', e => {
+        let $reID = $(e.currentTarget).data('id'),
+            $reSrc = $(e.currentTarget).data('default'),
+            $change = $($reID),
+            $input = $(e.currentTarget).siblings('input[type=file]');
+
+        $change.attr('src', $reSrc);
+        $input.val('');
+    });
+
+
 })
