@@ -22,7 +22,7 @@ class CreateOrdersTable extends Migration
             $table->integer('person_number')->comment('人次編號')->nullable(true);
             $table->integer('type')->comment('訂單類型(1:個人訂單 2:團購訂單)')->nullable(true);
             $table->integer('parent_id')->comment('團購主單ID')->nullable(true);
-            $table->integer('status')->comment('訂單狀態(1:未入庫 2:已入庫 3:宅配派送中 4:取消)')->nullable(true);
+            $table->integer('status')->comment('訂單狀態(1:未入庫 2:已入庫 3:宅配派送中 4:完成 5:取消)')->nullable(true);
             $table->integer('pay_status')->comment('付款狀態(1:未付款 2:已出帳 3:已付款)')->nullable(true);
             $table->integer('total_price')->comment('訂單總金')->nullable(true);
             $table->text('shipment_use')->comment('目的')->nullable(true);
