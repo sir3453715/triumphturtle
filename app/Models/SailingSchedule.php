@@ -19,7 +19,6 @@ class SailingSchedule extends Model
         'on_off', 'price', 'minimum', 'box_interval', 'discount'
     ];
 
-
     public function fromCountry(){
         return $this->belongsTo(Country::class,'from_country','id');
     }
@@ -27,7 +26,5 @@ class SailingSchedule extends Model
     public function toCountry(){
         return $this->belongsTo(Country::class,'to_country','id');
     }
-
-
 
 }
