@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Admin\Menu;
 
 use App\Http\Controllers\Controller;
+use App\Models\ActionLog;
+use App\Models\Country;
+use App\Models\SailingSchedule;
 use Facebook\Facebook;
 use Facebook\FacebookRequest;
 use Illuminate\Http\Request;
@@ -14,51 +17,105 @@ class SailingScheduleController extends Controller
     /**
      * index
      */
-    function index(Request $request){
-
-//        session_start();
-//
-//        $fb = new Facebook([
-//            'app_id' => '1984625251687847',
-//            'app_secret' => 'f0008da5defcdfe4bb64e79a36b67561',
-//            'default_graph_version' => 'v2.10',
-//        ]);
-//
-//        $helper = $fb->getRedirectLoginHelper();
-//        $helper->getPersistentDataHandler()->set('state', $request->query->get('state'));
-//        $permissions = ['email','read_insights'];
-//        try {
-//            if (isset($_SESSION['facebook_access_token'])) {
-//                $accessToken = $_SESSION['facebook_access_token'];
-//            } else {
-//                $accessToken = $helper->getAccessToken();
-//                $_SESSION['facebook_access_token'] = $accessToken;
-//            }
-//            $page_token_request = $fb->get('/103242447732766?fields=access_token',$accessToken);
-//            $json = json_decode($page_token_request->getBody());
-//            $page_token = $json->access_token;
-//            $since = strtotime('-1 month');
-//            $until = strtotime(now());
-//
-//            $page_request = $fb->get('/103242447732766/insights?metric=page_messages_active_threads_unique&since='.$since.'&until='.$until.'&access_token='.$page_token);
-//            $page_data = json_decode($page_request->getBody());
-//
-//
-//        } catch(Facebook\Exceptions\FacebookResponseException $e) {
-//            echo 'Graph returned an error: ' . $e->getMessage();
-//            exit;
-//        } catch(Facebook\Exceptions\FacebookSDKException $e) {
-//            echo 'Facebook SDK returned an error: ' . $e->getMessage();
-//            exit;
-//        }
-
-
-        return view('admin.dashboard.dashboard',[
-//            'helper'=>$helper,
-//            'permissions'=>$permissions,
-//            'accessToken'=>$accessToken,
+    public function index(Request $request)
+    {
+        $sailings = SailingSchedule::whereNotNull('id');
+        $queried=['status'=>'','on_off'=>'','from_country'=>'','to_country'=>'','statement_time'=>'','sailing_date'=>'',];
+        foreach ($queried as $key =>$value){
+            if($request->get($key)) {
+                $queried[$key] = $request->get($key);
+                $sailings = $sailings->where($key,'=',$request->get($key));
+            }
+        }
+        $countries = Country::all();
+        $sailings = $sailings->paginate(25);
+        return view('admin.sailingSchedule.sailingSchedule', [
+            'sailings'=>$sailings,
+            'countries'=>$countries,
+            'queried'=>$queried,
         ]);
-
     }
 
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        $countries = Country::all();
+        return view('admin.sailingSchedule.createSailingSchedule',[
+            'countries'=>$countries
+        ]);
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        $data=$request->toArray();
+        unset($data['_token']);
+        $sailing = SailingSchedule::create($data);
+        ActionLog::create_log($sailing,'create');
+
+        return redirect(route('admin.sailing-schedule.index'))->with('message', '航班資料已建立!');
+    }
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        $sailing = SailingSchedule::find($id);
+        $countries = Country::all();
+        return view('admin.sailingSchedule.editSailingSchedule',[
+            'sailing'=>$sailing,
+            'countries'=>$countries
+        ]);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        $sailing = SailingSchedule::find($id);
+        $data=$request->toArray();
+        unset($data['_token']);
+
+        $sailing->fill($data);
+        ActionLog::create_log($sailing);
+        $sailing->save();
+
+        return redirect(route('admin.sailing-schedule.index'))->with('message', '航班資料已更新!');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        //
+        $sailing = SailingSchedule::find($id);
+        if($sailing){
+            $sailing->delete();
+            ActionLog::create_log($sailing,'delete');
+        }
+
+        return redirect(route('admin.sailing-schedule.index'))->with('message', '航班資料已刪除!');
+
+    }
 }
