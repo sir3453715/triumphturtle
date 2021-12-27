@@ -29,14 +29,17 @@ class OptionsController extends Controller
         foreach ($fields as $key => $value) {
             app('Option')->$key = $value;
         }
+        $banner = app('Option')->banner;
+        $img = explode('/',$banner);
         if($request->hasFile('banner')){
+            if($banner){
+                unlink(storage_path('app/public/image/'.$img[3]));
+            }
             $extension = $request->file('banner')->getClientOriginalExtension(); //副檔名
             $path1 = time() . "." . $extension;    //重新命名
             $request->file('banner')->move(storage_path('app').'/public/image/', $path1); //移動至指定目錄
-            app('Option')->banner = '/storage/image/'.$path1;;
+            app('Option')->banner = '/storage/image/'.$path1;
         }
-
-
 
         return redirect(route('admin.option.index'))->with('message','設定修改成功!');
 
