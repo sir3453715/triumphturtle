@@ -62,9 +62,6 @@
                                 </div>
                             </form>
                         </div>
-                        <div class="ml-auto">
-                            <a href="{{route('admin.user.create')}}"><button type="button" class="btn btn-primary">建立</button></a>
-                        </div>
                     </div>
                 </div>
                 <!-- /.card-body -->
