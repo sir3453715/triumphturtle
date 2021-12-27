@@ -80,8 +80,15 @@
                         </table>
                     </div>
                     <!-- /.card-body -->
-                    <div class="card-footer clearfix">
-                        {{ $action_log->appends(request()->except('page'))->links() }}
+                    <div class="card-footer clearfix row">
+                        <div class="col">
+                            {{ $action_log->appends(request()->except('page'))->links() }}
+                        </div>
+                        <div class="ml-auto mr-4">
+                            <small>
+                                第 {{$action_log->firstItem()}} 到 {{$action_log->lastItem()}} 筆 共 {{$action_log->total()}} 筆
+                            </small>
+                        </div>
                     </div>
                 </div>
                 <!-- /.card -->
