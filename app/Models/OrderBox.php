@@ -15,7 +15,7 @@ class OrderBox extends Model
      * @var array
      */
     protected $fillable = [
-        'order_id', 'box_weight', 'box_length', 'box_width', 'box_height', 'box_price', 'tracking_number'
+        'order_id', 'box_seccode', 'box_weight', 'box_length', 'box_width', 'box_height', 'box_price', 'tracking_number'
     ];
 
     public function boxitems()

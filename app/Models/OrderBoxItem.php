@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class OrderBoxItem extends Model
 {
     use HasFactory;
-    protected $table = 'orders_box';
+    protected $table = 'orders_box_item';
     /**
      * The attributes that are mass assignable.
      *
@@ -20,10 +20,10 @@ class OrderBoxItem extends Model
 
     public function box()
     {
-        return $this->belongsTo(OrderBox::class,'box_id');
+        return $this->belongsTo(OrderBox::class,'box_id','id');
     }
     public function order()
     {
-        return $this->belongsTo(Order::class,'order_id');
+        return $this->belongsTo(Order::class,'order_id','id');
     }
 }
