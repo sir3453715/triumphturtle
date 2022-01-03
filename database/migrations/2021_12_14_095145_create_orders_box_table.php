@@ -16,10 +16,11 @@ class CreateOrdersBoxTable extends Migration
         Schema::create('orders_box', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('order_id')->comment('訂單id');
-            $table->integer('box_weight')->comment('毛重(KG)')->nullable(true);
-            $table->integer('box_length')->comment('外箱長度(CM)')->nullable(true);
-            $table->integer('box_width')->comment('外箱寬度(CM)')->nullable(true);
-            $table->integer('box_height')->comment('外箱高度(CM)')->nullable(true);
+            $table->string('box_seccode')->comment('運單號')->nullable(true);
+            $table->float('box_weight')->comment('毛重(KG)')->nullable(true);
+            $table->float('box_length')->comment('外箱長度(CM)')->nullable(true);
+            $table->float('box_width')->comment('外箱寬度(CM)')->nullable(true);
+            $table->float('box_height')->comment('外箱高度(CM)')->nullable(true);
             $table->integer('box_price')->comment('箱子金額')->nullable(true);
             $table->string('tracking_number')->comment('宅配單號')->nullable(true);
             $table->timestamps();

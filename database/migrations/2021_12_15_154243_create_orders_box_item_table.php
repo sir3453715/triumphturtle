@@ -17,9 +17,9 @@ class CreateOrdersBoxItemTable extends Migration
             $table->id();
             $table->Integer('order_id')->comment('訂單ID');
             $table->Integer('box_id')->comment('箱子ID');
-            $table->integer('item_name')->comment('商品描述')->nullable(true);
+            $table->string('item_name')->comment('商品描述')->nullable(true);
             $table->integer('item_num')->comment('數量')->nullable(true);
-            $table->integer('unit_price')->comment('單價(USD)')->nullable(true);
+            $table->float('unit_price')->comment('單價(USD)')->nullable(true);
             $table->timestamps();
         });
     }
