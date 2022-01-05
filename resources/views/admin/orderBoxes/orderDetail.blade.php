@@ -49,10 +49,11 @@
                                         <label for="status">訂單狀態</label>
                                         <select class="form-control ml-3" name="status" id="status" >
                                             <option value="">請選擇</option>
-                                            <option value="1" {!! $html->selectSelected(1,$queried['status']) !!}>未付款</option>
-                                            <option value="2" {!! $html->selectSelected(2,$queried['status']) !!}>已出帳</option>
-                                            <option value="3" {!! $html->selectSelected(3,$queried['status']) !!}>已付款</option>
-                                            <option value="4" {!! $html->selectSelected(4,$queried['status']) !!}>取消</option>
+                                            <option value="1" {!! $html->selectSelected(1,$queried['status']) !!}>未入庫</option>
+                                            <option value="2" {!! $html->selectSelected(2,$queried['status']) !!}>已入庫</option>
+                                            <option value="3" {!! $html->selectSelected(3,$queried['status']) !!}>宅配派送中</option>
+                                            <option value="4" {!! $html->selectSelected(4,$queried['status']) !!}>完成</option>
+                                            <option value="5" {!! $html->selectSelected(5,$queried['status']) !!}>取消</option>
                                         </select>
                                     </div>
                                 </div>
@@ -60,6 +61,9 @@
                                     <div class="form-group">
                                         <button type="submit" class="form-control">篩選</button>
                                     </div>
+                                </div>
+                                <div class="ml-auto">
+                                    <a href="{{route('admin.order-detail.create')}}"><button type="button" class="btn btn-primary">建立</button></a>
                                 </div>
                             </form>
                         </div>
@@ -133,7 +137,7 @@
                                             </a>
                                         </td>
                                         <td>
-                                            <a href="" class="btn btn-sm btn-outline-info copy" data-link="https://google.com">
+                                            <a href="" class="btn btn-sm btn-outline-info">
                                                 預覽/發送
                                             </a>
                                         </td>
