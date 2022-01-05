@@ -1,4 +1,4 @@
-<div class="form-group box-section">
+<div class="form-group box-section border-bottom">
     <div class="row">
         <h3  class="card-title">新箱子</h3>
         <a href="javascript:void(0);" class="delete-box btn btn-sm btn-outline-danger ml-3">

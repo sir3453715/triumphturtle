@@ -154,7 +154,7 @@
                             <!-- /.card-header -->
                             <div class="card-body bg-light box-wrapper">
                                 @foreach($order->box as $key => $box)
-                                    <div class="form-group box-section">
+                                    <div class="form-group box-section border-bottom">
                                         <div class="row">
                                             <h3  class="card-title">運單號{{$box->box_seccode}}</h3>
                                             <a href="javascript:void(0);" class="delete-box btn btn-sm btn-outline-danger ml-3">
