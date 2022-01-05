@@ -34,7 +34,7 @@
             <input type="text" class="form-control" name="tracking_number[]" id="tracking_number">
         </div>
     </div>
-    <div class="row mb-2">
+    <div class="row mb-2 add-item-div">
         <h3 class="card-title">裝箱內容</h3>
         <a href="javascript:void(0);" class="add-item btn btn-sm btn-outline-secondary ml-3">
             <i class="fa fa-plus"> 新增內容</i>

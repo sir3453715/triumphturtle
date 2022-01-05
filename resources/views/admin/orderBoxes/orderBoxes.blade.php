@@ -85,7 +85,6 @@
                                 <th>主揪連結</th>
                                 <th>驗證碼</th>
                             </tr>
-                            </thead>
                             <tbody>
                                 @foreach($orders as $order)
                                     <tr>
