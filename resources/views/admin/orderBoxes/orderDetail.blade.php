@@ -102,32 +102,32 @@
                                         <td>
                                             @switch($order->pay_status)
                                                 @case(1)
-                                                <span class="badge badge-secondary">未付款</span>
+                                                <span class="fa-1x badge badge-secondary">未付款</span>
                                                 @break
                                                 @case(2)
-                                                <span class="badge badge-warning">已出帳</span>
+                                                <span class="fa-1x badge badge-warning">已出帳</span>
                                                 @break
                                                 @case(3)
-                                                <span class="badge badge-success">已付款</span>
+                                                <span class="fa-1x badge badge-success">已付款</span>
                                                 @break
                                             @endswitch
                                         </td>
                                         <td>
                                             @switch($order->status)
                                                 @case(1)
-                                                <span class="badge badge-secondary">未入庫</span>
+                                                <span class="fa-1x badge badge-secondary">未入庫</span>
                                                 @break
                                                 @case(2)
-                                                <span class="badge badge-info">已入庫</span>
+                                                <span class="fa-1x badge badge-info">已入庫</span>
                                                 @break
                                                 @case(3)
-                                                <span class="badge badge-primary">宅配派送中</span>
+                                                <span class="fa-1x badge badge-primary">宅配派送中</span>
                                                 @break
                                                 @case(4)
-                                                <span class="badge badge-success">完成</span>
+                                                <span class="fa-1x badge badge-success">完成</span>
                                                 @break
                                                 @case(5)
-                                                <span class="badge badge-danger">取消</span>
+                                                <span class="fa-1x badge badge-danger">取消</span>
                                                 @break
                                             @endswitch
                                         </td>

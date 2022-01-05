@@ -120,27 +120,27 @@
                                         <td>
                                             @switch($sailing->status)
                                                 @case(1)
-                                                <span class="badge badge-secondary">集貨中</span>
+                                                <span class="fa-1x badge badge-secondary">集貨中</span>
                                                 @break
                                                 @case(2)
-                                                <span class="badge badge-info">準備中</span>
+                                                <span class="fa-1x badge badge-info">準備中</span>
                                                 @break
                                                 @case(3)
-                                                <span class="badge badge-warning">開航中</span>
+                                                <span class="fa-1x badge badge-warning">開航中</span>
                                                 @break
                                                 @case(4)
-                                                <span class="badge badge-success">抵達目的地倉庫</span>
+                                                <span class="fa-1x badge badge-success">抵達目的地倉庫</span>
                                                 @break
                                                 @case(5)
-                                                <span class="badge badge-danger">取消</span>
+                                                <span class="fa-1x badge badge-danger">取消</span>
                                                 @break
                                             @endswitch
                                         </td>
                                         <td>
                                             @if($sailing->on_off == '2')
-                                                <span class="badge badge-success">上架</span>
+                                                <span class="fa-1x badge badge-success">上架</span>
                                             @else
-                                                <span class="badge badge-danger">下架</span>
+                                                <span class="fa-1x badge badge-danger">下架</span>
                                             @endif
                                         </td>
                                         <td>{{$sailing->fromCountry->title}}</td>
