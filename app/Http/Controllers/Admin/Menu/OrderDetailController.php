@@ -58,7 +58,12 @@ class OrderDetailController extends Controller
      */
     public function create()
     {
-
+        $time = date('Y-m-d');
+        $sailings = SailingSchedule::where('status',1)->where('on_off','2')
+            ->where('statement_time', '>=' , $time)->get();
+        return view('admin.orderBoxes.createOrderDetail',[
+            'sailings'=>$sailings,
+        ]);
     }
 
     /**
@@ -69,7 +74,88 @@ class OrderDetailController extends Controller
      */
     public function store(Request $request)
     {
+        /* 判斷當前流水號 */
+        $tempserial = 'TS'.substr(date('Y', time()), 2, 2) . date('md', time()) ;
+        $serial_number_order = Order::where('seccode','LIKE','%'.$tempserial.'%')->where('parent_id',0)->orderBy('created_at','DESC')->get();//只找主單
+        if($serial_number_order){
+            $num = count($serial_number_order);
+            do{
+                $num ++;
+                $serial_number2 = $tempserial.str_pad($num,3,0,STR_PAD_LEFT);
+                $chk_seccode = Order::where('seccode','=',$serial_number2)->first();//判斷已產生的訂單編號是否存在
+            } while ($chk_seccode);
+        }else{
+            $serial_number2 = $tempserial.'001';
+        }
+        if ( $request->get('type') == 2){
+            $captcha = rand(1000,9999);
+        }else{
+            $captcha = null;
+        }
 
+        $data = [
+            'sailing_id' => $request->get('sailing_id'),
+            'type' => $request->get('type'),
+            'seccode' => $serial_number2.'-1',
+            'serial_number' => $serial_number2,
+            'person_number' => 1,
+            'parent_id'=>0,
+            'status' => $request->get('status'),
+            'pay_status' => $request->get('pay_status'),
+            'total_price' => $request->get('total_price'),
+            'shipment_use' => $request->get('shipment_use'),
+            'sender_name' => $request->get('sender_name'),
+            'sender_phone' => $request->get('sender_phone'),
+            'sender_address' => $request->get('sender_address'),
+            'sender_company' => $request->get('sender_company'),
+            'sender_taxid' => $request->get('sender_taxid'),
+            'sender_email' => $request->get('sender_email'),
+            'for_name' => $request->get('for_name'),
+            'for_phone' => $request->get('for_phone'),
+            'for_address' => $request->get('for_address'),
+            'for_company' => $request->get('for_company'),
+            'for_taxid' => $request->get('for_taxid'),
+            'invoice' => $request->get('invoice'),
+            'captcha'=>$captcha,
+        ];
+        $order = Order::create($data);
+        ActionLog::create_log($order,'create');
+
+        /* 儲存新箱子資料 */
+        $start_item = 0;
+        $total_items_num = 0;
+        $boxSize = sizeof($request->get('box_weight'));
+        for($i = 0; $i<$boxSize; $i++){
+            $boxData = [
+                'order_id'=>$order->id,
+                'box_seccode'=>$order->serial_number.'-'.$order->person_number.'-'.($i+1),
+                'box_weight'=>$request->get('box_weight')[$i],
+                'box_length'=>$request->get('box_length')[$i],
+                'box_width'=>$request->get('box_width')[$i],
+                'box_height'=>$request->get('box_height')[$i],
+                'box_price'=>$request->get('box_price')[$i],
+                'tracking_number'=>$request->get('tracking_number')[$i],
+            ];
+            $box = OrderBox::create($boxData);
+            ActionLog::create_log($box,'create');
+
+            $itemSize = $request->get('box_items_num')[$i];
+            $total_items_num = $total_items_num + $itemSize;
+            for($j = $start_item;$j<$total_items_num;$j++){
+                $itemData = [
+                    'order_id'=>$order->id,
+                    'box_id'=>$box->id,
+                    'item_name'=>$request->get('item_name')[$j],
+                    'item_num'=>$request->get('item_num')[$j],
+                    'unit_price'=>$request->get('unit_price')[$j],
+                ];
+                $item = OrderBoxItem::create($itemData);
+                ActionLog::create_log($item,'create');
+                $start_item++;
+            }
+        }
+
+        return redirect(route('admin.order-detail.index'))->with('message', '訂單 '.$order->seccode.'已新增成功');
     }
     /**
      * Show the form for editing the specified resource.
