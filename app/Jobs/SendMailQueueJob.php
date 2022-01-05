@@ -36,7 +36,7 @@ class SendMailQueueJob implements ShouldQueue
     {
         $data = $this->data;
         $mail = Mail::to($data['email']);
-        if(sizeof($data['cc'])>0){
+        if(isset($data['cc'])&&sizeof($data['cc'])>0){
             $mail->cc($data['cc']);
         }
         $mail->later('60',new SendMailTest($data));

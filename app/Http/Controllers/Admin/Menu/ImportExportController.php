@@ -158,14 +158,13 @@ class ImportExportController extends Controller
 
         return Excel::download(new DemoExport($data,$title,$headings),'模擬匯出'.date('Y-m-d_H_i_s'). '.xls');
     }
-    public function sendmail(Request $request)
+    public static function sendmail($mail)
     {
         $data = [
-            'email'=>$request->get('mail'),
-            'subject'=>'測試發送信件主旨',
-            'for_title'=>'測試對象',
-            'msg'=>'測試發送信件內文!收到信表示功能目前正常，一切都好',
-            'cc'=>['sir3453715@gmail.com','hanhsu@beautifullife.global'],
+            'email'=>$mail['email'],
+            'subject'=>$mail['subject'],
+            'for_title'=>$mail['for_title'],
+            'msg'=>$mail['msg'],
         ];
         dispatch(new SendMailQueueJob($data));
 
