@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin\Menu;
 
 use App\Http\Controllers\Controller;
+use App\Models\ActionLog;
+use App\Models\Order;
 use Facebook\Facebook;
 use Facebook\FacebookRequest;
 use Illuminate\Http\Request;
@@ -15,50 +17,108 @@ class PaymentController extends Controller
      * index
      */
     function index(Request $request){
+        $queried=['seccode'=>'','sender'=>''];
 
-//        session_start();
-//
-//        $fb = new Facebook([
-//            'app_id' => '1984625251687847',
-//            'app_secret' => 'f0008da5defcdfe4bb64e79a36b67561',
-//            'default_graph_version' => 'v2.10',
-//        ]);
-//
-//        $helper = $fb->getRedirectLoginHelper();
-//        $helper->getPersistentDataHandler()->set('state', $request->query->get('state'));
-//        $permissions = ['email','read_insights'];
-//        try {
-//            if (isset($_SESSION['facebook_access_token'])) {
-//                $accessToken = $_SESSION['facebook_access_token'];
-//            } else {
-//                $accessToken = $helper->getAccessToken();
-//                $_SESSION['facebook_access_token'] = $accessToken;
-//            }
-//            $page_token_request = $fb->get('/103242447732766?fields=access_token',$accessToken);
-//            $json = json_decode($page_token_request->getBody());
-//            $page_token = $json->access_token;
-//            $since = strtotime('-1 month');
-//            $until = strtotime(now());
-//
-//            $page_request = $fb->get('/103242447732766/insights?metric=page_messages_active_threads_unique&since='.$since.'&until='.$until.'&access_token='.$page_token);
-//            $page_data = json_decode($page_request->getBody());
-//
-//
-//        } catch(Facebook\Exceptions\FacebookResponseException $e) {
-//            echo 'Graph returned an error: ' . $e->getMessage();
-//            exit;
-//        } catch(Facebook\Exceptions\FacebookSDKException $e) {
-//            echo 'Facebook SDK returned an error: ' . $e->getMessage();
-//            exit;
-//        }
-
-
-        return view('admin.dashboard.dashboard',[
-//            'helper'=>$helper,
-//            'permissions'=>$permissions,
-//            'accessToken'=>$accessToken,
+        $orders = Order::where('pay_status',2);
+        if($request->get('seccode')) {
+            $queried['seccode'] = $request->get('seccode');
+            $orders = $orders->where('seccode','LIKE','%'.$request->get('seccode').'%');
+        }
+        if($request->get('sender')) {
+            $queried['sender'] = $request->get('sender');
+            $orders = $orders->where(function ($query) use ($queried){
+                $query->orwhere('sender_name','LIKE','%'.$queried['sender'].'%');
+                $query->orwhere('sender_phone','LIKE','%'.$queried['sender'].'%');
+            });
+        }
+        $orders = $orders->paginate(30);
+        return view('admin.payment.payment',[
+            'queried'=>$queried,
+            'orders'=>$orders,
         ]);
 
     }
 
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        return view('admin.country.createCountry');
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        return redirect(route('admin.country.index'))->with('message', '國家資料已建立!');
+    }
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        return view('admin.country.editCountry',[
+            'country'=>$country,
+        ]);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+
+        return redirect(route('admin.country.index'))->with('message', '資料已更新!');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+
+        return redirect(route('admin.country.index'))->with('message', '資料已刪除!');
+
+    }
+
+    public function checkPay($id){
+        $order = Order::find($id);
+        if ($order){
+            $data = ['pay_status' =>'3'];
+            $order->fill($data);
+            $order->save();
+            ActionLog::create_log($order);
+
+            $mail = [
+                'email'=>$order->sender_email,
+                'subject'=>'確認收款',
+                'for_title'=>$order->sender_name,
+                'msg'=>'已收到您的訂單'.$order->seccode.'款項',
+                'cc'=>[''],
+            ];
+            ImportExportController::sendmail($mail);
+
+            return redirect(route('admin.payment.index'))->with('message', '訂單'.$order->seccode.'已確認收款!');
+        }else{
+            return redirect(route('admin.payment.index'))->with('error', '無法確認收款!，請詢問工程人員');
+        }
+
+    }
 }
