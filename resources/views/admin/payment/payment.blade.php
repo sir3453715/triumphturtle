@@ -54,7 +54,7 @@
                         <table class="table table-bordered">
                             <thead>
                             <tr>
-                                <th>運單號</th>
+                                <th>訂單編號</th>
                                 <th>寄件人</th>
                                 <th>電話</th>
                                 <th>箱數</th>
