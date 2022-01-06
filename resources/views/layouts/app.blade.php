@@ -35,9 +35,7 @@
         @yield('content')
     </div>
 
-    @if(\Request::route()->getName() == 'template')
-        @include('component.footer')
-    @endif
+    @include('component.footer')
 </div>
 @section('app-scripts')
     <script src="{{ asset('js/app.js') }}"></script>
