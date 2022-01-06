@@ -38,7 +38,8 @@ class CreateOrdersTable extends Migration
             $table->text('for_company')->comment('收件者公司名稱')->nullable(true);
             $table->text('for_taxid')->comment('收件者統編')->nullable(true);
             $table->integer('invoice')->comment('發票(1:不需要 2:二聯 3:三聯)')->nullable(true);
-            $table->string('captcha')->comment('驗證碼')->nullable(true);
+            $table->string('captcha')->comment('下線訂單驗證碼')->nullable(true);
+            $table->string('updateToken')->comment('修改訂單驗證碼')->nullable(true);
             $table->timestamps();
         });
     }

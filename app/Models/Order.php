@@ -19,7 +19,7 @@ class Order extends Model
     protected $fillable = [
         'user_id', 'sailing_id', 'seccode', 'serial_number', 'person_number', 'type', 'parent_id', 'status', 'pay_status', 'total_price',
         'shipment_use', 'sender_name', 'sender_phone', 'sender_address', 'sender_company', 'sender_taxid', 'sender_email',
-        'for_name', 'for_phone', 'for_address', 'for_company', 'for_taxid', 'invoice', 'captcha'
+        'for_name', 'for_phone', 'for_address', 'for_company', 'for_taxid', 'invoice', 'captcha','updateToken'
     ];
 
     public function user(){
