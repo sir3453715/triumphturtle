@@ -12,10 +12,10 @@ return [
         'site_description' => [
             'label' => 'siteDescription'
         ],
-//        'service' => [
-//            'label' => 'service',
-//            'type' => 'editor',
-//            'weight' => '550',
-//        ],
+        'service' => [
+            'label' => 'service',
+            'type' => 'editor',
+            'weight' => '300',
+        ],
     ],
 ];

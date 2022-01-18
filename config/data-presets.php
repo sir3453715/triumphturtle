@@ -42,9 +42,9 @@ return[
         ],
         [
             //帳務管理
-            'name'         => 'admin payment ',
+            'name'         => 'admin payment',
             'displayName'  => '帳務管理',
-            'assignTo'     => ['manager'],
+            'assignTo'     => [],
         ],
         [
             //國家資料設定
@@ -73,7 +73,7 @@ return[
         [
             //網站設定
             'name'         => 'admin web setting',
-            'displayName'  => '網站設定',
+            'displayName'  => '網站資訊&設定',
             'assignTo'     => ['manager'],
         ],
         [
