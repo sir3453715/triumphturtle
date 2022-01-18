@@ -57,7 +57,7 @@ class LoginController extends Controller
         $data = [
             'user_id'=>$user->id,
             'IP'=>$request->getClientIp(),
-            'result'=>'success',
+            'result'=>'成功',
         ];
         LoginLog::create($data);
 
@@ -78,7 +78,7 @@ class LoginController extends Controller
             $data = [
                 'user_id'=>$user->id,
                 'IP'=>$request->getClientIp(),
-                'result'=>'failed Password Wrong',
+                'result'=>'密碼錯誤',
             ];
             LoginLog::create($data);
         }
