@@ -11,7 +11,7 @@ class LoginLogController extends Controller
     //
     public function index(Request $request)
     {
-        $login_log = LoginLog::orderBy('created_at','desc')->paginate(25);
+        $login_log = LoginLog::orderBy('created_at','desc')->simplePaginate(25);
         return view('admin.setting.LoginLog',[
             'login_log'=>$login_log,
         ]);
