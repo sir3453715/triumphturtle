@@ -88,7 +88,10 @@ class OrderDetailController extends Controller
             $serial_number2 = $tempserial.'001';
         }
         if ( $request->get('type') == 2){
-            $captcha = rand(1000,9999);
+            do{
+                $captcha = rand(1000,9999);
+                $chk_captcha = Order::where('captcha','=',$captcha)->first();//判斷已產生的驗證碼是否存在
+            } while ($chk_captcha);
         }else{
             $captcha = null;
         }
