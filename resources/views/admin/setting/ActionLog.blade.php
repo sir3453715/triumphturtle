@@ -54,26 +54,22 @@
                                     <td>{{$action->action_id}}</td>
                                     <td>{{trans('admin.action.'.$action->action)}}</td>
                                     <td>
-                                        <span class="dropright">
-                                            <a data-toggle="dropdown" href="#">
-                                                <i class="fa fa-info-circle"></i>
-                                            </a>
-                                            <div class="dropdown-menu dropdown-menu-xl">
-                                                <div>
-                                                    <ul class="list-group">
-                                                        @foreach(json_decode($action->change_column) as $key => $change_item )
-                                                            @if(is_numeric($key))
-                                                                <li class="list-group-item">{!! $key+1  !!}. {!! $change_item  !!}</li>
-                                                            @else
-                                                                <li class="list-group-item">{!! $key  !!}: {!! $change_item  !!}</li>
-                                                            @endif
-                                                        @endforeach
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </span>
+                                        <a data-toggle="collapse" class="btn btn-warning" href="#detail-{{$action->id}}" role="button" aria-expanded="false" aria-controls="detail-{{$action->id}}">檢視詳細</a>
                                     </td>
                                     <td>{{$action->created_at}}</td>
+                                </tr>
+                                <tr class="collapse" id="detail-{{$action->id}}">
+                                    <td colspan="6">
+                                        <div class="row col-12">
+                                            @foreach(json_decode($action->change_column) as $key => $change_item )
+                                                @if(is_numeric($key))
+                                                    <div class="col-2 border text-lg">{!! $key+1  !!}. {!! $change_item  !!}</div>
+                                                @else
+                                                    <div class="col-2 border text-lg">{!! $key  !!}: {!! $change_item  !!}</div>
+                                                @endif
+                                            @endforeach
+                                        </div>
+                                    </td>
                                 </tr>
                             @endforeach
                             </tbody>
@@ -83,11 +79,6 @@
                     <div class="card-footer clearfix row">
                         <div class="col">
                             {{ $action_log->appends(request()->except('page'))->links() }}
-                        </div>
-                        <div class="ml-auto mr-4">
-                            <small>
-                                第 {{$action_log->firstItem()}} 到 {{$action_log->lastItem()}} 筆 共 {{$action_log->total()}} 筆
-                            </small>
                         </div>
                     </div>
                 </div>
