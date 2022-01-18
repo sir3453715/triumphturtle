@@ -14,6 +14,33 @@ $(() => {
                 placeholder: 'Please Edit Here.',
                 tabsize: 2,
                 height: $('.custom-editor').attr('data-weight'),
+                callbacks:{
+                    onImageUpload: function(files, editor, welEditable) {
+                        for(let i=0; i < files.length; i++) {
+                            var data = new FormData();
+                            var $this = $(this);
+                            data.append("file", files[i]);
+                            data.append('_token', $('meta[name="csrf-token"]').attr('content'));
+                            $.ajax({
+                                data: data,
+                                type: "POST",
+                                url:"./uploadEditorImage",
+                                cache: false,
+                                contentType: false,
+                                processData: false,
+                                success:function(object){
+                                    if (object['result'] === true){
+                                        $this.summernote('insertImage', object['url']);
+                                        $('input[name="files"]').val('');
+                                    }else{
+                                        alert('圖片無法正常上傳!請洽工程人員');
+                                    }
+                                }
+                            });
+                        }
+
+                    }
+                }
             });
         }
         $('.select2').select2({

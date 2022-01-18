@@ -38,6 +38,10 @@ Route::group(['prefix'=>'admin', 'middleware' => ['web', 'admin.area'],'as'=>'ad
         return redirect()->back()->with('message', '快取已清除!');
     })->name('clear-cache');
 
+
+    Route::post('/uploadEditorImage', 'Admin\AdminController@uploadEditorImage')
+        ->name('uploadEditorImage');
+
     Route::group(['prefix' => 'import-export', 'as' => 'import-export.'], function(){
         Route::post('/import', 'Admin\Menu\ImportExportController@import')
             ->name('import');
