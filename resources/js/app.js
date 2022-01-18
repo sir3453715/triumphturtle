@@ -18,68 +18,10 @@ $(() => {
             placeholder:"enter keyword",
             allowClear: true
         });
-        $('.select2-limit').select2({
-            maximumSelectionLength: 2,
-        });
-        $('.select2-limit-zhTW').select2({
-            language:'zh-TW',
-            maximumSelectionLength: 1,
-        });
-        $('.select2-min-input-length').select2({
-            minimumInputLength: 2
-        });
-        $('.select2-max-input-length').select2({
-            maximumInputLength: 4
-        });
-
         $('.slider').slick({
             prevArrow:'<button type="button" class="slick-prev"></button>',
             nextArrow:'<button type="button" class="slick-next"></button>',
             dots: true,
-        });
-        $('.slider-multi').slick({
-            prevArrow:'<button type="button" class="slick-prev"></button>',
-            nextArrow:'<button type="button" class="slick-next"></button>',
-            dots: true,
-            infinite: true,
-            slidesToShow: 3,
-            slidesToScroll: 3
-        });
-        $('.slider-fade').slick({
-            prevArrow:'<button type="button" class="slick-prev"></button>',
-            nextArrow:'<button type="button" class="slick-next"></button>',
-            fade: true,
-        });
-        $('.slider-syncing').slick({
-            slidesToShow: 1,
-            slidesToScroll: 1,
-            arrows: false,
-            asNavFor: '.slider-nav'
-        });
-        $('.slider-nav').slick({
-            prevArrow:'<button type="button" class="slick-prev"></button>',
-            nextArrow:'<button type="button" class="slick-next"></button>',
-            slidesToShow: 3,
-            slidesToScroll: 1,
-            asNavFor: '.slider-syncing',
-            dots: true,
-            centerMode: true,
-            focusOnSelect: true
-        });
-        $('.slider-autoplay').slick({
-            slidesToScroll: 1,
-            autoplay: true,
-            arrows: false,
-            autoplaySpeed: 1000,
-        });
-
-        $('a[data-toggle="pill"]').on('shown.bs.tab', function (e) {
-            $('.slider').slick('refresh');
-            $('.slider-multi').slick('refresh');
-            $('.slider-fade').slick('refresh');
-            $('.slider-syncing').slick('refresh');
-            $('.slider-nav').slick('refresh');
-            $('.slider-autoplay').slick('refresh');
         });
 
     });
