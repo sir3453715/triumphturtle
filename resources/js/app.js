@@ -67,3 +67,24 @@ $(() => {
         return false;
     });
 })
+
+
+ 
+     //========== toggle mobile menu ==========
+     $(".navbar-toggler").on('click', function () {
+        $("#navBarMobile").toggleClass("active");
+        $("body").css({"overflow": "hidden"});
+    });
+
+    $("#nav-remove").on('click', function () {
+        $("#navBarMobile").removeClass("active");
+        $("body").css({"overflow-y": "auto"});
+    });
+
+//========== active main slider ==========
+$('.main-slider').slick({
+    dots: true,
+    infinite: true,
+    speed: 500
+});
+
