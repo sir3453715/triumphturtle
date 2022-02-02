@@ -17,136 +17,21 @@
 @import "slick-carousel/slick/slick.css";
 @import "slick-carousel/slick/slick-theme.css";
 
+/*========================================================================*\
+    > layout
+\*========================================================================*/
+@import "layout/_header";
+@import "layout/_footer";
 
-.login-form {
-    margin-top: 5%;
-}
+/*========================================================================*\
+    > components
+\*========================================================================*/
+@import "components/_button";
+@import "components/_form";
+@import "components/_card";
 
-// header style
+/*========================================================================*\
+    > global
+\*========================================================================*/
 
-.navbar {
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    background: white;
-    height: 80px;
-
-    @media only screen and (max-width:576px) {
-        height: 50px;
-        padding-top: 0px;
-    }
-
-    &-brand {
-        @media only screen and (max-width:576px) {
-            height: 50px;
-            min-width: 250px;
-            max-width: 250px;
-        }
-
-        @media only screen and (max-width:360px) {
-            max-width: 200px;
-            min-width: 200px;
-        }
-
-    }
-
-    &-toggler {
-        @media only screen and (max-width:576px) {
-            height: 50px;
-        }
-
-        &:focus {
-            outline: none;
-        }
-
-        &-icon {
-            background: url(/storage/image/hamburger.svg);
-            background-repeat: no-repeat;
-            background-size: contain;
-            background-position: center;
-
-            @media only screen and (max-width:360px) {
-                width: 20px;
-            }
-        }
-    }
-
-    .navbar-nav {
-        margin-left: auto;
-        align-items: center;
-
-        .nav-item {
-            margin-right: 2.5rem;
-            font-weight: 400;
-            font-size: 18px;
-        }
-    }
-}
-
-#navBarMobile {
-    width: 315px;
-    background: white;
-    position: absolute;
-    top: 0;
-    right: -400px;
-    height: 100vh;
-    transition: .5s;
-
-    @media only screen and (min-width:1200px) {
-        display: none;
-    }
-
-    &:after {
-        content: '';
-        background: rgba(0, 0, 0, 0.5);
-    }
-
-    &.active {
-        right: 0;
-        transition: .5s;
-    }
-
-    .navbar-nav {
-        height: 90vh;
-        overflow-y: scroll;
-    }
-
-    ul {
-        display: block;
-        margin-top: 55px;
-
-        li {
-            border-bottom: solid 1px #E6EAF0;
-            width: 100%;
-        }
-
-        .nav-link {
-            padding: 1rem 1.5rem;
-        }
-    }
-
-    #nav-remove {
-        float: left;
-        font-size: 25px;
-        margin: 1rem;
-        cursor: pointer;
-        position: absolute;
-    }
-
-    &-toggle {
-        &::before {
-            content: "\f078";
-            font-family: "Font Awesome 5 Free";
-            font-weight: 700;
-            position: absolute;
-            right: 20px;
-        }
-    }
-}
-
-.main-wrapper {
-    margin-top: 80px;
-}
-
-.main-slider,
-.slide-item {
-    min-height: 560px;
-}
+@import "_global";

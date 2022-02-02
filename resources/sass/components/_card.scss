@@ -1,0 +1,143 @@
+.shipment {
+    // max-width: 850px;
+    // margin: auto;
+    // padding: 5%;
+
+    .card {
+        border-radius: 15px !important;
+
+        &-top {
+            border-radius: 15px 15px 0px 0px;
+            padding: 25px 25px 10px;
+        }
+
+        &-bottom {
+            border-radius: 0px 0px 15px 15px;
+            padding: 0 25px 25px;
+        }
+
+        .price-info {
+            font-size: 16px;
+            letter-spacing: 1.5px;
+
+            img {
+                margin-right: 10px;
+            }
+        }
+
+
+        .data {
+            &-header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 15px;
+
+                @media only screen and (max-width:576px) {
+                    display: block;
+                }
+
+
+                &-top {
+                    display: flex;
+                    align-items: center;
+
+                    @media only screen and (max-width:576px) {
+                        margin-bottom: 1rem;
+                    }
+
+                    img {
+                        margin-right: 12px;
+                    }
+                }
+
+                &-title {
+                    font-size: 20px;
+                    color: #333333;
+                    margin-bottom: 5px;
+                    font-weight: 700;
+                }
+            }
+
+            &-label {
+                font-size: 16px;
+                font-weight: 700;
+                color: #000000;
+            }
+
+            &-number {
+                color: #FB1616;
+                margin: 0 5px;
+            }
+
+            &-extra-info {
+                color: $orange;
+                margin-left: 33px;
+            }
+
+            &-content {
+                font-weight: 500;
+                font-size: 22px;
+                line-height: 32px;
+                display: flex;
+                justify-content: space-between;
+                text-align: center;
+
+                i {
+                    color: $green;
+                }
+
+                &-item {
+                    display: grid;
+                    align-items: stretch;
+
+                    .item-label {
+                        font-size: 16px;
+                        font-weight: 400;
+                        color: #606060;
+                        line-height: 1.5;
+                    }
+
+                    .item-date {
+                        font-size: 20px;
+                        font-weight: 700;
+                        display: grid;
+                        align-items: end;
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+.cus-badge {
+    font-size: 14px;
+    color: $color-white;
+    padding: 3px 17px;
+    margin-right: .5rem;
+    border-radius: 4px;
+    font-weight: 500;
+
+    &-green {
+        background: $green;
+    }
+
+    &-orange {
+        background: $orange;
+    }
+
+    &-blue {
+        background: $blue;
+    }
+
+    &-teal {
+        background: $teal;
+    }
+
+    &-gray {
+        background: #B6B5B5;
+    }
+
+
+}

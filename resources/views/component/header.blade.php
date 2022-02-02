@@ -23,7 +23,7 @@
                     <a class="nav-link" href="＃">倉庫位置</a>
                 </li>
                 <li class="nav-item">
-                    <a class="btn btn-md btn-outline" href="＃">訂單查詢</a>
+                    <a class="btn btn-sm btn-solid" href="＃">訂單查詢</a>
                 </li>
             </ul>
         </div>
@@ -49,7 +49,7 @@
                     <a class="nav-link" href="＃">倉庫位置</a>
                 </li>
                 <div class="m-3 pt-3">
-                <a class="btn btn-md btn-outline w-100" href="＃">訂單查詢</a>
+                <a class="btn btn-md btn-solid w-100" href="＃">訂單查詢</a>
             </div>
             </ul>
         </div>
