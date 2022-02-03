@@ -39,4 +39,8 @@ class HomeController extends Controller
     {
         return view('service');
     }
+    public function option()
+    {
+        return view('option');
+    }
 }
