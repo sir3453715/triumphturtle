@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-  <div>about</div>
+  <div class="main-wrapper">
+    
+  </div>
 @endsection

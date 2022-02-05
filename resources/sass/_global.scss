@@ -29,6 +29,7 @@ p {
 
 .main-wrapper {
     margin-top: 80px;
+    min-height: calc(100vh - 240px);
 
     @media only screen and (max-width: 576px) {
         margin-top: 50px;
@@ -111,6 +112,8 @@ p {
     margin-bottom: 0 !important;
 }
 
+// home page
+
 .display-box {
     display: flex;
     background-color: $teal;
@@ -119,6 +122,12 @@ p {
     padding: 20px 50px;
     border-radius: 15px;
     align-items: center;
+
+    @media (max-width: 768px) {
+        width: 100%;
+        justify-content: center;
+        padding: 5%;
+    }
 
     h2 {
         font-size: 40px;
@@ -149,4 +158,63 @@ p {
     justify-content: center;
     padding: 90px 5%;
     background: $body-bg;
+}
+
+// option page
+
+#option-page.container {
+    @media (min-width: 992px) {
+        max-width: 900px;
+    }
+}
+
+// service page 
+#shipping-des {
+    background: $color-white;
+    margin: 100px auto;
+    padding: 65px 1%;
+
+    .display-box {
+        position: absolute;
+        left: 18px;
+        top: -110px;
+
+        @media (max-width: 768px) {
+            position: relative;
+            top: unset;
+            left: unset;
+            margin-bottom: 20px !important;
+        }
+
+    }
+}
+
+.cus-grid {
+    display: grid;
+    grid-template-columns: 30% 70%;
+    align-items: start;
+
+    @media (max-width: 1200px) {
+        grid-template-columns: 100%;
+    }
+}
+
+#service-page {
+    .display-box {
+        display: block;
+        min-width: 360px;
+        margin-top: 70px;
+
+        @media (max-width: 1200px) {
+            min-width: unset;
+            width: 100%;
+            margin-top: unset;
+            margin-bottom: 30px;
+        }
+
+        p {
+            font-size: 24px;
+            font-weight: 400;
+        }
+    }
 }

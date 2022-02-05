@@ -1,7 +1,5 @@
-.shipment {
-    // max-width: 850px;
-    // margin: auto;
-    // padding: 5%;
+.shipment,
+.member-card {
 
     .card {
         border-radius: 15px !important;
@@ -138,6 +136,118 @@
     &-gray {
         background: #B6B5B5;
     }
+}
 
+
+.member {
+    &-card {
+
+        .card {
+            box-shadow: 0px 1px 5px 2px rgba(173, 173, 173, 0.1);
+            height: 100%;
+            border: none;
+            justify-content: space-between;
+
+            &-body {
+                justify-content: center;
+                display: grid;
+                min-height: 590px;
+                padding: 1.25rem 0;
+
+                p {
+                    text-align: center;
+                    font-size: 16px;
+
+                }
+            }
+
+            &-title {
+                font-size: 25px;
+                font-weight: 700;
+                text-align: center;
+            }
+
+            &-subtitle {
+                font-size: 18px;
+                font-weight: 700;
+                text-align: center;
+            }
+        }
+
+        ul {
+            padding-left: 0.5rem;
+            list-style: none;
+            justify-content: center;
+            display: grid;
+
+            li {
+                margin-bottom: 10px;
+
+                &:before {
+                    font-family: "Font Awesome 5 Free";
+                    font-weight: 900;
+                    content: '\f00c';
+                    margin-right: 1rem;
+                    color: $orange;
+                    font-size: 20px;
+                    line-height: 0;
+                }
+            }
+        }
+
+    }
+}
+
+.member-regular {
+    @media only screen and (min-width:992px) {
+        p {
+            margin-bottom: 26px;
+        }
+    }
+
+    .card-top {
+        background-color: $blue;
+    }
+
+    .card-title,
+    .card-subtitle {
+        color: $color-white;
+    }
+}
+
+.member-group {
+    .card-top {
+        border-bottom: solid 2px $blue;
+    }
+
+    .card-title {
+        color: $blue;
+    }
+}
+
+.back-space {
+    margin-left: 36px;
+}
+
+// description box
+
+.des-box {
+    border-radius: 15px;
+    font-size: 20px;
+    padding: 5%;
+    font-weight: 400;
+
+    ol li {
+        margin-bottom: 15px;
+    }
+
+    &-white {
+        background: $color-white;
+    }
+
+    &-blue {
+        background: $blue;
+        color: $color-white;
+    }
 
 }

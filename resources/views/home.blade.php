@@ -110,6 +110,16 @@
       </div>
       @endfor
     </div>
+    <!-- Pagination -->
+    <nav aria-label="Page navigation">
+  <ul class="pagination justify-content-end mb-5">
+    <li class="page-item"><a class="page-link" href="#">上一頁</a></li>
+    <li class="page-item"><a class="page-link" href="#">1</a></li>
+    <li class="page-item"><a class="page-link" href="#">2</a></li>
+    <li class="page-item"><a class="page-link" href="#">3</a></li>
+    <li class="page-item"><a class="page-link" href="#">下一頁</a></li>
+  </ul>
+</nav>
   </section>
 
   <section class="container mb-5">

@@ -7,10 +7,10 @@
                 <div class="footer-menu">
                     <ul class="text-muted list-unstyled d-md-flex d-block justify-content-lg-start justify-content-center">
                         <li class="justify-content-center">
-                            <a href="#">關於我們</a>
+                            <a href="/about">關於我們</a>
                         </li>
                         <li class="justify-content-center">
-                            <a href="#">服務說明</a>
+                            <a href="/service">服務說明</a>
                         </li>
                         <li class="justify-content-center">
                             <a href="#">禁運清單</a>
