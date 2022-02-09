@@ -19,6 +19,11 @@ Route::get('/', 'HomeController@index')->name('index');
 Route::get('/about', 'HomeController@about')->name('about');
 Route::get('/service', 'HomeController@service')->name('service');
 Route::get('/option', 'HomeController@option')->name('option');
+Route::get('/embargo', 'HomeController@embargo')->name('embargo');
+Route::get('/question', 'HomeController@question')->name('question');
+Route::get('/location', 'HomeController@location')->name('location');
+Route::get('/tracking', 'HomeController@tracking')->name('tracking');
+
 
 
 /**

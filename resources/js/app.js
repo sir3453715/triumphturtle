@@ -88,3 +88,7 @@ $('.main-slider').slick({
     speed: 500
 });
 
+//========== Enable tooltips everywhere ==========
+$(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+  })

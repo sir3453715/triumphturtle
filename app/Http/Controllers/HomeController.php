@@ -43,4 +43,20 @@ class HomeController extends Controller
     {
         return view('option');
     }
+    public function embargo()
+    {
+        return view('embargo');
+    }
+    public function question()
+    {
+        return view('question');
+    }
+    public function location()
+    {
+        return view('location');
+    }
+    public function tracking()
+    {
+        return view('tracking');
+    }
 }

@@ -14,16 +14,16 @@
                     <a class="nav-link" href="/service">服務說明</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="＃">禁運清單</span></a>
+                    <a class="nav-link" href="/embargo">禁運清單</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="＃">常見問題</a>
+                    <a class="nav-link" href="/question">常見問題</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="＃">倉庫位置</a>
+                    <a class="nav-link" href="/location">倉庫位置</a>
                 </li>
                 <li class="nav-item m-0">
-                    <a class="btn btn-sm btn-solid" href="＃">訂單查詢</a>
+                    <a class="btn btn-sm btn-solid" href="/tracking">訂單查詢</a>
                 </li>
             </ul>
         </div>
@@ -40,16 +40,16 @@
                     <a class="nav-link" href="/service">服務說明</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="＃">禁運清單</span></a>
+                    <a class="nav-link" href="/embargo">禁運清單</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="＃">常見問題</a>
+                    <a class="nav-link" href="/question">常見問題</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="＃">倉庫位置</a>
+                    <a class="nav-link" href="/location">倉庫位置</a>
                 </li>
                 <div class="m-3 pt-3">
-                <a class="btn btn-md btn-solid w-100" href="＃">訂單查詢</a>
+                <a class="btn btn-md btn-solid w-100" href="/tracking">訂單查詢</a>
             </div>
             </ul>
         </div>

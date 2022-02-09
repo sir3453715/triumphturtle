@@ -13,16 +13,16 @@
                             <a href="/service">服務說明</a>
                         </li>
                         <li class="justify-content-center">
-                            <a href="#">禁運清單</a>
+                            <a href="/embargo">禁運清單</a>
                         </li>
                         <li class="justify-content-center">
-                            <a href="#">常見問題</a>
+                            <a href="/question">常見問題</a>
                         </li>
                         <li class="justify-content-center">
-                            <a href="#">倉庫位置</a>
+                            <a href="/location">倉庫位置</a>
                         </li>
                         <li class="justify-content-center">
-                            <a href="#">訂單查詢</a>
+                            <a href="/tracking">訂單查詢</a>
                         </li>
                     </ul>
                 </div>

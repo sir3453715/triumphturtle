@@ -218,3 +218,123 @@ p {
         }
     }
 }
+
+// about page
+
+#about {
+    background-image: url(/storage/image/about-bg.svg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center right;
+    height: 100vh;
+}
+
+.about-content {
+    max-width: 480px;
+    padding: 5% 20px 0;
+    margin-right: 30%;
+    margin-left: auto;
+
+    @media (max-width: 768px) {
+        margin-right: auto;
+        margin-left: auto;
+    }
+
+    h1 {
+        font-size: 50px;
+        font-weight: 500;
+        color: $blue;
+        margin-bottom: 30px;
+
+        @media (max-width: 768px) {
+            font-size: 40px;
+        }
+    }
+
+    p {
+        font-size: 16px;
+        font-weight: 400;
+        letter-spacing: 1.5px;
+        line-height: 31px;
+        margin-bottom: 20px;
+        color: #1E2E38;
+    }
+}
+
+// embargo page
+
+#embargo-page {
+    margin-bottom: 90px;
+}
+
+.banner {
+    background-image: url(/storage/image/header-banner.jpg);
+    min-height: 190px;
+    background-repeat: no-repeat;
+    background-position: center center;
+    display: flex;
+
+    @media (max-width: 1200px) {
+        background-image: url(/storage/image/header-banner-sm.svg);
+        min-height: 190px;
+        background-repeat: no-repeat;
+        background-position: center right;
+    }
+
+    &-wrapper {
+        background: $color-white;
+    }
+
+    div {
+
+        display: inline-flex;
+        align-items: center;
+
+        img {
+            margin-right: 20px;
+        }
+
+    }
+}
+
+.list {
+    h2 {
+        font-weight: 700;
+        font-size: 30px;
+        margin-bottom: 25px;
+    }
+
+    &-item {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: left;
+        flex-wrap: wrap;
+
+        &-box {
+            display: grid;
+            background: $color-white;
+            box-sizing: border-box;
+            border-radius: 15px;
+            width: 170px;
+            height: 170px;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            margin-right: 15px;
+            margin-bottom: 25px;
+
+            p {
+                text-align: center;
+                font-size: 14px;
+                font-weight: 500;
+            }
+
+            img {
+                width: 70px;
+                margin: auto;
+            }
+        }
+    }
+
+}
