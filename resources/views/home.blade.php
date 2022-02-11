@@ -74,7 +74,7 @@
               </div>
             </div>
           </div>
-          <div class="price-info">
+          <div class="detail-info">
             <p class="mb-3"><span class="data-label">成團單價:</span> NT$ 2,600 / 箱</p>
             <!-- <div><img src="/storage/image/pack-icon.svg" alt="">差 <span class="data-number">3</span>箱即可成團</div> -->
             <div><img src="/storage/image/pack-icon.svg" alt="">差 <span class="data-number">3</span>箱即可享有優惠<div

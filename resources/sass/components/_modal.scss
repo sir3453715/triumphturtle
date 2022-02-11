@@ -1,0 +1,29 @@
+.modal-dark {
+    .modal {
+        &-content {
+            background-color: #292929;
+            color: $color-white;
+            border-radius: 15px;
+
+            .close {
+                color: $color-white;
+                font-size: 2rem;
+            }
+        }
+
+        &-header {
+            border-bottom: none;
+        }
+
+        &-body {
+            padding-bottom: 70px;
+
+            p {
+                font-weight: 500;
+                font-size: 18px;
+                line-height: 2;
+            }
+        }
+    }
+
+}

@@ -349,34 +349,6 @@ p {
     min-height: calc(100vh - 240px);
     padding: 50px 0;
 
-    .cus-grid {
-        display: grid;
-        grid-template-columns: 35% 65%;
-        align-items: end;
-
-        @media (max-width: 1200px) {
-            grid-template-columns: 100%;
-        }
-    }
-
-    .display-box {
-        display: block;
-        margin-top: 70px;
-        padding: 20px 50px 100px 50px;
-
-        @media (max-width: 1200px) {
-            width: 100%;
-            margin-top: unset;
-            margin-bottom: 30px;
-            padding: 20px 50px;
-        }
-    }
-
-    p {
-        font-size: 24px;
-        font-weight: 400;
-    }
-
     .edit-box {
         padding: 5%;
         height: 600px;
@@ -391,7 +363,57 @@ p {
     }
 }
 
-.location-link {
-    display: flex;
-    justify-content: space-between;
+#location-page,
+#tracking-page {
+    .location-link {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .display-box {
+        display: block;
+        padding: 30px 40px 100px 40px;
+        width: 92%;
+
+        @media (max-width: 1200px) {
+            width: 100%;
+        }
+
+        p {
+            font-size: 24px;
+            font-weight: 400;
+        }
+
+        @media (max-width: 1200px) {
+            width: 100%;
+            margin-bottom: 30px;
+            padding: 20px 50px;
+        }
+    }
+
+    .cus-grid {
+        display: grid;
+        grid-template-columns: 35% 65%;
+
+        @media (max-width: 1200px) {
+            grid-template-columns: 100%;
+        }
+    }
+}
+
+// tracking page
+
+#tracking-page {
+    padding-top: 70px;
+    padding-bottom: 70px;
+
+    .info-text {
+        justify-content: center;
+        align-items: center;
+        min-height: 400px;
+        display: grid;
+        font-size: 20px;
+        color: #818181;
+        letter-spacing: 1.5px;
+    }
 }

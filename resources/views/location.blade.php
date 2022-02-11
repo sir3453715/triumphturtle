@@ -4,9 +4,9 @@
 <div class="main-wrapper">
   <section id="location-page">
     <div class="container">
-      <div class="cus-grid">
+      <div class="cus-grid align-items-end">
         <div class="display-box display-box-outline">
-          <div class="d-flex">
+          <div class="d-flex align-items-center">
             <img src="/storage/image/location-icon.svg" alt="">
             <h2>倉庫位置</h2>
           </div>
@@ -32,8 +32,8 @@
                 </div>
               </div>
               <div class="location-info">
-                <p class="mb-3"><span class="data-label">收件人 : </span>Michael</p>
-                <p class="mb-3"><span class="data-label">地址 : </span>Marko Service Street Postepu 19 warehouse 8 Warszawa
+                <p class="mb-3"><span class="data-label">收件人:</span>Michael</p>
+                <p class="mb-3"><span class="data-label">地址:</span>Marko Service Street Postepu 19 warehouse 8 Warszawa
                 </p>
               </div>
               <div class="location-link">
