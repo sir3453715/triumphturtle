@@ -108,6 +108,95 @@
     }
 }
 
+.location-card {
+
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    border-radius: 15px;
+    margin-bottom: 20px;
+
+    @media only screen and (max-width:768px) {
+        flex-direction: column;
+    }
+
+    .card-left {
+        overflow: hidden;
+
+        img {
+            object-fit: cover;
+            height: 100%;
+            border-radius: 15px 0 0 15px;
+
+            @media only screen and (max-width:768px) {
+                height: 200px;
+                border-radius: 15px 15px 0 0;
+                width: 100%;
+            }
+        }
+    }
+
+    .card-right {
+        padding: 20px;
+    }
+
+    .data {
+        &-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+
+            @media only screen and (max-width:576px) {
+                display: block;
+            }
+
+            &-top {
+                display: flex;
+                align-items: center;
+
+                @media only screen and (max-width:576px) {
+                    margin-bottom: 1rem;
+                }
+
+                img {
+                    margin-right: 12px;
+                }
+            }
+
+            &-title {
+                p {
+                    font-size: 20px !important;
+                    color: #333333;
+                    margin-bottom: 5px;
+                    font-weight: 700 !important;
+                }
+
+            }
+        }
+    }
+
+    .location-info {
+        p {
+            font-size: 16px !important;
+            letter-spacing: 1.5px;
+            font-weight: 400 !important;
+        }
+
+        .data-label {
+            font-size: 16px;
+            font-weight: 700;
+            color: #000000;
+        }
+
+    }
+}
+
 
 .cus-badge {
     font-size: 14px;
@@ -135,6 +224,10 @@
 
     &-gray {
         background: #B6B5B5;
+    }
+
+    &-dark-gray {
+        background: #818181;
     }
 }
 

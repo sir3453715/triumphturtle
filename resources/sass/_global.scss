@@ -338,3 +338,60 @@ p {
     }
 
 }
+
+// location page
+
+#location-page {
+    background-image: url(/storage/image/location-bg.svg);
+    background-repeat: no-repeat;
+    background-position: top center;
+    background-size: cover;
+    min-height: calc(100vh - 240px);
+    padding: 50px 0;
+
+    .cus-grid {
+        display: grid;
+        grid-template-columns: 35% 65%;
+        align-items: end;
+
+        @media (max-width: 1200px) {
+            grid-template-columns: 100%;
+        }
+    }
+
+    .display-box {
+        display: block;
+        margin-top: 70px;
+        padding: 20px 50px 100px 50px;
+
+        @media (max-width: 1200px) {
+            width: 100%;
+            margin-top: unset;
+            margin-bottom: 30px;
+            padding: 20px 50px;
+        }
+    }
+
+    p {
+        font-size: 24px;
+        font-weight: 400;
+    }
+
+    .edit-box {
+        padding: 5%;
+        height: 600px;
+        overflow-y: scroll;
+    }
+
+    h4 {
+        font-size: 20px;
+        color: #0094AE;
+        text-align: center;
+        font-weight: 400;
+    }
+}
+
+.location-link {
+    display: flex;
+    justify-content: space-between;
+}

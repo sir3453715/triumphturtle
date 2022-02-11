@@ -108,3 +108,19 @@
         color: $color-white;
     }
 }
+
+.btn-link {
+    text-decoration: underline;
+    font-weight: 700;
+    font-size: 16px;
+    letter-spacing: 1.5px;
+    cursor: pointer;
+
+    &-blue {
+        color: $blue;
+    }
+
+    &-orange {
+        color: $orange;
+    }
+}
