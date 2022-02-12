@@ -23,6 +23,16 @@ Route::get('/embargo', 'HomeController@embargo')->name('embargo');
 Route::get('/question', 'HomeController@question')->name('question');
 Route::get('/location', 'HomeController@location')->name('location');
 Route::get('/tracking', 'HomeController@tracking')->name('tracking');
+Route::get('/group-form-initiator', 'HomeController@groupFormInitiator')->name('group-form-initiator');
+Route::get('/individual-form', 'HomeController@individualForm')->name('individual-form');
+Route::get('/group-form-member', 'HomeController@groupFormMember')->name('group-form-member');
+Route::get('/group-form-edit', 'HomeController@groupFormEdit')->name('group-form-edit');
+Route::get('/group-form-complet-i', 'HomeController@groupFormCompletI')->name('group-form-complet-i');
+Route::get('/individual-form-complet', 'HomeController@individualFormComplet')->name('individual-form-complet');
+Route::get('/group-member-join', 'HomeController@groupMemberJoin')->name('group-member-join');
+Route::get('/group-member-join-success', 'HomeController@groupMemberJoinSuccess')->name('group-member-join-success');
+Route::get('/edit-success', 'HomeController@editSuccess')->name('edit-success');
+
 
 
 

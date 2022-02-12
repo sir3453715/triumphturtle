@@ -11,7 +11,7 @@
             <h1>海龜集運</h1>
             <h2 class="deco-line">TRIUMPH TURTLE</h2>
             <p>突破海運的限制!!<br>首創揪團集運平台</p>
-            <a class="btn btn-lg btn-solid btn-green" href="＃">查詢倉庫位置</a>
+            <a class="btn btn-lg btn-solid btn-green" href="/location">查詢倉庫位置</a>
           </div>
         </div>
 
@@ -46,7 +46,7 @@
             </select>
           </div>
           <div class="text-center col-md-2">
-            <button class="btn btn-lg btn-solid btn-orange w-100 mt-3 mt-md-0">搜尋</button>
+            <button type="button" class="btn btn-lg btn-solid btn-orange w-100 mt-3 mt-md-0">搜尋</button>
           </div>
         </div>
       </form>
@@ -104,7 +104,7 @@
               <p class="item-date">2 / 25</p>
             </div>
           </div>
-          <button class="btn btn-lg btn-solid btn-blue btn-block mt-4">來去揪團</button>
+          <button type="button" class="btn btn-lg btn-solid btn-blue btn-block mt-4">來去揪團</button>
         </div>
       </div>
       </div>

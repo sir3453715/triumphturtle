@@ -36,6 +36,16 @@ p {
     }
 }
 
+.cus-container {
+    max-width: 800px;
+    margin-top: 60px;
+    margin-bottom: 60px;
+}
+
+.text-blue {
+    color: $blue;
+}
+
 // slider
 .main-slider,
 .slide {
@@ -415,5 +425,37 @@ p {
         font-size: 20px;
         color: #818181;
         letter-spacing: 1.5px;
+    }
+}
+
+// confirm page
+
+.confirm-page {
+    background-image: url(/storage/image/confirm-bg.svg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center right;
+    height: 100vh;
+
+    .confirm-content {
+        background-color: $teal;
+        color: $color-white;
+        padding: 20px 50px;
+        border-radius: 15px;
+        border: 5px solid #FFFFFF;
+        width: 100%;
+        max-width: 800px;
+        min-height: 330px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin: 0 5%;
+
+        p {
+            font-weight: 500;
+            font-size: 20px;
+            text-align: center;
+        }
     }
 }

@@ -21,7 +21,7 @@
                             </ul>
                             <img class="d-flex m-auto img-fluid" src="/storage/image/card-reqular.png" alt="">
                         </div>
-                        <btn class="btn btn-solid btn-lg btn-block btn-blue">我要個人寄送</btn>
+                        <button type="button" class="btn btn-solid btn-lg btn-block btn-blue" data-toggle="modal" data-target="#tandc-modal">我要個人寄送</button>
                     </div>
                 </div>
             </div>
@@ -47,10 +47,10 @@
                         </div>
                         <div class="row">
                                 <div class="col-md-6">
-                                    <btn class="btn btn-solid btn-lg w-100 btn-orange">我要主揪</btn>
+                                    <button type="button" class="btn btn-solid btn-lg w-100 btn-orange" data-toggle="modal" data-target="#tandc-modal">我要主揪</button>
                                 </div>
                                 <div class="col-md-6">
-                                    <btn class="btn btn-solid btn-lg btn-blue w-100 mt-3 mt-md-0">我要跟團</btn>
+                                    <button type="button" class="btn btn-solid btn-lg btn-blue w-100 mt-3 mt-md-0" data-toggle="modal" data-target="#confirm-modal">我要跟團</button>
                                 </div>
                             </div>
                     </div>
@@ -60,6 +60,25 @@
     </section>
 </div>
 
+<!-- 驗證 modal -->
+<form class="modal fade" id="confirm-modal" tabindex="-1" role="dialog" aria-labelledby="confirm-modal" aria-hidden="true"
+    data-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body text-left px-5 my-5">
+            <div class="d-block align-items-center">
+                     <input class="form-control form-control-lg mb-3" type="text" placeholder="請輸入驗證碼">
+            <button type="button" class="btn btn-lg btn-solid btn-orange btn-block mt-3 mt-md-0" data-toggle="modal" data-target="#tandc-modal" data-dismiss="modal">送出</button>
+              </div>
+            </div>
+        </div>
+    </div>
+</form>
 
 
 @endsection

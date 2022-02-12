@@ -52,7 +52,7 @@
               <div class="card-bottom detail-info">
                 <p class="mb-3"><span class="data-label">收件人:</span>Michael</p>
                 <p class="mb-3"><span class="data-label">收件電話:</span>0912345678</p>
-                <p class="mb-3"><span class="data-label">收件地址:</span>Michael</p>
+                <p class="mb-3"><span class="data-label">收件地址:</span>Marko Service Street Postepu 19 warehouse 8 Warszawa</p>
                 <button class="btn btn-lg btn-solid btn-blue btn-block mt-4">資料修改</button>
               </div>
             </div>

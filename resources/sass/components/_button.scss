@@ -60,9 +60,14 @@
         background: $green;
     }
 
-    &-white {
-        color: #FB2B44;
-        border: none;
+    &-red {
+        color: $color-white;
+        background: #D0502A;
+    }
+
+    &-dark-gray {
+        color: $color-white;
+        background: #818181;
     }
 
     &-orange {
@@ -120,7 +125,17 @@
         color: $blue;
     }
 
+    &-red {
+        color: $red;
+    }
+
     &-orange {
         color: $orange;
+    }
+
+    &-white {
+        color: $color-white;
+        font-size: 20px;
+        font-weight: 400;
     }
 }
