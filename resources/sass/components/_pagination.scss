@@ -1,0 +1,88 @@
+.pagination {
+
+    .page-item:last-child .page-link,
+    .page-item:first-child .page-link {
+        border-radius: 100px;
+        width: 80px;
+        font-size: 14px;
+
+        &:hover {
+            background: none;
+            color: $blue;
+        }
+    }
+
+    .page-item.disabled .page-link {
+        background: none;
+    }
+
+    .page {
+        &-link {
+            color: $color-white;
+            width: 30px;
+            height: 30px;
+            line-height: 30px;
+            padding: 0;
+            text-align: center;
+            margin-right: .5rem;
+            border: none;
+            background: transparent;
+            font-weight: 500;
+            border-radius: 5px;
+
+            &:hover,
+            &.active {
+                color: white;
+                background-color: $blue;
+                border-color: $blue;
+            }
+
+            &__prev,
+            &__next {
+                border-width: 0;
+                position: relative;
+
+                &::after {
+                    content: "";
+                    width: 10px;
+                    height: 10px;
+                    padding: 0;
+                    display: block;
+                    border-color: #333333;
+                    border-style: solid;
+                    border-width: 1px 1px 0 0;
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                }
+
+                &:hover {
+                    background-color: transparent;
+                    background-image: none;
+                    border-width: 0;
+
+                    &::after {
+                        border-color: $blue;
+                    }
+                }
+            }
+
+            &__prev {
+                &::after {
+                    margin-left: 2px;
+                    transform: translate(-50%, -50%) rotate(-135deg);
+                }
+            }
+
+            &__next {
+                margin-right: 0;
+
+                &::after {
+                    margin-left: -2px;
+                    transform: translate(-50%, -50%) rotate(45deg);
+                }
+            }
+        }
+    }
+
+}
