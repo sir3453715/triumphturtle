@@ -113,6 +113,40 @@
             }
         }
     }
+
+    .card-disabled {
+        img {
+            opacity: 0.5;
+        }
+
+        .data-header-title,
+        .detail-info,
+        .data-label,
+        .data-number,
+        .data-extra-info,
+        .item-label,
+        .item-date {
+            color: #818181;
+        }
+
+        .data-content i {
+            color: #818181;
+        }
+
+        button {
+            cursor: not-allowed;
+        }
+
+        button {
+            background-color: #B6B5B5;
+
+            &:hover {
+                background: #B6B5B5;
+                color: $color-white;
+                cursor: not-allowed;
+            }
+        }
+    }
 }
 
 .location-card {

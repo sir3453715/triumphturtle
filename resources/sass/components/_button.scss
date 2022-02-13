@@ -90,6 +90,15 @@
             color: $color-white;
         }
     }
+
+    &-disabled {
+        background-color: #B6B5B5;
+
+        &:hover {
+            background: #B6B5B5;
+            color: $color-white;
+        }
+    }
 }
 
 .btn-round {
