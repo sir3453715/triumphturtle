@@ -101,8 +101,8 @@
                 </div>
             </div>
             <div class="col-4 d-flex justify-content-lg-end justify-content-center mb-lg-0 mb-3 pl-1">
-                <a href="" class="mr-2"><img src="/storage/image/line-icon.svg" alt=""></a>
-                <a href="" class="ml-2"><img src="/storage/image/fb-icon.svg" alt=""></a>
+                <a href="https://msng.link/o/?@865udsia=ln" target="_blank" class="mr-2"><img src="/storage/image/line-icon.svg" alt=""></a>
+                <a href="https://www.facebook.com/triumphturtle" target="blank" class="ml-2"><img src="/storage/image/fb-icon.svg" alt=""></a>
             </div>
         </div>
         <div class="row flex-lg-row flex-column">
@@ -124,7 +124,7 @@
 
         </div>
         <div class="row justify-content-lg-start justify-content-center">
-            <p>© 2021 海龜集運 All Right Reserved. | Design by <a href="#" target="_blank"
+            <p>© 2021 海龜集運 All Right Reserved. | Design by <a href="https://nomadots.com/" target="_blank"
                     class="font-weight-bold">Nomadot</a></p>
         </div>
     </div>

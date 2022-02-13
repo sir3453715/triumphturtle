@@ -1,12 +1,15 @@
 <!-- NAVBAR -->
 <nav class="navbar navbar-expand-xl fixed-top">
     <div class="container">
-    <a class="navbar-brand" href="/"><img src="storage/image/temp-logo.svg" alt="logo"></a>
+    <a class="navbar-brand" href="/"><img class="img-fluid" src="storage/image/triumphturtle.jpg" alt="logo"></a>
         <button class="navbar-toggler" type="button">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
+            <li class="nav-item">
+                    <a class="nav-link" href="/">首頁</span></a>
+                </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/about">關於我們</span></a>
                 </li>
@@ -33,6 +36,9 @@
         <div id="navBarMobile">
             <i id="nav-remove" class="fas fa-times"></i>
             <ul class="navbar-nav">
+            <li class="nav-item">
+                    <a class="nav-link" href="/">首頁</span></a>
+                </li>
             <li class="nav-item">
                     <a class="nav-link" href="/about">關於我們</span></a>
                 </li>
