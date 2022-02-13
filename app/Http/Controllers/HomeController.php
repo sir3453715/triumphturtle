@@ -99,4 +99,14 @@ class HomeController extends Controller
         return view('edit-success');
     }
 
+    public function shipmentOrder()
+    {
+        return view('shipment-order');
+    }
+
+    public function deliveryOrder()
+    {
+        return view('delivery-order');
+    }
+
 }

@@ -32,6 +32,9 @@ Route::get('/individual-form-complet', 'HomeController@individualFormComplet')->
 Route::get('/group-member-join', 'HomeController@groupMemberJoin')->name('group-member-join');
 Route::get('/group-member-join-success', 'HomeController@groupMemberJoinSuccess')->name('group-member-join-success');
 Route::get('/edit-success', 'HomeController@editSuccess')->name('edit-success');
+// 運貨單
+Route::get('/shipment-order', 'HomeController@shipmentOrder')->name('shipment-order');
+Route::get('/delivery-order', 'HomeController@deliveryOrder')->name('delivery-order');
 
 
 
