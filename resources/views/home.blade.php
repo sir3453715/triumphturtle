@@ -14,11 +14,8 @@
             <a class="btn btn-lg btn-solid btn-green" href="/location">查詢倉庫位置</a>
           </div>
         </div>
-
       </div>
-
     </div>
-    <div class="slide-item">slide-2</div>
   </section>
 
   <section class="container p-0 mb-5">

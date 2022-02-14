@@ -81,12 +81,6 @@ $(() => {
         $("body").css({"overflow-y": "auto"});
     });
 
-//========== active main slider ==========
-$('.main-slider').slick({
-    dots: true,
-    infinite: true,
-    speed: 500
-});
 
 //========== Enable tooltips everywhere ==========
 $(function () {
