@@ -54,7 +54,7 @@
                 <img src="/storage/image/embargo-icon/food-10.png" alt="容易變質或需冷藏食品">
                 <p>容易變質或需</br>冷藏食品</p>
             </div>
-        </div> 
+        </div>
         </div>
 
         <!-- list 2 -->
@@ -73,7 +73,7 @@
                 <img src="/storage/image/embargo-icon/nature-3.png" alt="屍骨、殘骸、毛皮及化石">
                 <p>屍骨、殘骸、毛皮<br>及化石</p>
             </div>
-        </div> 
+        </div>
         </div>
 
            <!-- list 3 -->
@@ -92,7 +92,7 @@
                 <img src="/storage/image/embargo-icon/luxury-3.png" alt="指定博彩物品">
                 <p>指定博彩物品</p>
             </div>
-        </div> 
+        </div>
         </div>
 
           <!-- list 4 -->
@@ -120,7 +120,7 @@
                 <p>刀具及斧頭</p>
             </div>
             <div class="list-item-box" data-toggle="tooltip" data-placement="top" title="例如香水、香膏、香薰、擴香、香水筆、浴廁香氛品等相關產品。">
-                <img src="/storage/image/embargo-icon/fspecial-6.png" alt="香氛類">
+                <img src="/storage/image/embargo-icon/special-6.png" alt="香氛類">
                 <p>香氛類</p>
             </div>
             <div class="list-item-box" data-toggle="tooltip" data-placement="top" title="電子元件、單獨寄遞的電池、單獨郵寄批量的乾電池、鋰電池及行動電源、發電機等，因無法通過安檢，一律禁運。">
@@ -131,7 +131,7 @@
                 <img src="/storage/image/embargo-icon/special-8.png" alt="各國機關部門進出口許可">
                 <p>各國機關部門<br>進出口許可</p>
             </div>
-        </div> 
+        </div>
         </div>
 
          <!-- list 5 -->
@@ -170,7 +170,7 @@
                 <img src="/storage/image/embargo-icon/danger-8.png" alt="易燃物">
                 <p>易燃物</p>
             </div>
-        </div> 
+        </div>
         </div>
 
               <!-- list 6 -->
@@ -185,7 +185,7 @@
                 <img src="/storage/image/embargo-icon/other-2.png" alt="其他">
                 <p>其他</p>
             </div>
-        </div> 
+        </div>
         </div>
 
                <!-- list 6 -->
@@ -193,11 +193,13 @@
             <h2>寄送限制注意事項:</h2>
             <!-- 下面是使用wysiwyg編輯器-->
             <div class="edit-box mb-5">
-
+                <div class="edit-content p-3">
+                    {!! app('Option')->send_content !!}
+                </div>
             </div>
-        
+
         </div>
-       
+
     </section>
 </div>
 @endsection

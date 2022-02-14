@@ -13,7 +13,9 @@
     <div class="list mt-5">
       <!-- 下面是使用wysiwyg編輯器-->
       <div class="edit-box mb-5">
-
+          <div class="edit-content p-3">
+              {!! app('Option')->faq !!}
+          </div>
       </div>
 
     </div>
