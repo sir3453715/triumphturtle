@@ -101,26 +101,26 @@
                 </div>
             </div>
             <div class="col-4 d-flex justify-content-lg-end justify-content-center mb-lg-0 mb-3 pl-1">
-                <a href="https://msng.link/o/?@865udsia=ln" target="_blank" class="mr-2"><img src="/storage/image/line-icon.svg" alt=""></a>
-                <a href="https://www.facebook.com/triumphturtle" target="blank" class="ml-2"><img src="/storage/image/fb-icon.svg" alt=""></a>
+                <a href="{{ app('Option')->line }}" target="_blank" class="mr-2"><img src="/storage/image/line-icon.svg" alt=""></a>
+                <a href="{{ app('Option')->facebook }}" target="blank" class="ml-2"><img src="/storage/image/fb-icon.svg" alt=""></a>
             </div>
         </div>
         <div class="row flex-lg-row flex-column">
 
             <div class="d-flex mr-lg-5 mr-0 mb-3 justify-content-center"><img class="mr-2"
                     src="/storage/image/street-map-icon.svg" alt="">
-                <p>新北市三重區成功路113號2樓</p>
+                <p>{{ app('Option')->company_address }}</p>
             </div>
 
 
             <div class="d-flex mr-lg-5 mr-0 mb-3 justify-content-center"><img class="mr-2"
                     src="/storage/image/phone-icon.svg" alt="">
-                <p>(02) 2978-0058</p>
+                <p>{{ app('Option')->company_tel }}</p>
             </div>
 
 
             <div class="d-flex mb-3 justify-content-center"><img class="mr-2" src="/storage/image/mail-icon.svg"
-                    alt=""><a href="mailto:#" class="text-nowrap">info@TRIUMPH-TURTLE.com </a></div>
+                    alt=""><a href="mailto:{{ app('Option')->company_email }}" class="text-nowrap">{{ app('Option')->company_email }}</a></div>
 
         </div>
         <div class="row justify-content-lg-start justify-content-center">

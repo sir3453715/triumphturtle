@@ -8,16 +8,16 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
             <li class="nav-item">
-                    <a class="nav-link" href="/">首頁</span></a>
+                    <a class="nav-link" href="/">首頁</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/about">關於我們</span></a>
+                    <a class="nav-link" href="/about">關於我們</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/service">服務說明</span></a>
+                    <a class="nav-link" href="/service">服務說明</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/embargo">禁運清單</span></a>
+                    <a class="nav-link" href="/embargo">禁運清單</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/question">常見問題</a>
@@ -31,22 +31,22 @@
             </ul>
         </div>
     </div>
-      
+
         <!-- mobile menu -->
         <div id="navBarMobile">
             <i id="nav-remove" class="fas fa-times"></i>
             <ul class="navbar-nav">
             <li class="nav-item">
-                    <a class="nav-link" href="/">首頁</span></a>
+                    <a class="nav-link" href="/">首頁</a>
                 </li>
             <li class="nav-item">
-                    <a class="nav-link" href="/about">關於我們</span></a>
+                    <a class="nav-link" href="/about">關於我們</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/service">服務說明</span></a>
+                    <a class="nav-link" href="/service">服務說明</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/embargo">禁運清單</span></a>
+                    <a class="nav-link" href="/embargo">禁運清單</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/question">常見問題</a>
