@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="shortcut icon" href="storage/image/fav-icon.jpg">
     <title>{{ app('Option')->site_name }}</title>
     @stack('app-head-scripts')
     @section('app-styles')
