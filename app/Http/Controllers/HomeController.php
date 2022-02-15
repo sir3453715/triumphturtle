@@ -53,7 +53,8 @@ class HomeController extends Controller
     }
     public function location()
     {
-        return view('location');
+        $warehouses = Warehouse::all();
+        return view('location',['warehouses'=>$warehouses]);
     }
     public function tracking()
     {
