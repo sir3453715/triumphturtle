@@ -103,42 +103,62 @@ p {
 
     &-item {
         min-height: 500px;
-    }
-
-    &-1 {
-        background: url(/storage/image/slide-1.jpg) no-repeat;
-        background-size: cover;
-        background-position: top center;
-        min-height: 600px;
         position: relative;
 
-        @media only screen and (max-width: 992px) {
-            background: url(/storage/image/slide-1-mb.jpg) no-repeat;
-            background-size: cover;
-            background-position: bottom center;
-            min-height: 700px;
-            position: relative;
+        img {
+            min-height: 500px;
+            max-height: 600px;
+            width: 100%;
+            object-fit: cover;
+
+            @media only screen and (max-width: 768px) {
+                min-height: 700px;
+                max-height: 700px;
+            }
+        }
+    }
+
+    &-caption-wrapper {
+        position: absolute;
+        top: 50px;
+        left: 10%;
+        max-width: 600px;
+        min-width: 450px;
+
+        @media only screen and (min-width: 1440px) {
+            top: 15%;
+        }
+
+        @media only screen and (max-width: 768px) {
+            max-width: unset;
+            min-width: unset;
+            width: 100%;
+            left: 0;
+            padding: 0 8%;
         }
     }
 
     &-caption {
-        min-width: 300px;
-        max-width: 400px;
-        margin-top: 10%;
         background: $blue;
         border: 4px solid #FFFFFF;
         border-radius: 10px;
         outline: solid 15px $blue;
         color: $color-white;
-        padding: 4% 5%;
+        padding: 10% 15%;
 
         @media only screen and (max-width: 768px) {
-            max-width: unset;
+            min-width: 100%;
+            max-width: 100%;
+            padding: 5%;
         }
 
         h1 {
             font-size: 60px;
             margin-bottom: 15px;
+
+            @media only screen and (max-width: 768px) {
+                font-size: 50px;
+            }
         }
 
         h2 {
@@ -164,13 +184,6 @@ p {
     }
 }
 
-.slick-dots {
-    bottom: 10px;
-}
-
-.slick-dotted.slick-slider {
-    margin-bottom: 0 !important;
-}
 
 // home page
 

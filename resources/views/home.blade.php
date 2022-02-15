@@ -3,19 +3,18 @@
 @section('content')
     @inject('html', 'App\Presenters\Html\HtmlPresenter')
 <div class="main-wrapper" id="home-page">
-
   <section class="main-slider">
-    <div class="slide-item slide-1">
-      <div class="container">
-        <div class="mx-3 mx-md-0">
-          <div class="slide-caption col-xl-5 col-md-6 col-12">
+    <div class="slide-item">
+        <img class="d-none d-md-block" src="/storage/image/slide-1.jpg" alt="">
+        <img class="d-block d-md-none" src="/storage/image/slide-1-mb.jpg" alt="">
+        <div class="slide-caption-wrapper">
+             <div class="slide-caption">
             <h1>海龜集運</h1>
             <h2 class="deco-line">TRIUMPH TURTLE</h2>
             <p>突破海運的限制!!<br>首創揪團集運平台</p>
             <a class="btn btn-lg btn-solid btn-green" href="{{route('location')}}">查詢倉庫位置</a>
           </div>
         </div>
-      </div>
     </div>
   </section>
 
