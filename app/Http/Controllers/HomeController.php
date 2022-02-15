@@ -3,11 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Models\Calendar;
+use App\Models\Country;
 use App\Models\PunchCard;
+use App\Models\SailingSchedule;
 use App\Models\User;
+use App\Models\Warehouse;
 use Carbon\CarbonPeriod;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
 class HomeController extends Controller
@@ -27,9 +31,26 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('home');
+        $countries = Country::all();
+        $sailings = SailingSchedule::where('on_off','2');
+        $queried=['from_country'=>'','to_country'=>''];
+        if($request->get('from_country')) {
+            $queried['from_country'] = $request->get('from_country');
+            $sailings = $sailings->where('from_country',$request->get('from_country'));
+        }
+        if($request->get('to_country')) {
+            $queried['to_country'] = $request->get('to_country');
+            $sailings = $sailings->where('to_country',$request->get('to_country'));
+        }
+
+        $sailings = $sailings->paginate(6);
+        return view('home',[
+            'queried'=>$queried,
+            'countries'=>$countries,
+            'sailings'=>$sailings,
+        ]);
     }
     public function about()
     {
@@ -108,6 +129,21 @@ class HomeController extends Controller
     public function deliveryOrder()
     {
         return view('delivery-order');
+    }
+
+    public function ajaxSailingData(Request $request)
+    {
+        if ($request->ajax()) {
+            $sailings = SailingSchedule::where('on_off','2');
+            if($request->get('from_country')) {
+                $sailings = $sailings->where('from_country',$request->get('from_country'));
+            }
+            if($request->get('to_country')) {
+                $sailings = $sailings->where('to_country',$request->get('to_country'));
+            }
+            $sailings = $sailings->paginate(6);
+            return view('component.ajaxSailingData', ['sailings' => $sailings])->render();
+        }
     }
 
 }

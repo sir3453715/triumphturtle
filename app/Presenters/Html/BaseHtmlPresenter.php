@@ -2,6 +2,8 @@
 
 namespace App\Presenters\Html;
 
+use App\Models\Order;
+use App\Models\OrderBox;
 use Arr;
 
 trait BaseHtmlPresenter
@@ -125,4 +127,62 @@ trait BaseHtmlPresenter
     {
         return $currentValue == $comparedValue ? $this->selected() : '';
     }
+
+    public function sailingStatus($status){
+        $html = '';
+        switch ($status){
+            case 1:
+                $html = '<span class="cus-badge cus-badge-green">集貨中</span>';
+                break;
+            case 2:
+                $html = '<span class="cus-badge cus-badge-orange">準備中</span>';
+                break;
+            case 3:
+                $html = '<span class="cus-badge cus-badge-blue">開航中</span>';
+                break;
+            case 4:
+                $html = '<span class="cus-badge cus-badge-teal">已抵達</span>';
+                break;
+            case 5:
+                $html = '<span class="cus-badge cus-badge-gray">已取消</span>';
+                break;
+        }
+        return $html;
+    }
+
+    public function sailingPrice($sailing){
+        $sailing_id = $sailing->id;
+        $status = $sailing->status;
+        $minimum = $sailing->minimum;
+        $box_interval = $sailing->box_interval;
+        $order_ids = Order::where('sailing_id',$sailing_id)->pluck('id');
+        $box_count = OrderBox::whereIn('order_id',$order_ids)->count();
+        $html = '';
+        if ($status == 1){
+            if ($box_count >= $minimum){
+                $price = $sailing->price;
+                $interval = intval(floor($box_count/$box_interval));
+                $margin = $box_count%$box_interval;
+                for ($i = 0;$i<=$interval;$i++){
+                    $price = ($price*$sailing->discount);
+                }
+                $html = '<div><img src="/storage/image/pack-icon.svg" alt="">已成團！差 <span class="data-number">'.$margin.'</span>箱即可享有優惠</div>
+                            <div class="data-extra-info"><span>NT$ '.number_format($price).'</span> / 箱</div>';
+            }else{
+                $num = $minimum - $box_count;
+                $html = '<div><img src="/storage/image/pack-icon.svg" alt="">差 <span class="data-number">'.$num.'</span>箱即可成團</div>';
+            }
+        }else{
+            $price = $sailing->price;
+            $interval = intval(floor($box_count/$box_interval));
+            for ($i = 1;$i<=$interval;$i++){
+                $price = ($price*$sailing->discount);
+            }
+            $html = '<div><img src="/storage/image/pack-icon.svg" alt="">已成團！已滿箱享有優惠價</div>
+                            <div class="data-extra-info"><span>NT$ '.number_format($price).'</span> / 箱</div>';
+        }
+        return $html;
+
+    }
+
 }
