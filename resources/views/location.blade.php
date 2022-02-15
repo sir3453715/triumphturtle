@@ -16,10 +16,10 @@
         <div class="edit-box">
           <!-- location card -->
           @foreach($warehouses as $warehouse) <div class="location-card">
-            <div class="card-left">
+            <div class="card-left col-md-4">
               <img class="img-fluid" src="/storage/{{($warehouse->img)?'customer/'.$warehouse->img:'image/location-img/location-sample-img.jpg'}}" alt="">
             </div>
-            <div class="card-right">
+            <div class="card-right col-md-8">
               <div class="data-header">
                 <div class="data-header-top">
                   <img class="img-circle" src="/storage/image/box-icon.svg" alt="">
@@ -37,8 +37,8 @@
                 </p>
               </div>
               <div class="location-link">
-                <a href="" class="btn-link btn-link-blue">當地宅配資訊</a>
-                <a href="{{$warehouse->link}}" class="btn-link btn-link-orange">紙箱購買連結</a>
+                <a href="#" target="_blank" class="btn-link btn-link-blue">當地宅配資訊</a>
+                <a href="{{$warehouse->link}}" target="_blank" class="btn-link btn-link-orange">紙箱購買連結</a>
               </div>
             </div>
         </div>
