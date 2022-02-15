@@ -63,11 +63,21 @@
     &-red {
         color: $color-white;
         background: #D0502A;
+
+        &:hover {
+            color: $color-white;
+            outline: solid 2px #D0502A;
+        }
     }
 
     &-dark-gray {
         color: $color-white;
         background: #818181;
+
+        &:hover {
+            color: $color-white;
+            outline: solid 2px #818181;
+        }
     }
 
     &-orange {
@@ -77,7 +87,7 @@
         &:hover {
             background: #FFA800;
             color: $color-white;
-            border: solid 5px #FFA800;
+            outline: solid 2px #FFA800;
         }
     }
 
