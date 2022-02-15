@@ -39,12 +39,23 @@
                             {!! $html->render() !!}
                             <div class="form-group row">
                                 <div class="col-12 col-md-2">
-                                    <label for="option-banner">首頁Banner</label>
+                                    <label for="option-banner">首頁Banner(電腦版)</label>
                                 </div>
                                 <div class="col-12 col-md-10">
                                     <input type="file" class="form-control-file" name="banner" id="option-banner" >
                                     @if(app('Option')->banner)
                                         <img src="{{app('Option')->banner}}" width="300px">
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-12 col-md-2">
+                                    <label for="option-banner">首頁Banner(手機板)</label>
+                                </div>
+                                <div class="col-12 col-md-10">
+                                    <input type="file" class="form-control-file" name="banner_mb" id="option-banner" >
+                                    @if(app('Option')->banner_mb)
+                                        <img src="{{app('Option')->banner_mb}}" width="100px">
                                     @endif
                                 </div>
                             </div>
