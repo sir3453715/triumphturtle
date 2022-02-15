@@ -36,7 +36,8 @@ Route::get('/edit-success', 'HomeController@editSuccess')->name('edit-success');
 Route::get('/shipment-order', 'HomeController@shipmentOrder')->name('shipment-order');
 Route::get('/delivery-order', 'HomeController@deliveryOrder')->name('delivery-order');
 
-
+//Ajax
+Route::get('ajaxSailingData', 'HomeController@ajaxSailingData');
 
 
 /**
