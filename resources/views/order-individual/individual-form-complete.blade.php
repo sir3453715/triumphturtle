@@ -50,8 +50,8 @@
             <div class="des-box des-box-blue">
                 <ol>
                     <li>若設定完資料後有需要修改, 請在首頁點擊 “訂單查詢” 功能做異動</li>
-                   <li>運單將會發送到您設定個寄件人信箱，請列印出來後貼至箱上，並在入倉截止日前 <span>{{$order->sailing->parcel_deadline}}</span> 寄送到<a class="btn-link btn-link-white ml-2" href="/location">倉庫</a></li>
-                   <li>結單日 <span>{{$order->sailing->statement_time}}</span> 過後系統會發送優惠價格通知到電子信箱, 請款單將在貨物發送到台灣倉庫後發送通知</li>
+                   <li>運單將會發送到您設定個寄件人信箱，請列印出來後貼至箱上，並在入倉截止日前 <span>{{date('Y/m/d',strtotime($order->sailing->parcel_deadline))}}</span> 寄送到<a class="btn-link btn-link-white ml-2" href="/location">倉庫</a></li>
+                   <li>結單日 <span>{{date('Y/m/d',strtotime($order->sailing->statement_time))}}</span> 過後系統會發送優惠價格通知到電子信箱, 請款單將在貨物發送到台灣倉庫後發送通知</li>
                    <li>建議訂單完成後私訊客服人員您的姓名跟訂單編號，以利後續相關作業溝通，謝謝。</li>
                 </ol>
             </div>

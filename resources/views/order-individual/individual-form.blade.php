@@ -13,6 +13,8 @@
         <form class="cus-form cus-form-fill validation-form" action="{{route('orderCreate')}}" method="POST">
             @csrf
             <input type="hidden" name="sailing_id" value="{{$sailing_id}}">
+            <input type="hidden" name="type" value="1">
+            <input type="hidden" name="parent_id" value="0">
             <fieldset class="cus-form-wrap">
                 <div class="cus-form-header">
                     <img src="/storage/image/box-out-icon.svg" alt="寄件資訊圖示">
@@ -150,7 +152,7 @@
                                 </div>
                                 <div class="form-group col-6 col-md-3">
                                     <label for="">價值<small class="help">(USD)</small></label>
-                                    <div> <span class="show-price">XXX<span></span> <small class="help">USD</small></div>
+                                    <div> <span class="show-price">XXX</span><small class="help">USD</small></div>
                                 </div>
                                 <div class="col-6 col-md-3 d-flex align-items-center">
                                     <button type="button" class="btn btn-sm btn-red remove-item">刪除</button>
@@ -230,6 +232,16 @@
                 }else{
                     $('.d-hidden').hide();
                 }
+            });
+            $(document.body).on('change','.change-num',function (){
+                let num = $(this).val(), price = $(this).closest('.item-section').find('.change-price').val(),
+                    totalHtml = $(this).closest('.item-section').find('.show-price');
+                totalHtml.html((Math.round(num)*Math.round(price)));
+            });
+            $(document.body).on('change','.change-price',function (){
+                let num = $(this).val(), price = $(this).closest('.item-section').find('.change-num').val(),
+                    totalHtml = $(this).closest('.item-section').find('.show-price');
+                totalHtml.html((Math.round(num)*Math.round(price)));
             });
         });
     </script>
