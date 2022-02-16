@@ -18,17 +18,22 @@ Auth::routes();
 Route::get('/', 'HomeController@index')->name('index');
 Route::get('/about', 'HomeController@about')->name('about');
 Route::get('/service', 'HomeController@service')->name('service');
-Route::get('/option', 'HomeController@option')->name('option');
 Route::get('/embargo', 'HomeController@embargo')->name('embargo');
 Route::get('/question', 'HomeController@question')->name('question');
 Route::get('/location', 'HomeController@location')->name('location');
 Route::get('/tracking', 'HomeController@tracking')->name('tracking');
-Route::get('/group-form-initiator', 'HomeController@groupFormInitiator')->name('group-form-initiator');
-Route::get('/individual-form', 'HomeController@individualForm')->name('individual-form');
-Route::get('/group-form-member', 'HomeController@groupFormMember')->name('group-form-member');
+
+//選擇個人OR團購
+Route::get('/option/{id}', 'OrderController@option')->name('option');
+//個人
+Route::get('/individual-form/{id}', 'OrderController@individualForm')->name('individual-form');
+Route::get('/individual-form-complete/{id}', 'OrderController@individualFormComplete')->name('individual-form-complete');
+Route::post('/orderCreate','OrderController@orderCreate')->name('orderCreate');
+//團購
+Route::get('/group-form-initiator/{id}', 'HomeController@groupFormInitiator')->name('group-form-initiator');
+Route::get('/group-form-member/{id}', 'HomeController@groupFormMember')->name('group-form-member');
 Route::get('/group-form-edit', 'HomeController@groupFormEdit')->name('group-form-edit');
 Route::get('/group-form-complet-i', 'HomeController@groupFormCompletI')->name('group-form-complet-i');
-Route::get('/individual-form-complet', 'HomeController@individualFormComplet')->name('individual-form-complet');
 Route::get('/group-member-join', 'HomeController@groupMemberJoin')->name('group-member-join');
 Route::get('/group-member-join-success', 'HomeController@groupMemberJoinSuccess')->name('group-member-join-success');
 Route::get('/edit-success', 'HomeController@editSuccess')->name('edit-success');
@@ -36,8 +41,13 @@ Route::get('/edit-success', 'HomeController@editSuccess')->name('edit-success');
 Route::get('/shipment-order', 'HomeController@shipmentOrder')->name('shipment-order');
 Route::get('/delivery-order', 'HomeController@deliveryOrder')->name('delivery-order');
 
+
+
+
+
 //Ajax
 Route::get('ajaxSailingData', 'HomeController@ajaxSailingData');
+Route::post('confirmToken', 'OrderController@confirmToken');
 
 
 /**

@@ -2,11 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Calendar;
 use App\Models\Country;
-use App\Models\PunchCard;
 use App\Models\SailingSchedule;
-use App\Models\User;
 use App\Models\Warehouse;
 use Carbon\CarbonPeriod;
 use Illuminate\Http\Request;
@@ -60,10 +57,6 @@ class HomeController extends Controller
     {
         return view('service');
     }
-    public function option()
-    {
-        return view('option');
-    }
     public function embargo()
     {
         return view('embargo');
@@ -84,10 +77,6 @@ class HomeController extends Controller
     public function groupFormInitiator()
     {
         return view('group-form-initiator');
-    }
-    public function individualForm()
-    {
-        return view('individual-form');
     }
     public function groupFormMember()
     {
@@ -111,10 +100,6 @@ class HomeController extends Controller
         return view('group-member-join-success');
     }
 
-    public function individualFormComplet()
-    {
-        return view('individual-form-complet');
-    }
 
     public function editSuccess()
     {
