@@ -47,7 +47,7 @@
                         </div>
                     </div>
                     @if($sailing->status == 1)
-                        <button type="button" class="btn btn-lg btn-solid btn-blue btn-block mt-4">來去揪團</button>
+                        <a href="{{route('option',['id'=>$sailing->id])}}" class="btn btn-lg btn-solid btn-blue btn-block mt-4">來去揪團</a>
                     @else
                         <button type="button" class="btn btn-lg btn-solid btn-blue btn-block mt-4">已結單，下次請早</button>
                     @endif
