@@ -1,7 +1,7 @@
 <!-- NAVBAR -->
 <nav class="navbar navbar-expand-xl fixed-top">
     <div class="container">
-    <a class="navbar-brand" href="/"><img class="img-fluid" src="storage/image/triumphturtle.jpg" alt="logo"></a>
+    <a class="navbar-brand" href="/"><img class="img-fluid" src="/storage/image/triumphturtle.jpg" alt="logo"></a>
         <button class="navbar-toggler" type="button">
             <span class="navbar-toggler-icon"></span>
         </button>
