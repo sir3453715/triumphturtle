@@ -74,33 +74,6 @@ class HomeController extends Controller
     {
         return view('tracking');
     }
-    public function groupFormInitiator()
-    {
-        return view('group-form-initiator');
-    }
-    public function groupFormMember()
-    {
-        return view('group-form-member');
-    }
-    public function groupFormEdit()
-    {
-        return view('group-form-edit');
-    }
-
-    public function groupFormCompletI()
-    {
-        return view('group-form-complet-i');
-    }
-    public function groupMemberJoin()
-    {
-        return view('group-member-join');
-    }
-    public function groupMemberJoinSuccess()
-    {
-        return view('group-member-join-success');
-    }
-
-
     public function editSuccess()
     {
         return view('edit-success');

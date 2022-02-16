@@ -27,15 +27,18 @@ Route::get('/tracking', 'HomeController@tracking')->name('tracking');
 Route::get('/option/{id}', 'OrderController@option')->name('option');
 //個人
 Route::get('/individual-form/{id}', 'OrderController@individualForm')->name('individual-form');
-Route::get('/individual-form-complete/{id}', 'OrderController@individualFormComplete')->name('individual-form-complete');
+Route::get('/individual-form-complete/{parameter}', 'OrderController@individualFormComplete')->name('individual-form-complete');
 Route::post('/orderCreate','OrderController@orderCreate')->name('orderCreate');
 //團購
-Route::get('/group-form-initiator/{id}', 'HomeController@groupFormInitiator')->name('group-form-initiator');
-Route::get('/group-form-member/{id}', 'HomeController@groupFormMember')->name('group-form-member');
-Route::get('/group-form-edit', 'HomeController@groupFormEdit')->name('group-form-edit');
-Route::get('/group-form-complet-i', 'HomeController@groupFormCompletI')->name('group-form-complet-i');
-Route::get('/group-member-join', 'HomeController@groupMemberJoin')->name('group-member-join');
-Route::get('/group-member-join-success', 'HomeController@groupMemberJoinSuccess')->name('group-member-join-success');
+Route::get('/group-form-initiator/{id}', 'OrderController@groupFormInitiator')->name('group-form-initiator');
+Route::get('/group-form-complete-i/{parameter}', 'OrderController@groupFormCompleteI')->name('group-form-complete-i');
+
+Route::get('/group-form-member/{id}', 'OrderController@groupFormMember')->name('group-form-member');
+Route::get('/group-form-edit', 'OrderController@groupFormEdit')->name('group-form-edit');
+Route::get('/group-member-join', 'OrderController@groupMemberJoin')->name('group-member-join');
+Route::get('/group-member-join-success', 'OrderController@groupMemberJoinSuccess')->name('group-member-join-success');
+
+
 Route::get('/edit-success', 'HomeController@editSuccess')->name('edit-success');
 // 運貨單
 Route::get('/shipment-order', 'HomeController@shipmentOrder')->name('shipment-order');
