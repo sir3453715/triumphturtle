@@ -6,6 +6,7 @@ use App\Models\ActionLog;
 use App\Models\Order;
 use App\Models\OrderBox;
 use App\Models\OrderBoxItem;
+use App\Models\SailingSchedule;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
@@ -25,13 +26,48 @@ class OrderController extends Controller
             'sailing_id'=>$sailing_id,
         ]);
     }
-    public function individualFormComplete($order_id)
+    public function individualFormComplete(Request $request,$parameter)
     {
-        $order = Order::find($order_id);
-        return view('order-individual.individual-form-complete',[
-            'order'=>$order,
+
+        $array = unserialize(base64_decode($parameter));
+        if ($array['flag']){
+            $order = Order::find($array['id']);
+            return view('order-individual.individual-form-complete',[
+                'order'=>$order,
+            ]);
+        }else{
+            return redirect(route('index'));
+        }
+    }
+    public function groupFormInitiator($sailing_id)
+    {
+        $sailing = SailingSchedule::find($sailing_id);
+        return view('order-group.group-form-initiator',[
+            'sailing'=>$sailing,
         ]);
     }
+    public function groupFormMember()
+    {
+        return view('order-group.group-form-member');
+    }
+    public function groupFormEdit()
+    {
+        return view('order-group.group-form-edit');
+    }
+
+    public function groupFormCompletI()
+    {
+        return view('order-group.group-form-complet-i');
+    }
+    public function groupMemberJoin()
+    {
+        return view('order-group.group-member-join');
+    }
+    public function groupMemberJoinSuccess()
+    {
+        return view('order-group.group-member-join-success');
+    }
+
     public function orderCreate(Request $request)
     {
         /* 判斷當前流水號 */
@@ -50,11 +86,11 @@ class OrderController extends Controller
 
         $data = [
             'sailing_id' => $request->get('sailing_id'),
-            'type' => 1,
+            'type' => $request->get('type'),
             'seccode' => $serial_number2.'-1',
             'serial_number' => $serial_number2,
             'person_number' => 1,
-            'parent_id'=>0,
+            'parent_id'=>$request->get('parent_id'),
             'status' => 1,
             'pay_status' => 1,
             'shipment_use' => $request->get('shipment_use'),
@@ -105,7 +141,14 @@ class OrderController extends Controller
                 $start_item++;
             }
         }
+        $parameter = ['id'=>$order->id,'flag'=>true];
+        $parameter = base64_encode(serialize($parameter));
 
+        if($request->get('type') == 1){
+            return redirect(route('individual-form-complete',['parameter'=>$parameter]));
+        }else if($request->get('type') == 2){
+            return redirect(route('group-form-complete-i',['parameter'=>$parameter]));
+        }
 
     }
 
