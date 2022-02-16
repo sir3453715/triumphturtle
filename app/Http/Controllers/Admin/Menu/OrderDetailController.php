@@ -89,7 +89,9 @@ class OrderDetailController extends Controller
         }
         if ( $request->get('type') == 2){
             do{
-                $captcha = rand(1000,9999);
+
+                $captcha=substr(md5(uniqid(rand())),0,8);  ##產生隨機字串
+                $captcha = preg_replace('/\[O|0|I|i|L\]/',rand(2,9),$captcha);  #排除掉特定字元
                 $chk_captcha = Order::where('captcha','=',$captcha)->first();//判斷已產生的驗證碼是否存在
             } while ($chk_captcha);
         }else{
