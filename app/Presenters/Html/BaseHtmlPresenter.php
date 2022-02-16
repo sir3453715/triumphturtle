@@ -185,4 +185,63 @@ trait BaseHtmlPresenter
 
     }
 
+    public function orderStatus($order,$type = null){
+        $text = '';
+        switch ($type){
+            case 'sailing_status':
+                switch ($order->sailing->status){
+                    case 1:
+                        $text = '集貨中';
+                        break;
+                    case 2:
+                        $text = '準備中';
+                        break;
+                    case 3:
+                        $text = '開航中';
+                        break;
+                    case 4:
+                        $text = '已抵達';
+                        break;
+                    case 5:
+                        $text = '取消';
+                        break;
+                }
+                break;
+            case 'order_status':
+                switch ($order->status){
+                    case 1:
+                        $text = '未入庫';
+                        break;
+                    case 2:
+                        $text = '已入庫';
+                        break;
+                    case 3:
+                        $text = '宅配派送中';
+                        break;
+                    case 4:
+                        $text = '完成';
+                        break;
+                    case 5:
+                        $text = '取消';
+                        break;
+                }
+                break;
+            case 'pay_status':
+                switch ($order->pay_status){
+                    case 1:
+                        $text = '未付款';
+                        break;
+                    case 2:
+                        $text = '已出帳';
+                        break;
+                    case 3:
+                        $text = '已付款';
+                        break;
+                }
+                break;
+        }
+        return $text;
+
+    }
+
 }
