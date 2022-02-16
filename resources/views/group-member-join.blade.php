@@ -34,7 +34,7 @@
                     <div>
                         <div class="d-block d-md-flex align-items-center mb-3">
                             <input class="form-control form-control-lg mr-3" type="text" placeholder="請輸入驗證碼">
-                            <button type="button" id="send-confirm" class="btn btn-lg btn-solid btn-orange btn-block mt-3 mt-md-0" data-toggle="modal" href="#tandc-modal">送出</button>
+                            <button type="button" id="send-confirm" class="btn btn-lg btn-solid btn-orange btn-block mt-3 mt-md-0 open-TAC" data-toggle="modal" href="#tandc-modal">送出</button>
                         </div>
                     </div>
                 </div>

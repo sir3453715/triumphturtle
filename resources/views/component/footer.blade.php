@@ -37,7 +37,7 @@
 
 <!-- T&C -->
 <!--form info Modal -->
-<form class="modal fade" id="tandc-modal" tabindex="-1" role="dialog" aria-labelledby="confirm-modal" aria-hidden="true"
+<div class="modal fade" id="tandc-modal" tabindex="-1" role="dialog" aria-labelledby="confirm-modal" aria-hidden="true"
     data-backdrop="static">
     <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
         <div class="modal-content">
@@ -60,15 +60,15 @@
                 <p class="mb-4">本人已閱讀且了解<a class="btn-link btn-link-red mx-1" href="/embargo"
                         target="_blank">禁運清單</a>的內容，並會遵守規定不將違禁品置入包裹，若有違反規定本人願意承擔一切賠償及法律責任</p>
                 <p class="mb-4">此致<br>凱漩國際有限公司<br>TRIUMPH INTERNATIONAL TRADING CO., LTD.</p>
-                <div class="form-check">
-                    <input type="checkbox" class="form-check-input">
-                    <label class="form-check-label text-blue" for="exampleCheck1">我已閱讀了解並且同意以上條款</label>
+                <div class="form-check" id="TACCheckBoxDiv">
+                    <input type="checkbox" class="form-check-input" id="TACCheckBox" name="TACCheckBox">
+                    <label class="form-check-label text-blue" for="TACCheckBox">我已閱讀了解並且同意以上條款</label>
                 </div>
-                <button class="btn btn-lg btn-solid btn-blue btn-block mt-4">前往填寫資料</button>
+                <button type="button" id="checkTAC" class="btn btn-lg btn-solid btn-blue btn-block mt-4" >前往填寫資料</button>
             </div>
         </div>
     </div>
-</form>
+</div>
 
 
 <!-- FOOTER START -->

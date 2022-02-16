@@ -15,13 +15,13 @@
                             <p>適用對象 : 商務人士, 旅遊者, 跨國搬家</p>
                             <ul>
                                 <li>需多額外加3000報關文件處理費
-                                
+
                                 </li>
                                 <li>僅能送到一個地點</li>
                             </ul>
                             <img class="d-flex m-auto img-fluid" src="/storage/image/card-reqular.png" alt="">
                         </div>
-                        <button type="button" class="btn btn-solid btn-lg btn-block btn-blue" data-toggle="modal" data-target="#tandc-modal">我要個人寄送</button>
+                        <button type="button" class="btn btn-solid btn-lg btn-block btn-blue open-TAC" data-toggle="modal" data-target="#tandc-modal" data-link="/individual-form/{{$sailing_id}}">我要個人寄送</button>
                     </div>
                 </div>
             </div>
@@ -47,7 +47,7 @@
                         </div>
                         <div class="row">
                                 <div class="col-md-6">
-                                    <button type="button" class="btn btn-solid btn-lg w-100 btn-orange" data-toggle="modal" data-target="#tandc-modal">我要主揪</button>
+                                    <button type="button" class="btn btn-solid btn-lg w-100 btn-orange open-TAC" data-toggle="modal" data-target="#tandc-modal" data-link="/group-form-initiator/{{$sailing_id}}">我要主揪</button>
                                 </div>
                                 <div class="col-md-6">
                                     <button type="button" class="btn btn-solid btn-lg btn-blue w-100 mt-3 mt-md-0" data-toggle="modal" data-target="#confirm-modal">我要跟團</button>
@@ -72,8 +72,8 @@
             </div>
             <div class="modal-body text-left px-5 my-5">
             <div class="d-block align-items-center">
-                     <input class="form-control form-control-lg mb-3" type="text" placeholder="請輸入驗證碼">
-            <button type="button" class="btn btn-lg btn-solid btn-orange btn-block mt-3 mt-md-0" data-toggle="modal" data-target="#tandc-modal" data-dismiss="modal">送出</button>
+                     <input class="form-control form-control-lg mb-3" name="captcha" id="captcha" type="text" placeholder="請輸入驗證碼">
+                    <button type="button" class="btn btn-lg btn-solid btn-orange btn-block mt-3 mt-md-0" id="confirm-token" data-link="/group-form-member/{{$sailing_id}}">送出</button>
               </div>
             </div>
         </div>
