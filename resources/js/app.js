@@ -98,7 +98,12 @@ $(() => {
             event.preventDefault();
             if($('#TACCheckBox').is(':checked')) {
                 let route = $(this).data('link');
-                window.location.href=route;
+                if (route === 'group-captcha'){
+                    $('#tandc-modal').modal('hide');
+                    $('.shipment').submit();
+                }else{
+                    window.location.href=route;
+                }
             }else{
                 focusField('#TACCheckBoxDiv');
                 showValidationMessage('#TACCheckBoxDiv', '請同意條款!');
