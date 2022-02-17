@@ -28,7 +28,6 @@ class OrderController extends Controller
     }
     public function individualFormComplete(Request $request,$parameter)
     {
-
         $array = unserialize(base64_decode($parameter));
         if ($array['flag']){
             $order = Order::find($array['id']);
@@ -46,31 +45,68 @@ class OrderController extends Controller
             'sailing'=>$sailing,
         ]);
     }
-    public function groupFormMember()
+    public function groupFormMember($parent_id)
     {
-        return view('order-group.group-form-member');
+        $parent_order = Order::find($parent_id);
+        if ($parent_order->type == 2 && $parent_order->parent_id ==0){
+            return view('order-group.group-form-member',[
+                'parent_order'=>$parent_order,
+            ]);
+        }else{
+            return redirect(route('index'));
+        }
     }
     public function groupFormEdit()
     {
         return view('order-group.group-form-edit');
     }
 
-    public function groupFormCompletI()
+    public function groupFormCompleteI($parameter)
     {
-        return view('order-group.group-form-complet-i');
+        $array = unserialize(base64_decode($parameter));
+        if ($array['flag']){
+            $order = Order::find($array['id']);
+            return view('order-group.group-form-complete-i',[
+                'order'=>$order,
+            ]);
+        }else{
+            return redirect(route('index'));
+        }
     }
-    public function groupMemberJoin()
+    public function groupCaptcha(Request $request){
+        $id = $request->get('order_id');
+        $captcha = $request->get('captcha');
+        $order = Order::where('id',$id)->where('captcha',$captcha)->first();
+        if ($order){
+            return redirect(route('group-form-member',['parent_id'=>$id]));
+        }else{
+            return redirect(route('group-member-join',['base64_id'=>base64_encode($id)]))->with('errorText','驗證碼輸入錯誤!');
+        }
+    }
+    public function groupMemberJoin($base64_id)
     {
-        return view('order-group.group-member-join');
+        $id= base64_decode($base64_id);
+        $order = Order::find($id);
+        return view('order-group.group-member-join',[
+            'order'=>$order
+        ]);
     }
-    public function groupMemberJoinSuccess()
+    public function groupMemberJoinSuccess($parameter)
     {
-        return view('order-group.group-member-join-success');
+        $array = unserialize(base64_decode($parameter));
+        if ($array['flag']){
+            $order = Order::find($array['id']);
+            return view('order-group.group-member-join-success',[
+                'order'=>$order
+            ]);
+        }else{
+            return redirect(route('index'));
+        }
     }
-
     public function orderCreate(Request $request)
     {
         /* 判斷當前流水號 */
+        $person_number = 1;
         $tempserial = 'TS'.substr(date('Y', time()), 2, 2) . date('md', time()) ;
         $serial_number_order = Order::where('seccode','LIKE','%'.$tempserial.'%')->where('parent_id',0)->orderBy('created_at','DESC')->get();//只找主單
         if($serial_number_order){
@@ -78,18 +114,42 @@ class OrderController extends Controller
             do{
                 $num ++;
                 $serial_number2 = $tempserial.str_pad($num,3,0,STR_PAD_LEFT);
-                $chk_seccode = Order::where('seccode','=',$serial_number2)->first();//判斷已產生的訂單編號是否存在
+                $chk_seccode = Order::where('serial_number','=',$serial_number2)->first();//判斷已產生的訂單編號是否存在
             } while ($chk_seccode);
         }else{
             $serial_number2 = $tempserial.'001';
+        }
+        if ( $request->get('type') == 2){
+            do{
+                $captcha=substr(md5(uniqid(rand())),0,6);  ##產生隨機字串
+                $captcha = preg_replace('/\[O|0|I|i|L\]/',rand(2,9),$captcha);  #排除掉特定字元
+                $chk_captcha = Order::where('captcha','=',$captcha)->first();//判斷已產生的驗證碼是否存在
+            } while ($chk_captcha);
+            if ($request->get('parent_id') != 0){
+                $captcha = null;
+                $parent_order = Order::find($request->get('parent_id'));
+                $group_orders = Order::where('parent_id',$request->get('parent_id'))->get();
+                if($group_orders){
+                    $person_number = count($group_orders)+1;
+                    do{
+                        $person_number ++;
+                        $serial_number2 = $parent_order->serial_number;
+                        $chk_seccode = Order::where('seccode','=',$serial_number2.'-'.$person_number)->first();//判斷已產生的訂單編號是否存在
+                    } while ($chk_seccode);
+                }else{
+                    $serial_number2 = $parent_order->serial_number.'-2';
+                }
+            }
+        }else{
+            $captcha = null;
         }
 
         $data = [
             'sailing_id' => $request->get('sailing_id'),
             'type' => $request->get('type'),
-            'seccode' => $serial_number2.'-1',
+            'seccode' => $serial_number2.'-'.$person_number,
             'serial_number' => $serial_number2,
-            'person_number' => 1,
+            'person_number' => $person_number,
             'parent_id'=>$request->get('parent_id'),
             'status' => 1,
             'pay_status' => 1,
@@ -106,6 +166,7 @@ class OrderController extends Controller
             'for_company' => $request->get('for_company'),
             'for_taxid' => $request->get('for_taxid'),
             'invoice' => $request->get('invoice'),
+            'captcha' => $captcha,
         ];
         $order = Order::create($data);
         ActionLog::create_log($order,'create');
@@ -147,13 +208,14 @@ class OrderController extends Controller
         if($request->get('type') == 1){
             return redirect(route('individual-form-complete',['parameter'=>$parameter]));
         }else if($request->get('type') == 2){
-            return redirect(route('group-form-complete-i',['parameter'=>$parameter]));
+            if ($request->get('parent_id') == 0){
+                return redirect(route('group-form-complete-i',['parameter'=>$parameter]));
+            }else{
+                return redirect(route('group-member-join-success',['parameter'=>$parameter]));
+            }
         }
 
     }
-
-
-
     public function confirmToken(Request $request){
         $return = false;
         $captcha = $request->get('captcha');
