@@ -90,10 +90,10 @@
                     'order_id': $('#order_id').val(),
                 },success:function(result){
                     if(result){
-                        // setTimeout(function (){
+                        setTimeout(function (){
                             $('#loading-wrapper').hide();
                             $('#updateToken-modal').modal();
-                        // },2000);
+                        },2000);
                     }
                 }
             });
