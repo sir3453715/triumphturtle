@@ -155,7 +155,7 @@
                                     </div>
                                     <div class="form-group col-6 col-md-3">
                                         <label for="">價值<small class="help">(USD)</small></label>
-                                        <div> <span class="show-price">XXX<span></span> <small class="help">USD</small></div>
+                                        <div> <span class="show-price">XXX</span> <small class="help">USD</small></div>
                                     </div>
                                     <div class="col-6 col-md-3 d-flex align-items-center">
                                         <button type="button" class="btn btn-sm btn-red remove-item">刪除</button>
