@@ -22,6 +22,7 @@ Route::get('/embargo', 'HomeController@embargo')->name('embargo');
 Route::get('/question', 'HomeController@question')->name('question');
 Route::get('/location', 'HomeController@location')->name('location');
 Route::get('/tracking', 'HomeController@tracking')->name('tracking');
+Route::get('/tracking-captcha/{seccode}', 'HomeController@trackingCaptcha')->name('tracking-captcha');
 
 //選擇個人OR團購
 Route::get('/option/{id}', 'OrderController@option')->name('option');
@@ -51,6 +52,7 @@ Route::get('/delivery-order', 'HomeController@deliveryOrder')->name('delivery-or
 
 //Ajax
 Route::get('ajaxSailingData', 'HomeController@ajaxSailingData');
+Route::post('updateToken', 'HomeController@updateToken');
 Route::post('confirmToken', 'OrderController@confirmToken');
 
 
