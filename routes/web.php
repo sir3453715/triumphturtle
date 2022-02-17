@@ -29,14 +29,15 @@ Route::get('/option/{id}', 'OrderController@option')->name('option');
 Route::get('/individual-form/{id}', 'OrderController@individualForm')->name('individual-form');
 Route::get('/individual-form-complete/{parameter}', 'OrderController@individualFormComplete')->name('individual-form-complete');
 Route::post('/orderCreate','OrderController@orderCreate')->name('orderCreate');
-//團購
+//團購主揪
 Route::get('/group-form-initiator/{id}', 'OrderController@groupFormInitiator')->name('group-form-initiator');
 Route::get('/group-form-complete-i/{parameter}', 'OrderController@groupFormCompleteI')->name('group-form-complete-i');
-
-Route::get('/group-form-member/{id}', 'OrderController@groupFormMember')->name('group-form-member');
+//團購下線
+Route::get('/group-form-member/{parent_id}', 'OrderController@groupFormMember')->name('group-form-member');
 Route::get('/group-form-edit', 'OrderController@groupFormEdit')->name('group-form-edit');
-Route::get('/group-member-join', 'OrderController@groupMemberJoin')->name('group-member-join');
-Route::get('/group-member-join-success', 'OrderController@groupMemberJoinSuccess')->name('group-member-join-success');
+Route::get('/group-member-join/{base64_id}', 'OrderController@groupMemberJoin')->name('group-member-join');
+Route::get('/group-member-join-success/{parameter}', 'OrderController@groupMemberJoinSuccess')->name('group-member-join-success');
+Route::post('/group-captcha', 'OrderController@groupCaptcha')->name('group-captcha');
 
 
 Route::get('/edit-success', 'HomeController@editSuccess')->name('edit-success');
