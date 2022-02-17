@@ -57,8 +57,16 @@
                                         <small class="btn btn-sm btn-outline-success reback" data-id="#img-show" data-default="/storage/customer/{{$warehouse->img}}"><i class="fas fa-redo"> 原圖</i></small>
                                     </div>
                                     <div class="form-group col-md-4">
+                                        <label for="for_name">收件者名稱</label>
+                                        <input type="text" class="form-control form-required" name="for_name" id="for_name" value="{{$warehouse->for_name}}">
+                                    </div>
+                                    <div class="form-group col-md-4">
                                         <label for="phone">電話</label>
                                         <input type="text" class="form-control form-required" name="phone" id="phone" value="{{$warehouse->phone}}">
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label for="note">當地宅配資訊</label>
+                                        <input type="text" class="form-control" name="local" id="local" value="{{$warehouse->local}}">
                                     </div>
                                     <div class="form-group col-md-8">
                                         <label for="address">地址</label>
@@ -67,10 +75,6 @@
                                     <div class="form-group col-md-4">
                                         <label for="link">紙箱購買連結</label>
                                         <input type="text" class="form-control" name="link" id="link" value="{{$warehouse->link}}">
-                                    </div>
-                                    <div class="form-group col-md-4">
-                                        <label for="note">備註說明</label>
-                                        <textarea rows="3" class="form-control" name="notes" id="notes" >{!! $warehouse->notes !!}</textarea>
                                     </div>
                                 </div>
                             </div>

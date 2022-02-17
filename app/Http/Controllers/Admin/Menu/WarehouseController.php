@@ -54,11 +54,12 @@ class WarehouseController extends Controller
 
         $data=[
             'title'=>$request->get('title'),
+            'for_name'=>$request->get('for_name'),
             'country'=>$request->get('country'),
             'phone'=>$request->get('phone'),
             'address'=>$request->get('address'),
             'link'=>$request->get('link'),
-            'note'=>$request->get('note'),
+            'local'=>$request->get('local'),
             'img'=>$img,
         ];
         $warehouse = Warehouse::create($data);
@@ -103,11 +104,12 @@ class WarehouseController extends Controller
 
         $data=[
             'title'=>$request->get('title'),
+            'for_name'=>$request->get('for_name'),
             'country'=>$request->get('country'),
             'phone'=>$request->get('phone'),
             'address'=>$request->get('address'),
             'link'=>$request->get('link'),
-            'notes'=>$request->get('notes'),
+            'local'=>$request->get('local'),
             'img'=>$img,
         ];
 

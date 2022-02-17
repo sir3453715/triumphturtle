@@ -15,7 +15,7 @@ class Warehouse extends Model
      * @var array
      */
     protected $fillable = [
-        'country','img','title','phone','address','link','notes'
+        'country','img','title','for_name','phone','address','link','local'
     ];
 
     public function countryTitle(){

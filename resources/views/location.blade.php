@@ -32,13 +32,18 @@
                 </div>
               </div>
               <div class="location-info">
+                <p class="mb-3"><span class="data-label">收件人:</span>{{$warehouse->for_name}}</p>
                 <p class="mb-3"><span class="data-label">電話:</span>{{$warehouse->phone}}</p>
                 <p class="mb-3"><span class="data-label">地址:</span>{{$warehouse->address}}
                 </p>
               </div>
               <div class="location-link">
-                <a href="#" target="_blank" class="btn-link btn-link-blue">當地宅配資訊</a>
-                <a href="{{$warehouse->link}}" target="_blank" class="btn-link btn-link-orange">紙箱購買連結</a>
+                  @if($warehouse->local)
+                      <a href="{{$warehouse->local}}" target="_blank" class="btn-link btn-link-blue">當地宅配資訊</a>
+                  @endif
+                  @if($warehouse->link)
+                      <a href="{{$warehouse->link}}" target="_blank" class="btn-link btn-link-orange">紙箱購買連結</a>
+                  @endif
               </div>
             </div>
         </div>
