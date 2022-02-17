@@ -142,7 +142,7 @@
                         $('#shipment').html(data);
                         $('html,body').animate({
                             scrollTop:$("#search-bar").offset().top-100
-                        },'show');
+                        },600);
                     }
                 });
             }
