@@ -82,7 +82,7 @@ class OrderDetailController extends Controller
             do{
                 $num ++;
                 $serial_number2 = $tempserial.str_pad($num,3,0,STR_PAD_LEFT);
-                $chk_seccode = Order::where('seccode','=',$serial_number2)->first();//判斷已產生的訂單編號是否存在
+                $chk_seccode = Order::where('serial_number','=',$serial_number2)->first();//判斷已產生的訂單編號是否存在
             } while ($chk_seccode);
         }else{
             $serial_number2 = $tempserial.'001';
