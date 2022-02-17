@@ -8,18 +8,18 @@
     <title>Test</title>
 </head>
 <body class="mainBody" style="width: 100%;max-width: 960px;margin: 0 auto;padding: 0;background: #ffffff;line-height: 24px;font-size: 16px;font-family: arial, &quot;微軟正黑體&quot;, &quot;Microsoft JhengHei&quot;;color: #333333;">
-<table class="brandHeadign" cellspacing="0" cellpadding="0" >
-    <thead>
-    <tr>
-        <td>
-            <a class="navbar-brand logo" href="{{ route('index') }}">
-                <i class="mdi mdi-chart-donut-variant"></i>
-                    Han Demo
-            </a>
-        </td>
-    </tr>
-    </thead>
-</table>
+{{--<table class="brandHeadign" cellspacing="0" cellpadding="0" >--}}
+{{--    <thead>--}}
+{{--    <tr>--}}
+{{--        <td>--}}
+{{--            <a class="navbar-brand logo" href="{{ route('index') }}">--}}
+{{--                <i class="mdi mdi-chart-donut-variant"></i>--}}
+{{--                    Han Demo--}}
+{{--            </a>--}}
+{{--        </td>--}}
+{{--    </tr>--}}
+{{--    </thead>--}}
+{{--</table>--}}
 <table class="mainTable" cellspacing="0" cellpadding="0" style="width: 100%;background-color: #ffffff;font-size: 16px;height: 38px;line-height: 38px;border-collapse: collapse;">
     <tbody>
     <tr>
