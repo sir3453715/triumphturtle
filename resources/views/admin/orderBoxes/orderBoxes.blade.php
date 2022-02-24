@@ -96,7 +96,7 @@
                                         <td>{{$order->boxListData()['box_count']}}</td>
                                         <td>{{$order->boxListData()['person']}}</td>
                                         <td>
-                                            <a href="#" class="btn btn-sm btn-outline-info ">
+                                            <a href="{{route('pdf-shipment',['id'=>$order->id])}}" class="btn btn-sm btn-outline-info " target="_blank">
                                                 <i class="fa fa-download"></i>
                                             </a>
                                         </td>
