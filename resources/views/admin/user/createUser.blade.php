@@ -76,6 +76,10 @@
                                         @endforeach
                                     </select>
                                 </div>
+                                <div class="form-group">
+                                    <input name="email_notification" id="email_notification" type="checkbox" value="1" >
+                                    <label for="email_notification">是否接收電子郵件</label>
+                                </div>
                             </div>
                             <div class="card-footer">
                                 <button type="submit" class="btn btn-info">送出</button>
