@@ -92,6 +92,7 @@ class UsersController extends Controller
                 'name'=>$request->get('name'),
                 'email'=>$request->get('email'),
                 'password'=>Hash::make($request->get('password')),
+                "email_notification" => ($request->get('email_notification'))??0,
             ];
             $user = User::create($data);
             ActionLog::create_log($user,'create');
@@ -159,6 +160,7 @@ class UsersController extends Controller
 
         $data=[
             'name'=>$request->get('name'),
+            "email_notification" => ($request->get('email_notification'))??0,
         ];
         if($request->get('change_password')=='1'){
             if($request->get('password')){
