@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin\Menu;
 use App\Http\Controllers\Controller;
 use App\Models\ActionLog;
 use App\Models\Country;
+use App\Models\Order;
+use App\Models\OrderBox;
 use App\Models\SailingSchedule;
 use Facebook\Facebook;
 use Facebook\FacebookRequest;
@@ -92,7 +94,31 @@ class SailingScheduleController extends Controller
         $sailing = SailingSchedule::find($id);
         $data=$request->toArray();
         unset($data['_token']);
-
+        if($data['status'] ==2 && $sailing->status !=2){
+            $box_interval = $sailing->box_interval;
+            $order_ids = Order::where('sailing_id',$id)->pluck('id');
+            $box_count = OrderBox::whereIn('order_id',$order_ids)->count();
+            $price = $sailing->price;
+            $interval = intval(floor($box_count/$box_interval));
+            for ($i = 1;$i<=$interval;$i++){
+                $price = ($price*$sailing->discount);
+            }
+            foreach ($order_ids as $order_id){
+                $order = Order::find($order_id);
+                if($order->invoice != 1){
+                    $price = ($price*1.05);
+                }
+                $order->fill(['total_price'=>$price]);
+                ActionLog::create_log($order);
+                $order->save();
+                $orderBoxes = OrderBox::where('order_id',$order_id)->get();
+                $box_price = intval(floor($price/$box_count));
+                foreach ($orderBoxes as $orderBox) {
+                    $orderBox->fill(['box_price' => $box_price]);
+                    $orderBox->save();
+                }
+            }
+        }
         $sailing->fill($data);
         ActionLog::create_log($sailing);
         $sailing->save();

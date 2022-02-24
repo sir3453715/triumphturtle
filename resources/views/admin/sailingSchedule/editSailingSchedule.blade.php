@@ -7,6 +7,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
+                    <a href="{{ route('admin.sailing-schedule.index') }}"><i class="fa fa-arrow-left"></i>Return</a>
                     <h1 class="m-0">修改航班 {{ $sailing->title }}</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
