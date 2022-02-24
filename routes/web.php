@@ -16,35 +16,40 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('index');
-Route::get('/about', 'HomeController@about')->name('about');
-Route::get('/service', 'HomeController@service')->name('service');
-Route::get('/embargo', 'HomeController@embargo')->name('embargo');
-Route::get('/question', 'HomeController@question')->name('question');
-Route::get('/location', 'HomeController@location')->name('location');
-Route::get('/tracking', 'HomeController@tracking')->name('tracking');
-Route::get('/tracking-captcha/{seccode}', 'HomeController@trackingCaptcha')->name('tracking-captcha');
+Route::get('about', 'HomeController@about')->name('about');
+Route::get('service', 'HomeController@service')->name('service');
+Route::get('embargo', 'HomeController@embargo')->name('embargo');
+Route::get('question', 'HomeController@question')->name('question');
+Route::get('location', 'HomeController@location')->name('location');
+Route::get('tracking', 'HomeController@tracking')->name('tracking');
+Route::get('tracking-captcha/{seccode}', 'HomeController@trackingCaptcha')->name('tracking-captcha');
 
 //選擇個人OR團購
-Route::get('/option/{id}', 'OrderController@option')->name('option');
+Route::get('option/{id}', 'OrderController@option')->name('option');
 //個人
-Route::get('/individual-form/{id}', 'OrderController@individualForm')->name('individual-form');
-Route::get('/individual-form-complete/{parameter}', 'OrderController@individualFormComplete')->name('individual-form-complete');
-Route::post('/orderCreate','OrderController@orderCreate')->name('orderCreate');
+Route::get('individual-form/{id}', 'OrderController@individualForm')->name('individual-form');
+Route::get('individual-form-complete/{parameter}', 'OrderController@individualFormComplete')->name('individual-form-complete');
 //團購主揪
-Route::get('/group-form-initiator/{id}', 'OrderController@groupFormInitiator')->name('group-form-initiator');
-Route::get('/group-form-complete-i/{parameter}', 'OrderController@groupFormCompleteI')->name('group-form-complete-i');
+Route::get('group-form-initiator/{id}', 'OrderController@groupFormInitiator')->name('group-form-initiator');
+Route::get('group-form-complete-i/{parameter}', 'OrderController@groupFormCompleteI')->name('group-form-complete-i');
 //團購下線
-Route::get('/group-form-member/{parent_id}', 'OrderController@groupFormMember')->name('group-form-member');
-Route::get('/group-form-edit', 'OrderController@groupFormEdit')->name('group-form-edit');
-Route::get('/group-member-join/{base64_id}', 'OrderController@groupMemberJoin')->name('group-member-join');
-Route::get('/group-member-join-success/{parameter}', 'OrderController@groupMemberJoinSuccess')->name('group-member-join-success');
-Route::post('/group-captcha', 'OrderController@groupCaptcha')->name('group-captcha');
+Route::get('group-form-member/{parent_id}', 'OrderController@groupFormMember')->name('group-form-member');
+Route::get('group-form-edit/{seccode}', 'OrderController@groupFormEdit')->name('group-form-edit');
+Route::get('group-member-join/{base64_id}', 'OrderController@groupMemberJoin')->name('group-member-join');
+Route::get('group-member-join-success/{parameter}', 'OrderController@groupMemberJoinSuccess')->name('group-member-join-success');
+//訂單相關動作
+Route::post('group-captcha', 'OrderController@groupCaptcha')->name('group-captcha');
+Route::post('order-update-captcha', 'OrderController@orderUpdateCaptcha')->name('order-update-captcha');
+Route::post('orderCreate','OrderController@orderCreate')->name('orderCreate');
+Route::post('orderUpdate','OrderController@orderUpdate')->name('orderUpdate');
 
-
-Route::get('/edit-success', 'HomeController@editSuccess')->name('edit-success');
-// 運貨單
-Route::get('/shipment-order', 'HomeController@shipmentOrder')->name('shipment-order');
-Route::get('/delivery-order', 'HomeController@deliveryOrder')->name('delivery-order');
+Route::get('edit-success', 'HomeController@editSuccess')->name('edit-success');
+// 運貨單HTML
+Route::get('shipment-order', 'PdfExportController@shipmentOrder')->name('shipment-order');
+Route::get('delivery-order', 'PdfExportController@deliveryOrder')->name('delivery-order');
+// 或運單PDF
+Route::get('pdf-shipment/{id}', 'PdfExportController@pdfShipment')->name('pdf-shipment');//
+Route::get('pdf-delivery/{id}', 'PdfExportController@pdfDelivery')->name('pdf-delivery');//
 
 
 
