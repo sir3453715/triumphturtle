@@ -12,6 +12,7 @@ use Facebook\Facebook;
 use Facebook\FacebookRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class SailingScheduleController extends Controller
 {
@@ -94,26 +95,28 @@ class SailingScheduleController extends Controller
         $sailing = SailingSchedule::find($id);
         $data=$request->toArray();
         unset($data['_token']);
-        if($data['status'] ==2 && $sailing->status !=2){
+        if($data['status'] ==2 && $sailing->status == 1){//集貨轉準備 更動金額
             $box_interval = $sailing->box_interval;
             $order_ids = Order::where('sailing_id',$id)->pluck('id');
             $box_count = OrderBox::whereIn('order_id',$order_ids)->count();
-            $price = $sailing->price;
+            $defaultPrice = $sailing->price;
             $interval = intval(floor($box_count/$box_interval));
             for ($i = 1;$i<=$interval;$i++){
-                $price = ($price*$sailing->discount);
+                $defaultPrice = ($defaultPrice*$sailing->discount);//每箱單價
             }
             foreach ($order_ids as $order_id){
+                $price = $defaultPrice;//預設為每箱單價
                 $order = Order::find($order_id);
+                $singleOrderBoxes = OrderBox::where('order_id',$order_id)->get();
+                $price = $price*count($singleOrderBoxes);
                 if($order->invoice != 1){
-                    $price = ($price*1.05);
+                    $price = round($price*1.05);
                 }
                 $order->fill(['total_price'=>$price]);
                 ActionLog::create_log($order);
                 $order->save();
-                $orderBoxes = OrderBox::where('order_id',$order_id)->get();
-                $box_price = intval(floor($price/$box_count));
-                foreach ($orderBoxes as $orderBox) {
+                $box_price = intval(floor($price/count($singleOrderBoxes)));
+                foreach ($singleOrderBoxes as $orderBox) {
                     $orderBox->fill(['box_price' => $box_price]);
                     $orderBox->save();
                 }
