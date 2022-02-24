@@ -56,9 +56,22 @@ class OrderController extends Controller
             return redirect(route('index'));
         }
     }
-    public function groupFormEdit()
+    public function orderUpdateCaptcha(Request $request){
+        $order = Order::find($request->get('order_id'));
+        if(($order->updateToken == $request->get('updateToken')) && ($order->updateToken)){
+            $order->fill(['updateToken'=>'']);
+            $order->save();
+            return redirect(route('group-form-edit',['seccode'=>$order->seccode]));
+        }else{
+            return redirect(route('tracking-captcha',['seccode'=>$order->seccode]))->with('errorText','驗證碼輸入錯誤!');
+        }
+    }
+    public function groupFormEdit($seccode)
     {
-        return view('order-group.group-form-edit');
+        $order = Order::where('seccode',$seccode)->first();
+        return view('order-group.group-form-edit',[
+            'order'=>$order,
+        ]);
     }
 
     public function groupFormCompleteI($parameter)
@@ -169,7 +182,6 @@ class OrderController extends Controller
             'captcha' => $captcha,
         ];
         $order = Order::create($data);
-        ActionLog::create_log($order,'create');
 
         /* 儲存新箱子資料 */
         $start_item = 0;
@@ -185,7 +197,6 @@ class OrderController extends Controller
                 'box_height'=>$request->get('box_height')[$i],
             ];
             $box = OrderBox::create($boxData);
-            ActionLog::create_log($box,'create');
 
             $itemSize = $request->get('box_items_num')[$i];
             $total_items_num = $total_items_num + $itemSize;
@@ -198,7 +209,6 @@ class OrderController extends Controller
                     'unit_price'=>$request->get('unit_price')[$j],
                 ];
                 $item = OrderBoxItem::create($itemData);
-                ActionLog::create_log($item,'create');
                 $start_item++;
             }
         }
@@ -215,6 +225,62 @@ class OrderController extends Controller
             }
         }
 
+    }
+    public function orderUpdate(Request $request)
+    {
+        $id = $request->get('order_id');
+        $order = Order::find($id);
+        $data = [
+            'for_name' => $request->get('for_name'),
+            'for_phone' => $request->get('for_phone'),
+            'for_address' => $request->get('for_address'),
+            'for_company' => $request->get('for_company'),
+            'for_taxid' => $request->get('for_taxid'),
+            'invoice' => $request->get('invoice'),
+        ];
+        $order->fill($data);
+        $order->save();
+
+        /* 刪除舊箱子資料 */
+        $oldBox = OrderBox::where('order_id',$id);
+        $oldBoxItem = OrderBoxItem::where('order_id',$id);
+        if($oldBoxItem)
+            $oldBoxItem->delete();
+
+        if($oldBox)
+            $oldBox->delete();
+
+        /* 儲存新箱子資料 */
+        $start_item = 0;
+        $total_items_num = 0;
+        $boxSize = sizeof($request->get('box_weight'));
+        for($i = 0; $i<$boxSize; $i++){
+            $boxData = [
+                'order_id'=>$order->id,
+                'box_seccode'=>$order->serial_number.'-'.$order->person_number.'-'.($i+1),
+                'box_weight'=>$request->get('box_weight')[$i],
+                'box_length'=>$request->get('box_length')[$i],
+                'box_width'=>$request->get('box_width')[$i],
+                'box_height'=>$request->get('box_height')[$i],
+            ];
+            $box = OrderBox::create($boxData);
+
+            $itemSize = $request->get('box_items_num')[$i];
+            $total_items_num = $total_items_num + $itemSize;
+            for($j = $start_item;$j<$total_items_num;$j++){
+                $itemData = [
+                    'order_id'=>$order->id,
+                    'box_id'=>$box->id,
+                    'item_name'=>$request->get('item_name')[$j],
+                    'item_num'=>$request->get('item_num')[$j],
+                    'unit_price'=>$request->get('unit_price')[$j],
+                ];
+                $item = OrderBoxItem::create($itemData);
+                $start_item++;
+            }
+        }
+
+        return redirect(route('edit-success'));
     }
     public function confirmToken(Request $request){
         $return = false;

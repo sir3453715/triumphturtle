@@ -17,7 +17,8 @@
 
         </div>
           <!-- ==== 驗證卡 ==== -->
-          <form class="shipment">
+          <form class="shipment validation-form" action="{{route('order-update-captcha')}}" method="POST">
+              @csrf
             <div class="card">
               <div class="card-top">
                 <div class="data-header">
@@ -45,8 +46,13 @@
                 </div>
                   <div class="d-block d-md-flex align-items-center mb-3">
                      <input type="hidden" id="order_id" name="order_id" value="{{$order->id}}">
-                     <input id="updateToken" name="updateToken" class="form-control form-control-lg mr-3" type="text" placeholder="請輸入驗證碼">
-                    <button class="btn btn-lg btn-solid btn-orange btn-block mt-3 mt-md-0">送出</button>
+                      <div class="form-control mr-3 border-0 mb-3">
+                         <input id="updateToken" name="updateToken" class="form-control form-control-lg mr-3 form-required {{(\Session::has('errorText'))?'required-error':''}}" type="text" placeholder="請輸入驗證碼">
+                          @if (\Session::has('errorText'))
+                              <small class="required-error-message text-danger">{!! \Session::get('errorText') !!}</small>
+                          @endif
+                      </div>
+                      <button class="btn btn-lg btn-solid btn-orange btn-block mt-4 mt-md-0 ">送出</button>
                   </div>
               </div>
               </div>
