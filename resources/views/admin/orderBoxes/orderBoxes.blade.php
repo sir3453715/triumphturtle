@@ -102,7 +102,7 @@
                                         </td>
                                         <td>
                                             @if($order->type == 2)
-                                                <a href="javascript:void(0)" class="btn btn-sm btn-outline-info copy" data-link="https://google.com">
+                                                <a href="javascript:void(0)" class="btn btn-sm btn-outline-info copy" data-link="{{route('group-member-join',['base64_id'=>base64_encode($order->id)])}}">
                                                     <i class="fa fa-copy"></i>
                                                 </a>
                                             @endif
