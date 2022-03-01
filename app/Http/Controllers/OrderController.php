@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\SendMailQueueJob;
 use App\Models\ActionLog;
 use App\Models\Order;
 use App\Models\OrderBox;
@@ -215,6 +216,15 @@ class OrderController extends Controller
         $parameter = ['id'=>$order->id,'flag'=>true];
         $parameter = base64_encode(serialize($parameter));
 
+//            $data = [
+//                'email'=>$order->sender_email,
+//                'subject'=>'修改訂單驗證碼通知信',
+//                'for_title'=>$order->sender_name,
+//                'msg'=>'您的訂單修改驗證碼為:'.$updateToken.'請再透過網站進行驗證後修改訂單，<br/>'.
+//                    '或透過下方連結進行驗證手續<br/><a target="_blank" href="'.route('tracking-captcha',['seccode'=>$order->seccode]).'">訂單修改驗證</a>',
+//            ];
+//            dispatch(new SendMailQueueJob($data));
+
         if($request->get('type') == 1){
             return redirect(route('individual-form-complete',['parameter'=>$parameter]));
         }else if($request->get('type') == 2){
@@ -279,6 +289,15 @@ class OrderController extends Controller
                 $start_item++;
             }
         }
+
+//            $data = [
+//                'email'=>$order->sender_email,
+//                'subject'=>'修改訂單驗證碼通知信',
+//                'for_title'=>$order->sender_name,
+//                'msg'=>'您的訂單修改驗證碼為:'.$updateToken.'請再透過網站進行驗證後修改訂單，<br/>'.
+//                    '或透過下方連結進行驗證手續<br/><a target="_blank" href="'.route('tracking-captcha',['seccode'=>$order->seccode]).'">訂單修改驗證</a>',
+//            ];
+//            dispatch(new SendMailQueueJob($data));
 
         return redirect(route('edit-success'));
     }
