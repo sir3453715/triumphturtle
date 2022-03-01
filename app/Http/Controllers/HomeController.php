@@ -119,7 +119,6 @@ class HomeController extends Controller
         $return = false;
         $order = Order::find($request->get('order_id'));
         if ($order){
-
             $updateToken=substr(md5(uniqid(rand())),0,8);  ##產生隨機字串
             $updateToken = preg_replace('/\[O|0|I|i|L\]/',rand(2,9),$updateToken);  #排除掉特定字元
             $order->fill(['updateToken'=>$updateToken]);
@@ -129,7 +128,7 @@ class HomeController extends Controller
                 'subject'=>'修改訂單驗證碼通知信',
                 'for_title'=>$order->sender_name,
                 'msg'=>'您的訂單修改驗證碼為:'.$updateToken.'請再透過網站進行驗證後修改訂單，<br/>'.
-                    '或透過下方連結進行驗證手續<a target="_blank" href="'.route('tracking-captcha',['seccode'=>$order->seccode]).'"></a>',
+                    '或透過下方連結進行驗證手續<br/><a target="_blank" href="'.route('tracking-captcha',['seccode'=>$order->seccode]).'">訂單修改驗證</a>',
             ];
             dispatch(new SendMailQueueJob($data));
 
