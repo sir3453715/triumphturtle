@@ -104,6 +104,7 @@ class SailingScheduleController extends Controller
             for ($i = 1;$i<=$interval;$i++){
                 $defaultPrice = ($defaultPrice*$sailing->discount);//每箱單價
             }
+            $data['final_price'] = $defaultPrice;
             foreach ($order_ids as $order_id){
                 $price = $defaultPrice;//預設為每箱單價
                 $order = Order::find($order_id);
