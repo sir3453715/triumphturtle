@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\Menu;
 
 use App\Http\Controllers\Controller;
+use App\Jobs\SendMailQueueJob;
 use App\Models\ActionLog;
 use App\Models\Country;
 use App\Models\Order;
@@ -93,6 +94,8 @@ class SailingScheduleController extends Controller
     public function update(Request $request, $id)
     {
         $sailing = SailingSchedule::find($id);
+        $old_status = $sailing->status;
+        $new_status = $request->get('status');
         $data=$request->toArray();
         unset($data['_token']);
         if($data['status'] ==2 && $sailing->status == 1){//集貨轉準備 更動金額
@@ -121,6 +124,30 @@ class SailingScheduleController extends Controller
                     $orderBox->fill(['box_price' => $box_price]);
                     $orderBox->save();
                 }
+                /** 用戶收信-航期準備 */
+                $mailData = [
+                    'is_admin'=>false,
+                    'template'=>'email-order-info',
+                    'email'=>$order->sender_email,
+                    'subject'=>'【海龜集運】訂單編號 #'.$order->seccode.' 航期準備中',
+                    'for_title'=>$order->sender_name,
+                    'msg'=>'訂單編號: #'.$order->seccode.'  狀態更新通知 - 航期準備中！<br/><br/><span style="color: red;">最終優惠價格: '.$defaultPrice.' TWD/箱</span><br/><br/>提醒您請於入倉截止日 '.$sailing->parcel_deadline.' 前將運單列印後貼至包裹上，並寄送至倉庫。<br/><br/>您也可以至 <a href="'.route('tracking').'">訂單查詢頁面</a> 查看訂單詳細資訊。',
+                ];
+                dispatch(new SendMailQueueJob($mailData));
+            }
+        }elseif($data['status'] == '3' && $sailing->status != 3) {
+            $orders = Order::where('sailing_id',$id)->get();
+            foreach ($orders as $order){
+                /** 用戶收信-航班航行 */
+                $mailData = [
+                    'is_admin'=>false,
+                    'template'=>'email-order-info',
+                    'email'=>$order->sender_email,
+                    'subject'=>'【海龜集運】訂單編號 #'.$order->seccode.' 航班航行中',
+                    'for_title'=>$order->sender_name,
+                    'msg'=>'訂單編號: #'.$order->seccode.'  狀態更新通知 - 航班航行中！<br/><br/>您也可以至 <a href="'.route('tracking').'">訂單查詢頁面</a> 查看訂單詳細資訊。',
+                ];
+                dispatch(new SendMailQueueJob($mailData));
             }
         }
         $sailing->fill($data);

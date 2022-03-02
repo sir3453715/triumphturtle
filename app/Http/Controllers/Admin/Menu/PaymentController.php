@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\Menu;
 
 use App\Http\Controllers\Controller;
+use App\Jobs\SendMailQueueJob;
 use App\Models\ActionLog;
 use App\Models\Order;
 use Facebook\Facebook;
@@ -46,7 +47,7 @@ class PaymentController extends Controller
      */
     public function create()
     {
-        return view('admin.country.createCountry');
+//        return view('admin.payment.createpayment');
     }
 
     /**
@@ -57,7 +58,7 @@ class PaymentController extends Controller
      */
     public function store(Request $request)
     {
-        return redirect(route('admin.country.index'))->with('message', '國家資料已建立!');
+//        return redirect(route('admin.payment.index'))->with('message', '資料已建立!');
     }
     /**
      * Show the form for editing the specified resource.
@@ -67,9 +68,9 @@ class PaymentController extends Controller
      */
     public function edit($id)
     {
-        return view('admin.country.editCountry',[
-            'country'=>$country,
-        ]);
+//        return view('admin.payment.editpayment',[
+//            'payment'=>$payment,
+//        ]);
     }
 
     /**
@@ -81,8 +82,7 @@ class PaymentController extends Controller
      */
     public function update(Request $request, $id)
     {
-
-        return redirect(route('admin.country.index'))->with('message', '資料已更新!');
+//        return redirect(route('admin.payment.index'))->with('message', '資料已更新!');
     }
 
     /**
@@ -93,8 +93,7 @@ class PaymentController extends Controller
      */
     public function destroy($id)
     {
-
-        return redirect(route('admin.country.index'))->with('message', '資料已刪除!');
+//        return redirect(route('admin.payment.index'))->with('message', '資料已刪除!');
 
     }
 
@@ -106,14 +105,16 @@ class PaymentController extends Controller
             $order->save();
             ActionLog::create_log($order);
 
-            $mail = [
+            /** 用戶收信-收款通知 */
+            $mailData = [
+                'is_admin'=>false,
+                'template'=>'email-pay-info',
                 'email'=>$order->sender_email,
-                'subject'=>'確認收款',
+                'subject'=>'【海龜集運】您的款項已確認',
                 'for_title'=>$order->sender_name,
-                'msg'=>'已收到您的訂單'.$order->seccode.'款項',
-                'cc'=>[''],
+                'msg'=>'訂單編號: #'.$order->seccode.'<br/><br/>您的訂單已確認付款，我們會盡快為您安排出貨，您可隨時至訂單查詢最新的寄送進度，謝謝！',
             ];
-            ImportExportController::sendmail($mail);
+            dispatch(new SendMailQueueJob($mailData));
 
             return redirect(route('admin.payment.index'))->with('message', '訂單'.$order->seccode.'已確認收款!');
         }else{

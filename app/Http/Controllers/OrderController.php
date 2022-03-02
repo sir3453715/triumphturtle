@@ -8,6 +8,7 @@ use App\Models\Order;
 use App\Models\OrderBox;
 use App\Models\OrderBoxItem;
 use App\Models\SailingSchedule;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
@@ -215,15 +216,53 @@ class OrderController extends Controller
         }
         $parameter = ['id'=>$order->id,'flag'=>true];
         $parameter = base64_encode(serialize($parameter));
+        if($request->get('type') == 1){
+           $subject = '【海龜集運】個人寄送 - 訂單已成立';
+           $msg = '訂單編號: #'.$order->seccode.'<br/>寄件人: '.$order->sender_name.'<br/><br/>請將運單列印後貼至包裹上，並於入倉截止日: '.date('Y/m/d',strtotime($order->sailing->parcel_deadline)).' 前將包裹寄送到倉庫。<br/>請點擊此處: <a href="'.route('pdf-delivery',['id'=>$order->id]).'" target="_blank">下載運單</a><br/><br/>如需查看訂單資訊或修改訂單內容，請前往<a href="'.route('tracking').'">訂單查詢頁面</a>。<br/>';
+        }else if($request->get('type') == 2){
+            if ($request->get('parent_id') == 0){
+                $subject = '【海龜集運】揪團集運 (主揪) - 訂單已成立';
+                $msg = '訂單編號: #'.$order->seccode.'<br/>寄件人: '.$order->sender_name.'<br/><br/>請將下列連結及驗證碼分享給您的同團成員，並於訂單截止日: '.date('Y/m/d',strtotime($order->sailing->statement_time)).' 前完成所有寄送資訊與裝箱資料。<br/>分享連結: <a href="'.route('group-member-join',['base64_id'=>base64_encode($order->id)]).'" target="_blank">分享連結</a><br/>驗證碼: '.$order->captcha.'<br/><br/>請將運單列印後貼至包裹上，並於入倉截止日: '.date('Y/m/d',strtotime($order->sailing->parcel_deadline)).' 前將包裹寄送到倉庫。<br/>請點擊此處:  <a href="'.route('pdf-delivery',['id'=>$order->id]).'" target="_blank">下載運單</a><br/><br/>如需查看訂單資訊或修改訂單內容，請前往<a href="'.route('tracking').'">訂單查詢頁面</a>。';
+            }else{
+                $subject = '【海龜集運】揪團集運 (跟團) - 訂單已成立';
+                $msg = '訂單編號: #'.$order->seccode.'<br/>寄件人: '.$order->sender_name.'<br/><br/>請將運單列印後貼至包裹上，並於入倉截止日: '.date('Y/m/d',strtotime($order->sailing->parcel_deadline)).' 前將包裹寄送到倉庫。<br/>請點擊此處: <a href="'.route('pdf-delivery',['id'=>$order->id]).'" target="_blank">下載運單</a><br/>如需查看訂單資訊或修改訂單內容，請前往<a href="'.route('tracking').'">訂單查詢頁面</a>。<br/>';
+            }
+        }
+        /** 用戶收信 - 訂單成立 */
+        $mailData = [
+            'is_admin'=>false,
+            'template'=>'email-order-finish',
+            'email'=>$order->sender_email,
+            'subject'=>$subject,
+            'for_title'=>$order->sender_name,
+            'msg'=>$msg,
+        ];
+        dispatch(new SendMailQueueJob($mailData));
+        /** 管理員收信 - 訂單成立 */
+        $adminMailData = [
+            'is_admin'=>true,
+            'template'=>'email-order-finish',
+            'subject'=>'【海龜集運】您收到一筆新訂單!',
+            'for_title'=>'網站管理員',
+            'msg'=>'訂單編號: #'.$order->seccode.'<br/>寄件人: '.$order->sender_name.'<br/>寄件人電話: '.$order->sender_phone.'<br/><br/>您也可以至 <a href="'.route('admin.index').'">網站後台</a> 查看訂單詳細資訊。',
+        ];
+        $managers = User::role(['manager'])->get();
+        $i = 0;$cc = array();
+        foreach ($managers as $manager){
+            if($manager->email_notification){
+                if ($i == 0){
+                    $adminMailData['email'] = $manager->email;
+                }else{
+                    array_push($cc,$manager->email);
+                }
+                $i ++ ;
+            }
+        }
+        if (sizeof($cc) >0 ){
+            $adminMailData['cc']=$cc;
+        }
+        dispatch(new SendMailQueueJob($adminMailData));
 
-//            $data = [
-//                'email'=>$order->sender_email,
-//                'subject'=>'修改訂單驗證碼通知信',
-//                'for_title'=>$order->sender_name,
-//                'msg'=>'您的訂單修改驗證碼為:'.$updateToken.'請再透過網站進行驗證後修改訂單，<br/>'.
-//                    '或透過下方連結進行驗證手續<br/><a target="_blank" href="'.route('tracking-captcha',['seccode'=>$order->seccode]).'">訂單修改驗證</a>',
-//            ];
-//            dispatch(new SendMailQueueJob($data));
 
         if($request->get('type') == 1){
             return redirect(route('individual-form-complete',['parameter'=>$parameter]));
@@ -289,15 +328,30 @@ class OrderController extends Controller
                 $start_item++;
             }
         }
-
-//            $data = [
-//                'email'=>$order->sender_email,
-//                'subject'=>'修改訂單驗證碼通知信',
-//                'for_title'=>$order->sender_name,
-//                'msg'=>'您的訂單修改驗證碼為:'.$updateToken.'請再透過網站進行驗證後修改訂單，<br/>'.
-//                    '或透過下方連結進行驗證手續<br/><a target="_blank" href="'.route('tracking-captcha',['seccode'=>$order->seccode]).'">訂單修改驗證</a>',
-//            ];
-//            dispatch(new SendMailQueueJob($data));
+        /** 管理員收信-訂單修改 */
+        $adminMailData = [
+            'is_admin'=>true,
+            'template'=>'email-order-info',
+            'subject'=>'【海龜集運】訂單編號 #'.$order->seccode.' 異動通知',
+            'for_title'=>'網站管理員',
+            'msg'=>'訂單編號: #'.$order->seccode.' 訂單資料有更新，請至 <a href="'.route('admin.index').'">網站後台</a> 查看訂單詳細資訊。',
+        ];
+        $managers = User::role(['manager'])->get();
+        $i = 0;$cc = array();
+        foreach ($managers as $manager){
+            if($manager->email_notification){
+                if ($i == 0){
+                    $adminMailData['email'] = $manager->email;
+                }else{
+                    array_push($cc,$manager->email);
+                }
+                $i ++ ;
+            }
+        }
+        if (sizeof($cc) >0 ){
+            $adminMailData['cc']=$cc;
+        }
+        dispatch(new SendMailQueueJob($adminMailData));
 
         return redirect(route('edit-success'));
     }

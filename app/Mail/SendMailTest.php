@@ -13,6 +13,8 @@ class SendMailTest extends Mailable
     use Queueable, SerializesModels;
 
     protected $for_title;
+    protected $is_admin;
+    protected $template;
     protected $msg;
     /**
      * Create a new message instance.
@@ -24,6 +26,8 @@ class SendMailTest extends Mailable
         //
         $this->subject = $data['subject'];
         $this->for_title = $data['for_title'];
+        $this->is_admin = $data['is_admin'];
+        $this->template = $data['template'];
         $this->msg = $data['msg'];
     }
 
@@ -34,11 +38,12 @@ class SendMailTest extends Mailable
      */
     public function build()
     {
-        return $this->view('email.email-template')
+        return $this->view('email.'.$this->template)
             ->from(env('MAIL_USERNAME'),  env('MAIL_FROM_NAME'))
             ->subject($this->subject)
             ->with([
                 'for_title'=>$this->for_title,
+                'is_admin'=>$this->is_admin,
                 'msg'=>$this->msg,
             ]);
     }

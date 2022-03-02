@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\Menu;
 
 use App\Http\Controllers\Controller;
+use App\Jobs\SendMailQueueJob;
 use App\Models\ActionLog;
 use App\Models\Country;
 use App\Models\Order;
@@ -189,6 +190,8 @@ class OrderDetailController extends Controller
 
         /* 修改訂單資料 */
         $order = Order::find($id);
+        $old_status = $order->status;
+        $new_status = $request->get('status');
         $data = [
             'status' => $request->get('status'),
             'pay_status' => $request->get('pay_status'),
@@ -214,6 +217,7 @@ class OrderDetailController extends Controller
         /* 刪除舊箱子資料 */
         $oldBox = OrderBox::where('order_id',$id);
         $oldBoxItem = OrderBoxItem::where('order_id',$id);
+        $oldBoxTrackingNumber = $oldBox->pluck('tracking_number')->toArray();
         if($oldBoxItem)
             $oldBoxItem->delete();
 
@@ -252,6 +256,33 @@ class OrderDetailController extends Controller
                 ActionLog::create_log($item,'create');
                 $start_item++;
             }
+        }
+
+        if($new_status == '2' && $old_status == '1'){
+            /** 用戶收信-包裹入倉 */
+            $mailData = [
+                'is_admin'=>false,
+                'template'=>'email-order-info',
+                'email'=>$order->sender_email,
+                'subject'=>'【海龜集運】訂單編號 #'.$order->seccode.' 包裹已入倉',
+                'for_title'=>$order->sender_name,
+                'msg'=>'訂單編號: #'.$order->seccode.'  狀態更新通知 - 您的包裹已入倉！<br/><br/>您也可以至 <a href="'.route('tracking').'">訂單查詢頁面</a> 查看訂單詳細資訊。',
+            ];
+            dispatch(new SendMailQueueJob($mailData));
+        }
+
+        $trackingNumberDifferent = array_diff($request->get('tracking_number'),$oldBoxTrackingNumber);
+        if($trackingNumberDifferent){
+            /** 用戶收信-宅配單號 */
+            $mailData = [
+                'is_admin'=>false,
+                'template'=>'email-order-info',
+                'email'=>$order->sender_email,
+                'subject'=>'【海龜集運】宅配單號已更新',
+                'for_title'=>$order->sender_name,
+                'msg'=>'訂單編號: #'.$order->seccode.'  狀態更新通知 - 宅配單號已更新！<br/><br/>您也可以至 <a href="'.route('tracking').'">訂單查詢頁面</a> 查看訂單詳細資訊。',
+            ];
+            dispatch(new SendMailQueueJob($mailData));
         }
 
         return redirect(route('admin.order-detail.index'))->with('message', '訂單 '.$order->seccode.'已完成修改');

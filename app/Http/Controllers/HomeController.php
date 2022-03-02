@@ -6,6 +6,7 @@ use App\Jobs\SendMailQueueJob;
 use App\Models\Country;
 use App\Models\Order;
 use App\Models\SailingSchedule;
+use App\Models\User;
 use App\Models\Warehouse;
 use Carbon\CarbonPeriod;
 use Illuminate\Http\Request;
@@ -123,14 +124,16 @@ class HomeController extends Controller
             $updateToken = preg_replace('/\[O|0|I|i|L\]/',rand(2,9),$updateToken);  #排除掉特定字元
             $order->fill(['updateToken'=>$updateToken]);
             $order->save();
-            $data = [
+            /** 用戶收信 */
+            $mailData = [
+                'is_admin'=>true,
+                'template'=>'email-order-info',
                 'email'=>$order->sender_email,
-                'subject'=>'修改訂單驗證碼通知信',
+                'subject'=>'【海龜集運】驗證碼',
                 'for_title'=>$order->sender_name,
-                'msg'=>'您的訂單修改驗證碼為:'.$updateToken.'請再透過網站進行驗證後修改訂單，<br/>'.
-                    '或透過下方連結進行驗證手續<br/><a target="_blank" href="'.route('tracking-captcha',['seccode'=>$order->seccode]).'">訂單修改驗證</a>',
+                'msg'=>'您的訂單修改驗證碼為: '.$updateToken.'<br/><br/>請透過網站進行驗證，或點擊下方連結完成驗證手續:<br/><a target="_blank" href="'.route('tracking-captcha',['seccode'=>$order->seccode]).'">訂單修改驗證</a><br/><br/><span style="color: red;">注意: 如果此活動不是您本人操作，請停止操作並寫信至 service@triumphturtle.com 或撥打客服專線 (02) 2978-0058 聯繫客服人員。</span>',
             ];
-            dispatch(new SendMailQueueJob($data));
+            dispatch(new SendMailQueueJob($mailData));
 
             $return = true;
         }
