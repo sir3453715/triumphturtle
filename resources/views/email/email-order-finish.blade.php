@@ -19,12 +19,23 @@
                 <tbody>
                 <tr>
                     <td style="font-size: 15px; line-height:24px;">
-                        您好 {{$for_title}},
+                        親愛的{{$for_title}},{{($is_admin)?'您收到一筆新訂單!':'您的訂單已成立'}}
+                        <br/>
+                        <br/>
+                        {{($is_admin)?'以下為新訂單資訊:':'以下是您的訂單資訊:'}}
                         <br/>
                         <br/>
                         {!! $msg !!}
                         <br/>
                         <br/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        海龜集運<br/>
+                        <br/>
+                        客服信箱 service@triumphturtle.com<br/>
+                        線上客服 <a href="{{route('index')}}" target="_blank">https://www.facebook.com/triumphturtle</a><br/>
                     </td>
                 </tr>
                 </tbody>
