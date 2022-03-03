@@ -34,6 +34,26 @@ class PdfExportController extends Controller
         $pdf->loadView('pdf.delivery-order',$order_data)->setPaper('a4')->setOptions(['dpi' => 140, 'defaultFont' => 'msyh' , 'isFontSubsettingEnabled'=>true ,'isRemoteEnabled'=>true]);
         return $pdf->stream();
     }
+    function pdfPackage(Request $request,$id){
+        $parentOrder = Order::find($id);
+        $order_data = $parentOrder->toArray();
+        $order_data['fromCountry']=$parentOrder->sailing->fromCountry->title.' '.$parentOrder->sailing->fromCountry->en_title;
+        $order_data['toCountry']=$parentOrder->sailing->toCountry->title.' '.$parentOrder->sailing->fromCountry->en_title;
+        $packageOrderIDs = Order::where('serial_number',$parentOrder['serial_number'])->orderBy('parent_id','ASC')->pluck('id')->toArray();
+        $packageBoxes = OrderBox::whereIn('order_id',$packageOrderIDs)->orderBy('box_seccode','ASC')->get();
+        foreach ($packageBoxes as $packageBox){
+            $order_data['OrderBoxes'][$packageBox->id]=$packageBox->toArray();
+            $order_data['OrderBoxes'][$packageBox->id]['OrderBoxesItems']=OrderBoxItem::where('box_id',$packageBox->id)->orderBy('id','ASC')->get()->toArray();
+            $total_value = 0;
+            foreach ($order_data['OrderBoxes'][$packageBox->id]['OrderBoxesItems'] as $key => $boxesItem){
+                $total_value += $boxesItem['unit_price'];
+            }
+            $order_data['OrderBoxes'][$packageBox->id]['total_value'] = $total_value;
+        }
+        $pdf = App::make('dompdf.wrapper');
+        $pdf->loadView('pdf.package',$order_data)->setPaper('a4')->setOptions(['dpi' => 140, 'defaultFont' => 'msyh' , 'isFontSubsettingEnabled'=>true ,'isRemoteEnabled'=>true]);
+        return $pdf->stream();
+    }
     public function shipmentOrder()
     {
         return view('pdf.default-shipment');
@@ -42,6 +62,10 @@ class PdfExportController extends Controller
     public function deliveryOrder()
     {
         return view('pdf.default-delivery');
+    }
+    public function package()
+    {
+        return view('pdf.default-package');
     }
 
 }
