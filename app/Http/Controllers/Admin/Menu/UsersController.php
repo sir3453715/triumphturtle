@@ -20,7 +20,7 @@ class UsersController extends Controller
      */
     public function index(Request $request)
     {
-        $type_array = ['customer','manager','administrator'];
+        $type_array = ['administrator','manager','customer'];
         $queried = array();
         if(Auth::user()->hasRole('administrator')){
             $roles = Role::orderBy('id','ASC')
@@ -28,7 +28,7 @@ class UsersController extends Controller
         }else{
             $roles = Role::where('name','!=','administrator')
                 ->orderBy('id','ASC')->get();
-            unset($type_array['administrator']);
+            $type_array = ['manager','customer'];
         }
         if($request->get('type') != 0) {
             $role = Role::find($request->get('type'));
@@ -59,8 +59,13 @@ class UsersController extends Controller
      */
     public function create()
     {
-        $roles = Role::orderBy('id','DESC')
-            ->get();
+        if(Auth::user()->hasRole('administrator')){
+            $roles = Role::orderBy('id','ASC')
+                ->get();
+        }else{
+            $roles = Role::where('name','!=','administrator')
+                ->orderBy('id','ASC')->get();
+        }
         return view('admin.user.createUser',[
             'roles' => $roles,
         ]);
