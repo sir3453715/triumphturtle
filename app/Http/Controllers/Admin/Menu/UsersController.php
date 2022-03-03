@@ -28,7 +28,8 @@ class UsersController extends Controller
         }else{
             $roles = Role::where('name','!=','administrator')
                 ->orderBy('id','ASC')->get();
-            $type_array = ['manager','customer'];
+//            $type_array = ['manager','customer'];
+            $type_array = ['manager'];
         }
         if($request->get('type') != 0) {
             $role = Role::find($request->get('type'));
@@ -63,7 +64,8 @@ class UsersController extends Controller
             $roles = Role::orderBy('id','ASC')
                 ->get();
         }else{
-            $roles = Role::where('name','!=','administrator')
+//            $roles = Role::where('name','!=','administrator')
+            $roles = Role::where('name','=','manager')
                 ->orderBy('id','ASC')->get();
         }
         return view('admin.user.createUser',[
@@ -141,7 +143,8 @@ class UsersController extends Controller
             $roles = Role::orderBy('id','ASC')
                 ->get();
         }else{
-            $roles = Role::where('name','!=','administrator')
+//            $roles = Role::where('name','!=','administrator')
+            $roles = Role::where('name','=','manager')
                 ->orderBy('id','ASC')
                 ->get();
         }
