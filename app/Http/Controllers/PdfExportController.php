@@ -46,7 +46,7 @@ class PdfExportController extends Controller
             $order_data['OrderBoxes'][$packageBox->id]['OrderBoxesItems']=OrderBoxItem::where('box_id',$packageBox->id)->orderBy('id','ASC')->get()->toArray();
             $total_value = 0;
             foreach ($order_data['OrderBoxes'][$packageBox->id]['OrderBoxesItems'] as $key => $boxesItem){
-                $total_value += $boxesItem['unit_price'];
+                $total_value += ($boxesItem['unit_price']*$boxesItem['item_num']);
             }
             $order_data['OrderBoxes'][$packageBox->id]['total_value'] = $total_value;
         }
