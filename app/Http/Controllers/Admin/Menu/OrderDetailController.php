@@ -296,6 +296,17 @@ class OrderDetailController extends Controller
      */
     public function destroy($id)
     {
+        $order = Order::find($id);
+        $orderBox = OrderBox::where('order_id',$id);
+        $orderBoxItems = OrderBoxItem::where('order_id',$id);
+        if($orderBoxItems)
+            $orderBoxItems->delete();
+        if($orderBox)
+            $orderBox->delete();
+        if($order)
+            $order->delete();
+
+        return redirect(route('admin.order-detail.index'))->with('message', '訂單 '.$order->seccode.'已被刪除');
 
     }
 }
