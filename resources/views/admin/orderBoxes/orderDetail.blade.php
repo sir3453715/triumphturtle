@@ -137,7 +137,7 @@
                                             </a>
                                         </td>
                                         <td>
-                                            <a href="" class="btn btn-sm btn-outline-info">
+                                            <a href="{{route('admin.payment.edit',['payment'=>$order->id])}}" class="btn btn-sm btn-outline-info">
                                                 預覽/發送
                                             </a>
                                         </td>
