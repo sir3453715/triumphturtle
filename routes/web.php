@@ -86,27 +86,11 @@ Route::group(['prefix'=>'admin', 'middleware' => ['web', 'admin.area'],'as'=>'ad
     Route::post('/uploadEditorImage', 'Admin\AdminController@uploadEditorImage')
         ->name('uploadEditorImage');
 
-    Route::group(['prefix' => 'import-export', 'as' => 'import-export.'], function(){
-        Route::post('/import', 'Admin\Menu\ImportExportController@import')
-            ->name('import');
-        Route::post('/export', 'Admin\Menu\ImportExportController@export')
-            ->name('export');
-    });
-    Route::group(['prefix' => 'punch-card', 'as' => 'punch-card.'], function(){
-        Route::post('/export', 'Admin\Menu\PunchCardController@export')
-            ->name('export');
-    });
+
     Route::group(['prefix' => 'payment', 'as' => 'payment.'], function(){
         Route::get('/checkPay/{id}', 'Admin\Menu\PaymentController@checkPay')
             ->name('checkPay');
     });
-    Route::group(['prefix' => 'calendar', 'as' => 'calendar.'], function(){
-        Route::post('/changeEventDate', 'Admin\Menu\CalendarController@changeEventDate')
-            ->name('changeEventDate');
-        Route::post('/EventDelete', 'Admin\Menu\CalendarController@EventDelete')
-            ->name('EventDelete');
-    });
-
 });
 
 
