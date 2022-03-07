@@ -132,7 +132,7 @@
                                             @endswitch
                                         </td>
                                         <td>
-                                            <a href="{{route('pdf-delivery',['id'=>$order->id])}}" class="btn btn-sm btn-outline-info " target="_blank">
+                                            <a href="{{route('pdf-shipment',['id'=>$order->id])}}" class="btn btn-sm btn-outline-info " target="_blank">
                                                 <i class="fa fa-download"></i>
                                             </a>
                                         </td>
