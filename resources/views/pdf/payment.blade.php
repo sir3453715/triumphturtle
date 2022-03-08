@@ -14,6 +14,7 @@
         }
         body {
             font-family: msyh, DejaVu Sans, sans-serif;
+            line-height:1;
         }
         table {
             width: 95%;
@@ -50,26 +51,38 @@ font-weight: bold;
             height: 100px;
         }
 
+        .border-none {
+            border:none;
+        }
+
+        .text-right {
+            text-align: right;
+        }
+
+        .pb-30 {
+            padding-bottom: 30px;
+        }
+
     </style>
 </head>
 <body>
     <table>
-        <tr class="main-sender">
-            <td colspan="2" rowspan="5" class="font-title"><img width="300px" src="{{url('/storage/image/triumphturtle.jpg')}}"></td>
-            <td colspan="4" class="font-title" style="font-size: 28px;">凱漩國際有限公司</td>
+        <tr>
+            <td colspan="2" rowspan="5" class="font-title border-none"><img width="300px" src="{{url('/storage/image/triumphturtle.jpg')}}"></td>
+            <td colspan="4" class="font-title border-none text-right" style="font-size: 28px;">凱漩國際有限公司</td>
         </tr>
         <tr>
-            <td colspan="4">TRIUMPH INTERNATIONAL TRADING CO.,  LTD</td>
+            <td colspan="4" class="border-none text-right">TRIUMPH INTERNATIONAL TRADING CO.,LTD</td>
         </tr>
         <tr>
-            <td colspan="4">2F, No. 113, Chenggong Rd., Sanchong Dist.,
+            <td colspan="4" class="border-none text-right">2F, No. 113, Chenggong Rd., Sanchong Dist.,<br> 
                 New Taipei City 241012, Taiwan (R.O.C.)</td>
+        </tr> 
+        <tr>
+            <td colspan="4" class="border-none text-right">+886 2 29780058</td>
         </tr>
         <tr>
-            <td colspan="4">+886 2 29780058</td>
-        </tr>
-        <tr>
-            <td colspan="4">www.triumphturtle.com</td>
+            <td colspan="4" class="border-none text-right pb-30">www.triumphturtle.com</td>
         </tr>
         <tr class="export-header center-text">
             <td colspan="6">BILL TO</td>
