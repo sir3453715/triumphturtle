@@ -49,6 +49,26 @@ class PdfExportController extends Controller
         $pdf->loadView('pdf.package',$order_data)->setPaper('a4')->setOptions(['dpi' => 140, 'defaultFont' => 'msyh' , 'isFontSubsettingEnabled'=>true ,'isRemoteEnabled'=>true]);
         return $pdf->stream();
     }
+    function pdfPayment(Request $request,$id){
+        $order = Order::find($id);
+        $other_total = 0;
+        $order_data = $order->toArray();
+        $order_data['sailing']=$order->sailing->toArray();
+        $order_data['box_count'] = count($order->box);
+        if($order_data['other_price']){
+            $other_price = unserialize($order_data['other_price']);
+            $order_data['other_price']=$other_price;
+            $other_total = $other_price['other_qty']*$other_price['other_unit'];
+        }
+        $order_data['subtotal'] = $order_data['sailing']['final_price'] * count($order->box);
+        if($other_total > 0 ){
+            $order_data['subtotal'] += $other_total;
+        }
+        $order_data['tax_value'] = ($order_data['invoice'] != 1)? $order_data['sailing']['final_price'] * 0.05 * count($order->box) :0 ;
+        $pdf = App::make('dompdf.wrapper');
+        $pdf->loadView('pdf.payment',$order_data)->setPaper('a4')->setOptions(['dpi' => 140, 'defaultFont' => 'msyh' , 'isFontSubsettingEnabled'=>true ,'isRemoteEnabled'=>true]);
+        return $pdf->stream();
+    }
     public function shipmentOrder()
     {
         return view('pdf.default-shipment');
@@ -61,6 +81,10 @@ class PdfExportController extends Controller
     public function package()
     {
         return view('pdf.default-package');
+    }
+    public function paymentBilling()
+    {
+        return view('pdf.default-payment');
     }
 
 }

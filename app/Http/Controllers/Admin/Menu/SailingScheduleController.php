@@ -94,8 +94,6 @@ class SailingScheduleController extends Controller
     public function update(Request $request, $id)
     {
         $sailing = SailingSchedule::find($id);
-        $old_status = $sailing->status;
-        $new_status = $request->get('status');
         $data=$request->toArray();
         unset($data['_token']);
         if($data['status'] ==2 && $sailing->status == 1){//集貨轉準備 更動金額
@@ -112,14 +110,21 @@ class SailingScheduleController extends Controller
                 $price = $defaultPrice;//預設為每箱單價
                 $order = Order::find($order_id);
                 $singleOrderBoxes = OrderBox::where('order_id',$order_id)->get();
-                $price = $price*count($singleOrderBoxes);
+                $total_price = $price*count($singleOrderBoxes);
+                $tax_price = 0;
+                $final_price = $total_price;
                 if($order->invoice != 1){
-                    $price = round($price*1.05);
+                    $tax_price = round($total_price*0.05);
+                    $final_price += $tax_price;
                 }
-                $order->fill(['total_price'=>$price]);
+                $order->fill([
+                    'total_price'=>$total_price,
+                    'tax_price'=>$tax_price,
+                    'final_price'=>$final_price,
+                ]);
                 ActionLog::create_log($order);
                 $order->save();
-                $box_price = intval(floor($price/count($singleOrderBoxes)));
+                $box_price = intval(floor($total_price/count($singleOrderBoxes)));
                 foreach ($singleOrderBoxes as $orderBox) {
                     $orderBox->fill(['box_price' => $box_price]);
                     $orderBox->save();

@@ -83,9 +83,23 @@
                                             <option value="3" {!! $html->selectSelected(3,$order->invoice) !!}>三聯</option>
                                         </select>
                                     </div>
+                                </div>
+                                <div class="form-group row">
                                     <div class="form-group col-md-3">
-                                        <label for="total_price">訂單總金額</label>
-                                        <input type="text" class="form-control form-required" name="total_price" id="total_price" value="{{$order->total_price}}">
+                                        <label for="total_price">訂單總金額(不含稅)</label>
+                                        <input type="text" class="form-control form-required" name="total_price" id="total_price" value="{{$order->total_price}}" readonly>
+                                    </div>
+                                    <div class="form-group col-md-3">
+                                        <label for="total_price">營業稅金額</label>
+                                        <input type="text" class="form-control form-required" name="tax_price" id="tax_price" value="{{$order->tax_price}}" readonly>
+                                    </div>
+                                    <div class="form-group col-md-3">
+                                        <label for="total_price">額外費用-總價</label>
+                                        <input type="text" class="form-control" name="final_price" id="final_price" value="{{($other_price)?$other_price['other_qty']*$other_price['other_unit']:''}}" readonly>
+                                    </div>
+                                    <div class="form-group col-md-3">
+                                        <label for="total_price">最後總金額</label>
+                                        <input type="text" class="form-control form-required" name="final_price" id="final_price" value="{{$order->final_price}}" readonly>
                                     </div>
                                 </div>
                                 <div class="form-group row border-top">
@@ -182,7 +196,7 @@
                                                 <input type="number" class="form-control form-required" name="box_height[]" id="box_height" min="0" step="0.1" value="{{$box->box_height}}">
                                             </div>
                                             <div class="form-group col-md-2">
-                                                <label for="box_price">箱子費用</label>
+                                                <label for="box_price">箱子費用(未稅)</label>
                                                 <input type="number" class="form-control form-required" name="box_price[]" id="box_price" value="{{$box->box_price}}">
                                             </div>
                                             <div class="form-group col-md-4">

@@ -65,7 +65,7 @@ font-weight: bold;
         <tr>
             <td colspan="1" class="font-title">For account and risk of Messrs</td>
             <td colspan="7">{{$for_name}}</td>
-        </tr> 
+        </tr>
         <tr>
             <td colspan="1" class="font-title">Address</td>
             <td colspan="7">{{$for_address}}</td>
@@ -82,7 +82,7 @@ font-weight: bold;
         <tr>
             <td colspan="1" class="font-title">purpose</td>
             <td colspan="7">{{$shipment_use}}</td>
-        </tr> 
+        </tr>
         <tr class="export-header center-text">
             <td colspan="8">list detail</td>
         </tr>
@@ -102,12 +102,12 @@ font-weight: bold;
                     <tr class="center-text">
                         <td rowspan="{{count($orderBox['OrderBoxesItems'])}}" class="bg-green">{{$orderBox['box_seccode']}} {{count($orderBox['OrderBoxesItems'])}}</td>
                         <td>{{$OrderBoxesItem['item_name']}}</td>
-                        <td>{{$OrderBoxesItem['unit_price']}}</td>
+                        <td>{{ number_format($OrderBoxesItem['unit_price']) }}</td>
                         <td>{{$OrderBoxesItem['item_num']}}</td>
                         <td>{{$orderBox['box_weight']}}KG</td>
                         <td>{{($orderBox['box_weight']-2)}}KG</td>
                         <td>{{$orderBox['box_length']}}*{{$orderBox['box_width']}}*{{$orderBox['box_height']}}</td>
-                        <td rowspan="{{count($orderBox['OrderBoxesItems'])}}">{{$orderBox['total_value']}}</td>
+                        <td rowspan="{{count($orderBox['OrderBoxesItems'])}}">{{number_format($orderBox['total_value'])}}</td>
                     </tr>
                 @else
                     <tr class="center-text">

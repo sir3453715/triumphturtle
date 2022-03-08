@@ -48,11 +48,12 @@ Route::get('edit-success', 'HomeController@editSuccess')->name('edit-success');
 Route::get('shipment-order', 'PdfExportController@shipmentOrder')->name('shipment-order');
 Route::get('delivery-order', 'PdfExportController@deliveryOrder')->name('delivery-order');
 Route::get('package', 'PdfExportController@package')->name('package');
+Route::get('payment-billing', 'PdfExportController@paymentBilling')->name('payment-billing');
 // 或運單PDF
 Route::get('pdf-shipment/{id}', 'PdfExportController@pdfShipment')->name('pdf-shipment');//
 Route::get('pdf-delivery/{id}', 'PdfExportController@pdfDelivery')->name('pdf-delivery');//
 Route::get('pdf-package/{id}', 'PdfExportController@pdfPackage')->name('pdf-package');//
-
+Route::get('pdf-payment/{id}', 'PdfExportController@pdfPayment')->name('pdf-payment');//
 
 
 

@@ -98,7 +98,7 @@
                                         <td>{{$order->sender_name}}</td>
                                         <td>{{$order->sender_phone}}</td>
                                         <td>{{count($order->box)}}</td>
-                                        <td>{{$order->total_price}}</td>
+                                        <td>{{$order->final_price}}</td>
                                         <td>
                                             @switch($order->pay_status)
                                                 @case(1)
@@ -137,9 +137,11 @@
                                             </a>
                                         </td>
                                         <td>
-                                            <a href="{{route('admin.payment.edit',['payment'=>$order->id])}}" class="btn btn-sm btn-outline-info">
-                                                預覽/發送
-                                            </a>
+                                            @if($order->pay_status != 3)
+                                                <a href="{{route('admin.payment.edit',['payment'=>$order->id])}}" class="btn btn-sm btn-outline-info">
+                                                    預覽/發送
+                                                </a>
+                                            @endif
                                         </td>
                                         <td class="action form-inline">
                                             <a href="{{route('admin.order-detail.edit',['order_detail'=>$order->id])}}" class="btn btn-sm btn-secondary mr-1">修改</a>

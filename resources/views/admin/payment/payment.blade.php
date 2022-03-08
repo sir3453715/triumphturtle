@@ -66,7 +66,7 @@
                             <tbody>
                                 @foreach($orders as $order)
                                 <tr>
-                                    <td>{{$order->seccode}}</td>
+                                    <td><a href="{{route('admin.order-detail.edit',['order_detail'=>$order->id])}}">{{$order->seccode}}</a></td>
                                     <td>{{$order->sender_name}}</td>
                                     <td>{{$order->sender_phone}}</td>
                                     <td>{{sizeof($order->box)}}</td>

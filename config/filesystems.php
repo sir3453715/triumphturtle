@@ -52,6 +52,13 @@ return [
             'endpoint' => env('AWS_ENDPOINT'),
         ],
 
+        'billing' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/billing'),
+            'url' => env('APP_URL').'/storage/billing',
+            'visibility' => 'public',
+        ],
+
     ],
 
     /*

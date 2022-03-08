@@ -172,8 +172,11 @@ class OrderDetailController extends Controller
     public function edit($id)
     {
         $order = Order::find($id);
+        $other_price = unserialize($order->other_price);
+
         return view('admin.orderBoxes.editOrderDetail',[
             'order'=>$order,
+            'other_price'=>$other_price,
         ]);
 
     }
@@ -192,10 +195,22 @@ class OrderDetailController extends Controller
         $order = Order::find($id);
         $old_status = $order->status;
         $new_status = $request->get('status');
+        $total_price = 0; $tax_price = 0; $final_price = 0;
+        foreach ($request->get('box_price') as $eachPrice){
+            $total_price += $eachPrice;
+        }
+        $final_price = $total_price;
+        if($request->get('invoice') != 1){
+            $tax_price = $total_price * 0.05;
+            $final_price += $tax_price;
+        }
+        $other_price = unserialize($order->other_price);
+        if($other_price){
+            $final_price = $final_price + ($other_price['other_qty']*$other_price['other_unit']);
+        }
         $data = [
             'status' => $request->get('status'),
             'pay_status' => $request->get('pay_status'),
-            'total_price' => $request->get('total_price'),
             'shipment_use' => $request->get('shipment_use'),
             'sender_name' => $request->get('sender_name'),
             'sender_phone' => $request->get('sender_phone'),
@@ -208,7 +223,10 @@ class OrderDetailController extends Controller
             'for_address' => $request->get('for_address'),
             'for_company' => $request->get('for_company'),
             'for_taxid' => $request->get('for_taxid'),
-            'invoice' => $request->get('invoice')
+            'invoice' => $request->get('invoice'),
+            'total_price' => $total_price,
+            'tax_price' => $tax_price,
+            'final_price' => $final_price,
         ];
         $order->fill($data);
         ActionLog::create_log($order);

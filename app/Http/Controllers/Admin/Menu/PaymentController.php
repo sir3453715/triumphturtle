@@ -9,7 +9,10 @@ use App\Models\Order;
 use Facebook\Facebook;
 use Facebook\FacebookRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Storage;
 
 class PaymentController extends Controller
 {
@@ -70,7 +73,14 @@ class PaymentController extends Controller
     {
         $order = Order::find($id);
 
-        dd($order->toArray());
+        $billing['sailing']=$order->sailing->toArray();
+        $billing['box_count'] = count($order->box);
+        $billing['subtotal'] = $order->total_price * count($order->box);
+
+        return view('admin.payment.editPayment',[
+            'order'=>$order,
+            'billing'=>$billing,
+        ]);
 
     }
 
@@ -83,7 +93,61 @@ class PaymentController extends Controller
      */
     public function update(Request $request, $id)
     {
-//        return redirect(route('admin.payment.index'))->with('message', '資料已更新!');
+        $order = Order::find($id);
+        $originalname = $order->seccode.' 出帳帳單.pdf';
+        $other_price = [
+            'other_title'=>$request->get('other_title'),
+            'other_qty'=>$request->get('other_qty'),
+            'other_unit'=>$request->get('other_unit'),
+        ];
+        $final_price = $order->final_price + ($other_price['other_qty']*$other_price['other_unit']);
+
+        $data = [
+            'pay_status'=>2,
+            'other_price'=>serialize($other_price),
+            'final_price'=>$final_price,
+        ];
+        $order->fill($data);
+        $order->save();
+
+        $order = Order::find($id);
+        $other_total = 0;
+        $order_data = $order->toArray();
+        $order_data['sailing']=$order->sailing->toArray();
+        $order_data['box_count'] = count($order->box);
+        if($order_data['other_price']){
+            $other_price = unserialize($order_data['other_price']);
+            $order_data['other_price']=$other_price;
+            $other_total = $other_price['other_qty']*$other_price['other_unit'];
+        }
+        $order_data['subtotal'] = $order_data['sailing']['final_price'] * count($order->box);
+        if($other_total > 0 ){
+            $order_data['subtotal'] += $other_total;
+        }
+        $order_data['tax_value'] = ($order_data['invoice'] != 1)? $order_data['sailing']['final_price'] * 0.05 * count($order->box) :0 ;
+
+        $pdf = App::make('dompdf.wrapper');
+        $pdf->loadView('pdf.payment',$order_data)->setPaper('a4')->setOptions(['dpi' => 140, 'defaultFont' => 'msyh' , 'isFontSubsettingEnabled'=>true ,'isRemoteEnabled'=>true]);
+        $content = $pdf->download()->getOriginalContent();
+        Storage::disk('billing')->put($originalname,$content);
+
+
+        /** 用戶收信-請款通知 */
+        $to = ['email'=>$order->sender_email,'name'=>$order->sender_name];
+        $data = [
+            'msg'=>'訂單編號: #'.$order->seccode.' <br/><br/>附件為此票寄送的帳單，再請您儘速確認付款，以利加速您出貨的進度。<br/>對於帳單有任何疑問，歡迎與我們客服直接聯絡，謝謝！<br/>',
+            'for_title'=>$order->sender_name,
+        ];
+        //寄出信件
+        Mail::send('email.email-pay-info', $data, function($message) use ($to,$originalname) {
+            $message->from(env('MAIL_USERNAME'),  env('MAIL_FROM_NAME'));
+            $message->to($to['email'], $to['name'])
+                ->subject('【海龜集運】付款通知');
+            $message->attach(storage_path('app/public/billing').'/'.$originalname);
+        });
+        Storage::disk('billing')->delete($originalname);
+
+        return redirect(route('admin.payment.index'))->with('message', '訂單'.$order->seccode.'已發送請款單!');
     }
 
     /**
@@ -94,10 +158,8 @@ class PaymentController extends Controller
      */
     public function destroy($id)
     {
-//        return redirect(route('admin.payment.index'))->with('message', '資料已刪除!');
 
     }
-
     public function checkPay($id){
         $order = Order::find($id);
         if ($order){
@@ -113,7 +175,7 @@ class PaymentController extends Controller
                 'email'=>$order->sender_email,
                 'subject'=>'【海龜集運】您的款項已確認',
                 'for_title'=>$order->sender_name,
-                'msg'=>'訂單編號: #'.$order->seccode.'<br/><br/>您的訂單已確認付款，我們會盡快為您安排出貨，您可隨時至訂單查詢最新的寄送進度，謝謝！',
+                'msg'=>'訂單編號: #'.$order->seccode.'<br/><br/>您的訂單已確認付款，我們會盡快為您安排出貨，您可隨時至<a href="'.route('tracking').'">訂單查詢頁面</a> 查看最新的寄送進度，謝謝！',
             ];
             dispatch(new SendMailQueueJob($mailData));
 

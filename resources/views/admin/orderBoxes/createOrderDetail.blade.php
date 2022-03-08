@@ -84,9 +84,17 @@
                                             <option value="3">三聯</option>
                                         </select>
                                     </div>
-                                    <div class="form-group col-md-3">
-                                        <label for="total_price">訂單總金額</label>
-                                        <input type="text" class="form-control form-required" name="total_price" id="total_price">
+                                    <div class="form-group col-md-2">
+                                        <label for="total_price">訂單總金額(不含稅)</label>
+                                        <input type="text" class="form-control form-required" name="total_price" id="total_price" value="">
+                                    </div>
+                                    <div class="form-group col-md-2">
+                                        <label for="total_price">營業稅金額</label>
+                                        <input type="text" class="form-control form-required" name="tax_price" id="tax_price" value="">
+                                    </div>
+                                    <div class="form-group col-md-2">
+                                        <label for="total_price">最後總金額</label>
+                                        <input type="text" class="form-control form-required" name="final_price" id="final_price" value="">
                                     </div>
                                 </div>
                                 <div class="form-group row border-top">
@@ -182,7 +190,7 @@
                                             <input type="number" class="form-control form-required" name="box_height[]" id="box_height" min="0" step="0.1">
                                         </div>
                                         <div class="form-group col-md-2">
-                                            <label for="box_price">箱子費用</label>
+                                            <label for="box_price">箱子費用(未稅)</label>
                                             <input type="number" class="form-control form-required" name="box_price[]" id="box_price">
                                         </div>
                                         <div class="form-group col-md-4">

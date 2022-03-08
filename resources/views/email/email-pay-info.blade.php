@@ -19,12 +19,20 @@
                 <tbody>
                 <tr>
                     <td style="font-size: 15px; line-height:24px;">
-                        您好 {{$for_title}},
+                        親愛的 {{$for_title}},
                         <br/>
                         <br/>
                         {!! $msg !!}
                         <br/>
                         <br/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        海龜集運<br/>
+                        <br/>
+                        客服信箱 service@triumphturtle.com<br/>
+                        線上客服 <a href="{{route('index')}}" target="_blank">https://www.facebook.com/triumphturtle</a><br/>
                     </td>
                 </tr>
                 </tbody>
