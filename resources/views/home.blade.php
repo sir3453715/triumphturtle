@@ -113,7 +113,7 @@
       {{ $sailings->appends(request()->except('page'))->links() }}
   </section>
 
-  <section class="container mb-5">
+  <section class="container d-grid mb-5">
     <div class="display-box display-box-outline display-box-down m-auto"><img src="/storage/image/steps.svg" alt=""><h2>作業流程說明</h2></div>
     <div class="border-box">
       <img class="img-fluid d-none d-md-block" src="/storage/image/process-step.svg" alt="">
