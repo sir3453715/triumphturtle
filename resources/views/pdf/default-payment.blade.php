@@ -54,12 +54,20 @@ font-weight: bold;
             padding-bottom: 30px;
         }
 
+        #payment-logo {
+            position: relative;
+    top: -25px;
+    min-width:300px;
+    width:80%;
+    max-width:400px;
+}
+
     </style>
 </head>
 <body>
     <table>
         <tr>
-            <td colspan="2" rowspan="5" class="font-title border-none"><img width="300px" src="/storage/image/triumphturtle.jpg"></td>
+            <td colspan="2" rowspan="5" class="font-title border-none"><img id="payment-logo" src="/storage/image/triumphturtle.jpg"></td>
             <td colspan="4" class="font-title border-none text-right" style="font-size: 28px;">凱漩國際有限公司</td>
         </tr>
         <tr>
