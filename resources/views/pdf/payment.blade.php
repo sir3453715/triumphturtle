@@ -75,9 +75,9 @@ font-weight: bold;
             <td colspan="4" class="border-none text-right">TRIUMPH INTERNATIONAL TRADING CO.,LTD</td>
         </tr>
         <tr>
-            <td colspan="4" class="border-none text-right">2F, No. 113, Chenggong Rd., Sanchong Dist.,<br> 
+            <td colspan="4" class="border-none text-right">2F, No. 113, Chenggong Rd., Sanchong Dist.,<br>
                 New Taipei City 241012, Taiwan (R.O.C.)</td>
-        </tr> 
+        </tr>
         <tr>
             <td colspan="4" class="border-none text-right">+886 2 29780058</td>
         </tr>
