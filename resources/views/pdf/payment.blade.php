@@ -130,16 +130,16 @@ font-weight: bold;
             <td>NT${{number_format($sailing['final_price'])}}</td>
             <td>NT${{number_format($sailing['final_price'] * $box_count) }}</td>
         </tr>
-        @if($other_price)
-            <tr class="center-text">
-                <td>{{$other_price['other_title']}}</td>
-                <td>{{$other_price['other_qty']}}</td>
-                <td></td>
-                <td></td>
-                <td>NT${{number_format($other_price['other_unit'])}}</td>
-                <td>NT${{number_format($other_price['other_qty'] * $other_price['other_unit']) }}</td>
-            </tr>
-        @endif
+{{--        @if($other_price)--}}
+{{--            <tr class="center-text">--}}
+{{--                <td>{{$other_price['other_title']}}</td>--}}
+{{--                <td>{{$other_price['other_qty']}}</td>--}}
+{{--                <td></td>--}}
+{{--                <td></td>--}}
+{{--                <td>NT${{number_format($other_price['other_unit'])}}</td>--}}
+{{--                <td>NT${{number_format($other_price['other_qty'] * $other_price['other_unit']) }}</td>--}}
+{{--            </tr>--}}
+{{--        @endif--}}
         <tr class="center-text">
             <td colspan="4"></td>
             <td colspan="1" class="bg-gray font-title ">Subtotal:</td>
