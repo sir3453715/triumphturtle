@@ -27,28 +27,28 @@
                     <div class="row">
                         <div class="col filter-form">
                             <form class="form-inline filter">
-                                <div class="form-group row">
-                                    <div class="form-group mr-3">
+                                <div class="form-group row col-12">
+                                    <div class="form-group col-2">
                                         <label for="from_country">From國家</label>
-                                        <select class="form-control ml-3 select2" name="from_country" id="from_country" >
+                                        <select class="form-control ml-3 col-12 select2" name="from_country" id="from_country" >
                                             <option value="">請選擇</option>
                                             @foreach($countries as $country)
                                                 <option value="{{$country->id}}" {!! $html->selectSelected($country->id,$queried['from_country']) !!}>{{$country->title}}</option>
                                             @endforeach
                                         </select>
                                     </div>
-                                    <div class="form-group mr-3">
+                                    <div class="form-group col-2">
                                         <label for="to_country">To國家</label>
-                                        <select class="form-control ml-3 select2" name="to_country" id="to_country" >
+                                        <select class="form-control ml-3 col-12 select2" name="to_country" id="to_country" >
                                             <option value="">請選擇</option>
                                             @foreach($countries as $country)
                                                 <option value="{{$country->id}}" {!! $html->selectSelected($country->id,$queried['to_country']) !!}>{{$country->title}}</option>
                                             @endforeach
                                         </select>
                                     </div>
-                                    <div class="form-group mr-3">
+                                    <div class="form-group col-2">
                                         <label for="status">狀態</label>
-                                        <select class="form-control ml-3" name="status" id="status" >
+                                        <select class="form-control ml-3 col-12" name="status" id="status" >
                                             <option value="">請選擇</option>
                                             <option value="1" {!! $html->selectSelected(1,$queried['status']) !!}>集貨中</option>
                                             <option value="2" {!! $html->selectSelected(2,$queried['status']) !!}>準備中</option>
@@ -57,21 +57,21 @@
                                             <option value="5" {!! $html->selectSelected(5,$queried['status']) !!}>取消</option>
                                         </select>
                                     </div>
-                                    <div class="form-group mr-3">
+                                    <div class="form-group col-2">
                                         <label for="on_off">上/下架</label>
-                                        <select class="form-control ml-3" name="on_off" id="on_off" >
+                                        <select class="form-control ml-3 col-12" name="on_off" id="on_off" >
                                             <option value="">請選擇</option>
                                             <option value="1" {!! $html->selectSelected(1,$queried['on_off']) !!}>下架</option>
                                             <option value="2" {!! $html->selectSelected(2,$queried['on_off']) !!}>上架</option>
                                         </select>
                                     </div>
-                                    <div class="form-group mr-3">
+                                    <div class="form-group col-2">
                                         <label for="statement_time">結單時間</label>
-                                        <input type="date" name="statement_time" class="form-control ml-3" value="{{(isset($queried['statement_time'])?$queried['statement_time']:'')}}">
+                                        <input type="date" name="statement_time" class="form-control ml-3 col-12" value="{{(isset($queried['statement_time'])?$queried['statement_time']:'')}}">
                                     </div>
-                                    <div class="form-group mr-3">
+                                    <div class="form-group col-2">
                                         <label for="sailing_date">開船日</label>
-                                        <input type="date" name="sailing_date" class="form-control ml-3" value="{{(isset($queried['sailing_date'])?$queried['sailing_date']:'')}}">
+                                        <input type="date" name="sailing_date" class="form-control ml-3 col-12" value="{{(isset($queried['sailing_date'])?$queried['sailing_date']:'')}}">
                                     </div>
                                 </div>
                                 <div class="form-group row ml-2 mt-2">

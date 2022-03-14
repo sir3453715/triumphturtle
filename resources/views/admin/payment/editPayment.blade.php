@@ -118,22 +118,22 @@
                                         <span> NT${{ $order->total_price * $billing['box_count']}} </span>
                                     </div>
                                 </div>
-                                <div class="form-group row">
-                                    <div class="form-group col-md-2">
-                                        <input type="text" class="form-control" name="other_title" id="other_title">
-                                    </div>
-                                    <div class="form-group col-md-2">
-                                        <input type="number" class="form-control other-price" name="other_qty" id="other_qty" min="1">
-                                    </div>
-                                    <div class="form-group col-md-2"></div>
-                                    <div class="form-group col-md-2"></div>
-                                    <div class="form-group col-md-2">
-                                        <input type="number" class="form-control other-price" name="other_unit" id="other_unit" min="0">
-                                    </div>
-                                    <div class="form-group col-md-2">
-                                        <span id="other_total"> NT$0 </span>
-                                    </div>
-                                </div>
+{{--                                <div class="form-group row">--}}
+{{--                                    <div class="form-group col-md-2">--}}
+{{--                                        <input type="text" class="form-control" name="other_title" id="other_title">--}}
+{{--                                    </div>--}}
+{{--                                    <div class="form-group col-md-2">--}}
+{{--                                        <input type="number" class="form-control other-price" name="other_qty" id="other_qty" min="1">--}}
+{{--                                    </div>--}}
+{{--                                    <div class="form-group col-md-2"></div>--}}
+{{--                                    <div class="form-group col-md-2"></div>--}}
+{{--                                    <div class="form-group col-md-2">--}}
+{{--                                        <input type="number" class="form-control other-price" name="other_unit" id="other_unit" min="0">--}}
+{{--                                    </div>--}}
+{{--                                    <div class="form-group col-md-2">--}}
+{{--                                        <span id="other_total"> NT$0 </span>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
                                 <div class="form-group row border-top">
                                     <div class="form-group col-md-8"></div>
                                     <div class="form-group col-md-2">
