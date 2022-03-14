@@ -109,7 +109,7 @@
                                         <span> box </span>
                                     </div>
                                     <div class="form-group col-md-2">
-                                        <span> {{$billing['sailing']['to_country']}} </span>
+                                        <span>{{\App\Models\Country::find($billing['sailing']['to_country'])->title}}</span>
                                     </div>
                                     <div class="form-group col-md-2">
                                         <span> NT${{ $order->total_price}} </span>

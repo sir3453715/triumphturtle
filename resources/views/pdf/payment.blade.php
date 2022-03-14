@@ -132,7 +132,7 @@ font-weight: bold;
             <td> Delivery Fee</td>
             <td>{{$box_count}}</td>
             <td>box</td>
-            <td>{{$sailing['to_country']}}</td>
+            <td>{{\App\Models\Country::find($sailing['to_country'])->title}}</td>
             <td>NT${{number_format($sailing['final_price'])}}</td>
             <td>NT${{number_format($sailing['final_price'] * $box_count) }}</td>
         </tr>
