@@ -24,8 +24,19 @@
         }
 
         .detail-info-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
+            display: flex;
+            flex-wrap: wrap;
+
+            p {
+                width: 50%;
+            }
+
+            #tracking_number_list {
+                width: 100%;
+                background: rgb(237, 237, 237);
+                padding: 10px 20px;
+                border-radius: 10px;
+            }
         }
 
 
@@ -151,6 +162,19 @@
 
 .shipment .card-top {
     min-height: 213px;
+}
+
+.shipment .detail-info-grid {
+    display: flex;
+    flex-wrap: wrap;
+
+    p {
+        width: 50%;
+    }
+
+    #tracking_number_list {
+        width: 100%;
+    }
 }
 
 .location-card {
