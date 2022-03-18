@@ -378,7 +378,6 @@ class OrderDetailController extends Controller
             }
 
         }
-
-        dd($request->toArray());
+        return redirect(route('admin.order-detail.index'))->with('message', '訂單批次修改完成');
     }
 }
