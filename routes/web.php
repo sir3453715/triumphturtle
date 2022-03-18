@@ -95,6 +95,10 @@ Route::group(['prefix'=>'admin', 'middleware' => ['web', 'admin.area'],'as'=>'ad
     Route::group(['prefix' => 'order-detail', 'as' => 'order-detail.'], function(){
         Route::post('/bulk', 'Admin\Menu\OrderDetailController@bulk')
             ->name('bulk');
+        Route::get('/importList', 'Admin\Menu\OrderDetailController@importList')
+            ->name('importList');
+        Route::post('/import', 'Admin\Menu\OrderDetailController@import')
+            ->name('import');
     });
 });
 

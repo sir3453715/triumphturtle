@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin\Menu;
 
+use App\Exports\DemoExport;
 use App\Http\Controllers\Controller;
 use App\Jobs\SendMailQueueJob;
 use App\Models\ActionLog;
@@ -15,6 +16,7 @@ use Facebook\FacebookRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
+use Maatwebsite\Excel\Facades\Excel;
 
 class OrderDetailController extends Controller
 {
@@ -329,55 +331,145 @@ class OrderDetailController extends Controller
     }
 
     public function bulk(Request $request){
+        $submit = $request->get('submit');
         $order_ids = $request->get('order_id');
         if(!$order_ids){
             return redirect(route('admin.order-detail.index'))->with('error', '沒有選擇任何訂單!');
         }
-        if($request->get('pay_status')){
-            $orders = Order::whereIn('id',$order_ids)->get();
+        if($submit == 'delivery'){
+            $data = array();
+            $orders = Order::whereIn('id',$order_ids)->orderBy('seccode','ASC')->get();
             foreach ($orders as $order){
-                $data = ['pay_status'=>$request->get('pay_status')];
-
-                if($request->get('pay_status') == '3' && $order->pay_status != '3') {
-                    /** 用戶收信-收款通知 */
-                    $mailData = [
-                        'is_admin' => false,
-                        'template' => 'email-pay-info',
-                        'email' => $order->sender_email,
-                        'subject' => '【海龜集運】您的款項已確認',
-                        'for_title' => $order->sender_name,
-                        'msg' => '訂單編號: #' . $order->seccode . '<br/><br/>您的訂單已確認付款，我們會盡快為您安排出貨，您可隨時至<a href="' . route('tracking') . '">訂單查詢頁面</a> 查看最新的寄送進度，謝謝！',
-                    ];
-                    dispatch(new SendMailQueueJob($mailData));
+                foreach ($order->box as $key => $box){
+                    if($key == 0){
+                        $data[]=[
+                            'sender_name'=>$order->sender_name,
+                            'sender_phone'=>$order->sender_phone,
+                            'sender_address'=>$order->sender_address,
+                            'sender_company'=>$order->sender_company,
+                            'sender_taxid'=>$order->sender_taxid,
+                            'for_name'=>$order->for_name,
+                            'for_phone'=>$order->for_phone,
+                            'for_address'=>$order->for_address,
+                            'for_company'=>$order->for_company,
+                            'for_taxid'=>$order->for_taxid,
+                            'box_seccode'=>$box->box_seccode,
+                            'tracking_number'=>$box->tracking_number,
+                        ];
+                    }else{
+                        $data[]=[
+                            'sender_name'=>'',
+                            'sender_phone'=>'',
+                            'sender_address'=>'',
+                            'sender_company'=>'',
+                            'sender_taxid'=>'',
+                            'for_name'=>'',
+                            'for_phone'=>'',
+                            'for_address'=>'',
+                            'for_company'=>'',
+                            'for_taxid'=>'',
+                            'box_seccode'=>$box->box_seccode,
+                            'tracking_number'=>$box->tracking_number,
+                        ];
+                    }
                 }
-
-                $order->fill($data);
-                ActionLog::create_log($order);
-                $order->save();
-
             }
+            $title = '下載宅配資訊';
+
+            $headings = [
+                'sender_name'=>"寄件者姓名",
+                'sender_phone'=>"寄件者電話",
+                'sender_address'=>"寄件者地址",
+                'sender_company'=>"公司名稱",
+                'sender_taxid'=>"統編",
+                'for_name'=>"收件者姓名",
+                'for_phone'=>"收件者電話",
+                'for_address'=>"收件者地址",
+                'for_company'=>"公司名稱",
+                'for_taxid'=>"統編",
+                'box_seccode'=>"運單號",
+                'tracking_number'=>"宅配單號",
+            ];
+
+            return Excel::download(new DemoExport($data,$title,$headings),'宅配資訊'.date('Y-m-d_H_i_s'). '.xls');
         }
-        if($request->get('status')){
-            foreach ($orders as $order){
-                $data = ['status'=>$request->get('status')];
-                if($request->get('status') == '2' && $order->status == '1'){
-                    /** 用戶收信-包裹入倉 */
-                    $mailData = [
-                        'is_admin'=>false,
-                        'template'=>'email-order-info',
-                        'email'=>$order->sender_email,
-                        'subject'=>'【海龜集運】訂單編號 #'.$order->seccode.' 包裹已入倉',
-                        'for_title'=>$order->sender_name,
-                        'msg'=>'訂單編號: #'.$order->seccode.'  狀態更新通知 - 您的包裹已入倉！<br/><br/>您也可以至 <a href="'.route('tracking').'">訂單查詢頁面</a> 查看訂單詳細資訊。',
-                    ];
-                    dispatch(new SendMailQueueJob($mailData));
-                }
-                $order->fill($data);
-                ActionLog::create_log($order);
-                $order->save();
-            }
+        if($submit == 'action'){
+            if($request->get('pay_status')){
+                $orders = Order::whereIn('id',$order_ids)->get();
+                foreach ($orders as $order){
+                    $data = ['pay_status'=>$request->get('pay_status')];
 
+                    if($request->get('pay_status') == '3' && $order->pay_status != '3') {
+                        /** 用戶收信-收款通知 */
+                        $mailData = [
+                            'is_admin' => false,
+                            'template' => 'email-pay-info',
+                            'email' => $order->sender_email,
+                            'subject' => '【海龜集運】您的款項已確認',
+                            'for_title' => $order->sender_name,
+                            'msg' => '訂單編號: #' . $order->seccode . '<br/><br/>您的訂單已確認付款，我們會盡快為您安排出貨，您可隨時至<a href="' . route('tracking') . '">訂單查詢頁面</a> 查看最新的寄送進度，謝謝！',
+                        ];
+                        dispatch(new SendMailQueueJob($mailData));
+                    }
+
+                    $order->fill($data);
+                    ActionLog::create_log($order);
+                    $order->save();
+
+                }
+            }
+            if($request->get('status')){
+                foreach ($orders as $order){
+                    $data = ['status'=>$request->get('status')];
+                    if($request->get('status') == '2' && $order->status == '1'){
+                        /** 用戶收信-包裹入倉 */
+                        $mailData = [
+                            'is_admin'=>false,
+                            'template'=>'email-order-info',
+                            'email'=>$order->sender_email,
+                            'subject'=>'【海龜集運】訂單編號 #'.$order->seccode.' 包裹已入倉',
+                            'for_title'=>$order->sender_name,
+                            'msg'=>'訂單編號: #'.$order->seccode.'  狀態更新通知 - 您的包裹已入倉！<br/><br/>您也可以至 <a href="'.route('tracking').'">訂單查詢頁面</a> 查看訂單詳細資訊。',
+                        ];
+                        dispatch(new SendMailQueueJob($mailData));
+                    }
+                    $order->fill($data);
+                    ActionLog::create_log($order);
+                    $order->save();
+                }
+
+            }
         }
         return redirect(route('admin.order-detail.index'))->with('message', '訂單批次修改完成');
+    }
+
+    public function import(Request $request){
+        if($request->hasFile('importFile')){
+            $extension = $request->file('importFile')->getClientOriginalExtension(); //副檔名
+            $path1 = time() . "." . $extension;    //重新命名
+            $request->file('importFile')->move(storage_path('app').'/temp', $path1); //移動至指定目錄
+            $path=storage_path('app').'/temp/'.$path1;
+            $excel = Excel::toArray('' ,$path);
+            foreach ($excel as $key => $sheets){ // 各個表分別撈出來
+                unset($sheets[0]);
+                foreach ($sheets as $sheetKey => $column){
+                    $box_seccode = $column[0];
+                    $tracking_number = $column[1];
+                    $orderBox = OrderBox::where('box_seccode',$box_seccode)->first();
+                    $orderBox->fill(['tracking_number'=>$tracking_number]);
+                    ActionLog::create_log($orderBox);
+                    $orderBox->save();
+                }
+            }
+            unlink(storage_path('app/temp/'.$path1));
+            return redirect(route('admin.order-detail.index'))->with('message', '訂單批次匯入宅配單號完成');
+        }else{
+            return redirect(route('admin.order-detail.index'))->with('error', '請上傳匯入檔案!');
+        }
+    }
+    public function importList(){
+        return view('admin.orderBoxes.orderImport',[
+            'orders'=>[''],
+        ]);
     }
 }

@@ -99,13 +99,17 @@
                                 </div>
                                 <div class="form-group row ml-2 mt-2">
                                     <div class="form-group">
-                                        <button type="submit" class="form-control btn btn-outline-danger update-confirm">執行</button>
+                                        <button type="button" class="form-control btn btn-outline-danger update-confirm mr-3" >執行</button>
+                                        <button type="submit" class="d-none" id="bulkSubmit" name="submit" value="action"></button>
+                                    </div>
+                                    <div class="form-group">
+                                        <button type="submit" class="form-control btn btn-outline-success" name="submit" value="delivery" formtarget="_blank">下載宅配資訊</button>
                                     </div>
                                 </div>
                             </form>
-{{--                            <div class="ml-auto mt-2">--}}
-{{--                                <a href="#"><button type="button" class="btn btn-outline-primary">批次匯入物流單號</button></a>--}}
-{{--                            </div>--}}
+                            <div class="ml-auto mt-2 border-top">
+                                <a href="{{route('admin.order-detail.importList')}}" class="mt-2 btn btn-outline-primary">批次匯入物流單號</a>
+                            </div>
                         </div>
                     </div>
                 </div>

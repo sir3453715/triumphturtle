@@ -115,7 +115,7 @@ $(() => {
             code += chars.charAt(i);
         }
         if(prompt('注意！目前將修改所選擇項目，此操作無法復原。 如果仍要繼續動作，請輸入以下代碼： ' + code ) === code) {
-            $(e.currentTarget).closest('form').submit();
+            $('#bulkSubmit').click();
         }
     });
     $(document.body).on('click','.delete-confirm',e => {
