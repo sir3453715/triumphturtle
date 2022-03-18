@@ -166,6 +166,9 @@ trait BaseHtmlPresenter
                 for ($i = 0;$i<=$interval;$i++){
                     $price = ($price*$sailing->discount);
                 }
+                if($price<=$sailing->min_price){
+                    $price = $sailing->min_price;
+                }
                 $html = '<div><img src="/storage/image/pack-icon.svg" alt="">已成團！差 <span class="data-number">'.$margin.'</span>箱即可享有優惠</div>
                             <div class="data-extra-info"><span>NT$ '.number_format($price).'</span> / 箱</div>';
             }else{
@@ -173,14 +176,38 @@ trait BaseHtmlPresenter
                 $html = '<div><img src="/storage/image/pack-icon.svg" alt="">差 <span class="data-number">'.$num.'</span>箱即可成團</div>';
             }
         }else{
-            $price = $sailing->price;
+            $defaultPrice = $sailing->price;
             $interval = intval(floor($box_count/$box_interval));
             for ($i = 1;$i<=$interval;$i++){
-                $price = ($price*$sailing->discount);
+                $price = ($defaultPrice*$sailing->discount);
             }
-            $html = '<div><img src="/storage/image/pack-icon.svg" alt="">已成團！已滿箱享有優惠價</div>
-                            <div class="data-extra-info"><span>NT$ '.number_format($price).'</span> / 箱</div>';
+            if($price<=$sailing->min_price){
+                $price = $sailing->min_price;
+            }
+            $percentage = (($defaultPrice-$price)/$defaultPrice)*100;
+            $html = '<div><img src="/storage/image/pack-icon.svg" alt="">已成團！此團最終優惠折扣為</div>
+                            <div class="data-extra-info"><span>'.$percentage.'</span>% OFF</div>';
         }
+        return $html;
+
+    }
+    public function nowSailingPrice($sailing){
+        $sailing_id = $sailing->id;
+        $status = $sailing->status;
+        $minimum = $sailing->minimum;
+        $box_interval = $sailing->box_interval;
+        $order_ids = Order::where('sailing_id',$sailing_id)->pluck('id');
+        $box_count = OrderBox::whereIn('order_id',$order_ids)->count();
+        $html = '';
+        $price = $sailing->price;
+        $interval = intval(floor($box_count/$box_interval));
+        for ($i = 1;$i<=$interval;$i++){
+            $price = ($price*$sailing->discount);
+        }
+        if($price<=$sailing->min_price){
+            $price = $sailing->min_price;
+        }
+        $html = '<span class="data-label">目前單價:</span><span class="unit-price">NT$ '.number_format($price).'</span> / 箱';
         return $html;
 
     }
@@ -216,7 +243,13 @@ trait BaseHtmlPresenter
                         $text = '已入庫';
                         break;
                     case 3:
-                        $text = '宅配派送中';
+
+                        $text = '<a href="#" id="openTracking" onclick="($('."'#tracking_number_list'".').toggle());">宅配派送中</a>';
+                        $text .= '<ul class="list-unstyled d-hidden" id="tracking_number_list">';
+                        foreach ($order->box as $box){
+                            $text .='<li>'.$box->tracking_number.'</li>';
+                        }
+                        $text .= '</ul>';
                         break;
                     case 4:
                         $text = '完成';
