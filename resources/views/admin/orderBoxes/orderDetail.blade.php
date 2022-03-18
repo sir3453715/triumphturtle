@@ -57,7 +57,7 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="form-group row ml-2 mt-2">
+                                <div class="form-group row ml-2">
                                     <div class="form-group">
                                         <button type="submit" class="form-control">篩選</button>
                                     </div>
@@ -71,11 +71,11 @@
                     <div class="row mt-2" >
                         <div class="col filter-form  border-top">
                             <div class="mt-2">
-                                <h4 class="m-0">批次修改</h4>
+                                <h5 class="m-0">批次修改訂單</h5>
                             </div>
                             <form class="form-inline filter" id="bulkForm" action="{{route('admin.order-detail.bulk')}}" method="post">
                                 @csrf
-                                <div class="form-group row">
+                                <div class="form-group row mt-2">
                                     <div class="form-group mr-3">
                                         <label for="pay_status">付款狀態</label>
                                         <select class="form-control ml-3" name="pay_status" id="pay_status" >
@@ -99,10 +99,13 @@
                                 </div>
                                 <div class="form-group row ml-2 mt-2">
                                     <div class="form-group">
-                                        <button type="submit" class="form-control btn btn-danger update-confirm">執行</button>
+                                        <button type="submit" class="form-control btn btn-outline-danger update-confirm">執行</button>
                                     </div>
                                 </div>
                             </form>
+{{--                            <div class="ml-auto mt-2">--}}
+{{--                                <a href="#"><button type="button" class="btn btn-outline-primary">批次匯入物流單號</button></a>--}}
+{{--                            </div>--}}
                         </div>
                     </div>
                 </div>

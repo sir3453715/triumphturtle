@@ -35,7 +35,7 @@
             font-weight: bold;
         }
 .shipment-number {
-    font-size: 40px;
+    font-size: 38px;
 }
 
 .shipment-number td {
