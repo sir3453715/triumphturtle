@@ -7,7 +7,6 @@
         &-top {
             border-radius: 15px 15px 0px 0px;
             padding: 25px 25px 10px;
-            min-height: 213px;
         }
 
         &-bottom {
@@ -148,6 +147,10 @@
             }
         }
     }
+}
+
+.shipment .card-top {
+    min-height: 213px;
 }
 
 .location-card {

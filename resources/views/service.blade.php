@@ -28,7 +28,7 @@
                                 </li>
                                 <li>僅能送到一個地點</li>
                             </ul>
-                            <img class="d-flex m-auto img-fluid" src="/storage/image/card-reqular.png" alt="">
+                            <img id="card-reqular" class="d-flex m-auto img-fluid" src="/storage/image/card-reqular.svg" alt="">
                         </div>
                     </div>
                 </div>
@@ -51,7 +51,7 @@
                                 <li>若該團未滿10箱則後續會跟<div class="back-space">主揪加收差額</div>
                                 </li>
                             </ul>
-                            <img class="d-flex m-auto img-fluid" src="/storage/image/card-group.png" alt="">
+                            <img id="card-group" class="d-flex m-auto img-fluid" src="/storage/image/card-group.svg" alt="">
                         </div>
                     </div>
                 </div>

@@ -245,6 +245,10 @@ p {
     }
 }
 
+#tandc-modal {
+    overflow-y: scroll;
+}
+
 // service page 
 #shipping-des {
     background: $color-white;
@@ -294,6 +298,14 @@ p {
             font-weight: 400;
         }
     }
+}
+
+#card-reqular {
+    min-width: 280px;
+}
+
+#card-group {
+    min-width: 240px;
 }
 
 // about page
