@@ -34,8 +34,10 @@
                     <td>
                         海龜集運<br/>
                         <br/>
-                        客服信箱 service@triumphturtle.com<br/>
-                        線上客服 <a href="{{route('index')}}" target="_blank">https://www.facebook.com/triumphturtle</a><br/>
+                        客服官方信箱：service@triumphturtle.com<br/>
+                        官方臉書專頁：https://www.facebook.com/triumphturtle<br/>
+                        官方Messenger諮詢：https://www.messenger.com/t/triumphturtle<br/>
+                        官方LINE諮詢：@865udsia<br/>
                     </td>
                 </tr>
                 </tbody>
