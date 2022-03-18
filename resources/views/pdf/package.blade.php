@@ -41,6 +41,7 @@ font-weight: bold;
 
         .bg-green {
             background-color: rgb(149, 215, 193);
+            font-size: 18px;
         }
 
         .main-sender {
@@ -91,8 +92,8 @@ font-weight: bold;
             <td>Description</td>
             <td>unit price</td>
             <td>Quantity</td>
-            <td>Net Weight</td>
             <td>Gross Weight</td>
+            <td>Net Weight</td>
             <td>Measurement(CM)</td>
             <td>Value (USD)</td>
         </tr>
@@ -100,7 +101,7 @@ font-weight: bold;
             @foreach($orderBox['OrderBoxesItems'] as $key => $OrderBoxesItem)
                 @if($key == 0)
                     <tr class="center-text">
-                        <td rowspan="{{count($orderBox['OrderBoxesItems'])}}" class="bg-green">{{$orderBox['box_seccode']}} {{count($orderBox['OrderBoxesItems'])}}</td>
+                        <td rowspan="{{count($orderBox['OrderBoxesItems'])}}" class="bg-green">{{$orderBox['box_seccode']}}</td>
                         <td>{{$OrderBoxesItem['item_name']}}</td>
                         <td>{{ number_format($OrderBoxesItem['unit_price']) }}</td>
                         <td>{{$OrderBoxesItem['item_num']}}</td>
