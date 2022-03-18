@@ -35,12 +35,9 @@
                     <div>
                         <div class="d-block d-md-flex align-items-center mb-3">
                             <div class="form-control mr-3 border-0 mb-3">
-                                <input class="form-control form-control-lg mr-3 form-required {{(\Session::has('errorText'))?'required-error':''}}" type="text" name="captcha" id="captcha" placeholder="請輸入驗證碼">
-                                @if (\Session::has('errorText'))
-                                    <small class="required-error-message text-danger">{!! \Session::get('errorText') !!}</small>
-                                @endif
+                                <input class="form-control form-control-lg mr-3 form-required " type="text" name="captcha" id="captcha" placeholder="請輸入驗證碼">
                             </div>
-                            <button type="submit" id="send-confirm" class="btn btn-lg btn-solid btn-orange btn-block mt-4 mt-md-0 open-TAC" data-toggle="modal" href="#tandc-modal" data-link="group-captcha">送出</button>
+                            <button type="button" id="confirm-token" class="btn btn-lg btn-solid btn-orange btn-block mt-4 mt-md-0" >送出</button>
                         </div>
                     </div>
                 </div>

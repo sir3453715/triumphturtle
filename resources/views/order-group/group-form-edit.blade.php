@@ -30,7 +30,7 @@
                     </div>
                     <div class="form-group col-6">
                         <label for="sender_name">姓名*</label>
-                        <input type="text" class="form-control form-required" name="sender_name" id="sender_name" placeholder="請填寫中文姓名" value="{{$order->sender_name}}">
+                        <input type="text" class="form-control form-required" name="sender_name" id="sender_name" placeholder="請填寫英文姓名(需同護照名)" value="{{$order->sender_name}}">
                     </div>
                     <div class="form-group col-6">
                         <label for="sender_phone">聯絡電話*</label>
@@ -38,7 +38,7 @@
                     </div>
                     <div class="form-group col-12">
                         <label for="sender_address">地址*</label>
-                        <input type="text" class="form-control form-required" name="sender_address" id="sender_address" placeholder="請填寫中文地址" value="{{$order->sender_address}}">
+                        <input type="text" class="form-control form-required" name="sender_address" id="sender_address" placeholder="請填寫英文地址" value="{{$order->sender_address}}">
                     </div>
                     <div class="form-group col-6 {{($order->shipment_use=='商業貨')?'':'d-hidden'}}">
                         <label for="sender_company">公司名稱*</label>
@@ -178,7 +178,6 @@
                         <select class="form-control form-required" name="invoice" id="invoice">
                             <option value="3" {!! $html->selectSelected($order->invoice,3) !!}>三聯</option>
                             <option value="2" {!! $html->selectSelected($order->invoice,2) !!}>二聯</option>
-                            <option value="1" {!! $html->selectSelected($order->invoice,1) !!}>不需要</option>
                         </select>
                     </div>
                 </div>

@@ -49,39 +49,32 @@
 </head>
 <body>
     <table>
-        <tr class="center-text">
-            <td colspan="5"><img width="200px" src="{{url('/storage/image/triumphturtle.jpg')}}"></td>
-        </tr>
-        <tr>
-            <td colspan="5">一個運單號貼一箱</td>
-        </tr>
-            @foreach($OrderBoxes as $num => $box)
-            @if($num!=0 && $num%5 ==0)
-                </table>
-                    <div class="wrapper-page"></div>
-                    <table>
-                        <tr class="center-text">
-                            <td colspan="5"><img width="200px" src="{{url('/storage/image/triumphturtle.jpg')}}"></td>
-                        </tr>
-                        <tr>
-                            <td colspan="5">一個運單號貼一箱</td>
-                        </tr>
-                    @endif
-                <tr class="center-text">
-                    <td colspan="5">寄送資訊</td>
-                </tr>
-                <tr class="export-header center-text">
-                    <td colspan="3">運單號 Shipment Code</td>
-                    <td colspan="2">第{{$num+1}}箱 box{{$num+1}}/{{count($OrderBoxes)}}</span></td>
-                </tr>
-                <tr class="shipment-number center-text">
-                    <td class="" colspan="3">{{$box['box_seccode']}}</td>
-                    <td class="" colspan="2">TIT</td>
-                </tr>
-                <tr>
-                    <td colspan="5" class="center-text">========== 裁切線 =========</td>
-                </tr>
-            @endforeach
+        @foreach($OrderBoxes as $num => $box)
+        @if($num!=0 && $num%4 ==0)
+            </table>
+                <div class="wrapper-page"></div>
+        @endif
+            <tr class="center-text">
+                <td colspan="5"><img width="200px" src="{{url('/storage/image/triumphturtle.jpg')}}"></td>
+            </tr>
+            <tr>
+                <td colspan="5">一個運單號貼一箱</td>
+            </tr>
+            <tr class="center-text">
+                <td colspan="5">寄送資訊</td>
+            </tr>
+            <tr class="export-header center-text">
+                <td colspan="3">運單號 Shipment Code</td>
+                <td colspan="2">第{{$num+1}}箱 box{{$num+1}}/{{count($OrderBoxes)}}</span></td>
+            </tr>
+            <tr class="shipment-number center-text">
+                <td class="" colspan="3">{{$box['box_seccode']}}</td>
+                <td class="" colspan="2">TIT</td>
+            </tr>
+            <tr>
+                <td colspan="5" class="center-text">============================== 裁切線 ==============================</td>
+            </tr>
+        @endforeach
     </table>
 </body>
 </html>

@@ -32,7 +32,7 @@
                     </div>
                     <div class="form-group col-6">
                         <label for="sender_name">姓名*</label>
-                        <input type="text" class="form-control form-required" name="sender_name" id="sender_name" placeholder="請填寫中文姓名">
+                        <input type="text" class="form-control form-required" name="sender_name" id="sender_name" placeholder="請填寫英文姓名(需同護照名)">
                     </div>
                     <div class="form-group col-6">
                         <label for="sender_phone">聯絡電話*</label>
@@ -40,7 +40,7 @@
                     </div>
                     <div class="form-group col-12">
                         <label for="sender_address">地址*</label>
-                        <input type="text" class="form-control form-required" name="sender_address" id="sender_address" placeholder="請填寫中文地址">
+                        <input type="text" class="form-control form-required" name="sender_address" id="sender_address" placeholder="請填寫英文地址">
                     </div>
                     <div class="form-group col-6 d-hidden">
                         <label for="sender_company">公司名稱*</label>
@@ -175,7 +175,6 @@
                             <option value="" hidden>請選擇發票類型</option>
                             <option value="3">三聯</option>
                             <option value="2">二聯</option>
-                            <option value="1">不需要</option>
                         </select>
                     </div>
                 </div>
