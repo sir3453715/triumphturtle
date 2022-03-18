@@ -106,6 +106,18 @@ $(() => {
             return false;
         }
     });
+    $(document.body).on('click','.update-confirm',e => {
+       e.preventDefault();
+        let code = '';
+        var chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+        for (var x = 0; x < 10; x++) {
+            var i = Math.floor(Math.random() * chars.length);
+            code += chars.charAt(i);
+        }
+        if(prompt('注意！目前將修改所選擇項目，此操作無法復原。 如果仍要繼續動作，請輸入以下代碼： ' + code ) === code) {
+            $(e.currentTarget).closest('form').submit();
+        }
+    });
     $(document.body).on('click','.delete-confirm',e => {
        e.preventDefault();
         let code = '';
@@ -114,7 +126,7 @@ $(() => {
             var i = Math.floor(Math.random() * chars.length);
             code += chars.charAt(i);
         }
-        if(prompt('注意！目前將刪除所選擇項目，此操作無法回覆。 如果仍要繼續動作，請輸入以下代碼： ' + code ) === code) {
+        if(prompt('注意！目前將刪除所選擇項目，此操作無法復原。 如果仍要繼續動作，請輸入以下代碼： ' + code ) === code) {
             $(e.currentTarget).closest('form').submit();
         }
     });
