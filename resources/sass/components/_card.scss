@@ -36,6 +36,16 @@
                 background: rgb(237, 237, 237);
                 padding: 10px 20px;
                 border-radius: 10px;
+                display: block;
+                margin-top: 10px;
+
+                ::before {
+                    content: "•";
+                }
+
+                span {
+                    display: block;
+                }
             }
         }
 
@@ -162,19 +172,6 @@
 
 .shipment .card-top {
     min-height: 213px;
-}
-
-.shipment .detail-info-grid {
-    display: flex;
-    flex-wrap: wrap;
-
-    p {
-        width: 50%;
-    }
-
-    #tracking_number_list {
-        width: 100%;
-    }
 }
 
 .location-card {
