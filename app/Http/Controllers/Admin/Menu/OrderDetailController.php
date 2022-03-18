@@ -327,4 +327,58 @@ class OrderDetailController extends Controller
         return redirect(route('admin.order-detail.index'))->with('message', '訂單 '.$order->seccode.'已被刪除');
 
     }
+
+    public function bulk(Request $request){
+        $order_ids = $request->get('order_id');
+        if(!$order_ids){
+            return redirect(route('admin.order-detail.index'))->with('error', '沒有選擇任何訂單!');
+        }
+        if($request->get('pay_status')){
+            $orders = Order::whereIn('id',$order_ids)->get();
+            foreach ($orders as $order){
+                $data = ['pay_status'=>$request->get('pay_status')];
+
+                if($request->get('pay_status') == '3' && $order->pay_status != '3') {
+                    /** 用戶收信-收款通知 */
+                    $mailData = [
+                        'is_admin' => false,
+                        'template' => 'email-pay-info',
+                        'email' => $order->sender_email,
+                        'subject' => '【海龜集運】您的款項已確認',
+                        'for_title' => $order->sender_name,
+                        'msg' => '訂單編號: #' . $order->seccode . '<br/><br/>您的訂單已確認付款，我們會盡快為您安排出貨，您可隨時至<a href="' . route('tracking') . '">訂單查詢頁面</a> 查看最新的寄送進度，謝謝！',
+                    ];
+                    dispatch(new SendMailQueueJob($mailData));
+                }
+
+                $order->fill($data);
+                ActionLog::create_log($order);
+                $order->save();
+
+            }
+        }
+        if($request->get('status')){
+            foreach ($orders as $order){
+                $data = ['status'=>$request->get('status')];
+                if($request->get('status') == '2' && $order->status == '1'){
+                    /** 用戶收信-包裹入倉 */
+                    $mailData = [
+                        'is_admin'=>false,
+                        'template'=>'email-order-info',
+                        'email'=>$order->sender_email,
+                        'subject'=>'【海龜集運】訂單編號 #'.$order->seccode.' 包裹已入倉',
+                        'for_title'=>$order->sender_name,
+                        'msg'=>'訂單編號: #'.$order->seccode.'  狀態更新通知 - 您的包裹已入倉！<br/><br/>您也可以至 <a href="'.route('tracking').'">訂單查詢頁面</a> 查看訂單詳細資訊。',
+                    ];
+                    dispatch(new SendMailQueueJob($mailData));
+                }
+                $order->fill($data);
+                ActionLog::create_log($order);
+                $order->save();
+            }
+
+        }
+
+        dd($request->toArray());
+    }
 }

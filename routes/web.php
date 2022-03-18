@@ -92,6 +92,10 @@ Route::group(['prefix'=>'admin', 'middleware' => ['web', 'admin.area'],'as'=>'ad
         Route::get('/checkPay/{id}', 'Admin\Menu\PaymentController@checkPay')
             ->name('checkPay');
     });
+    Route::group(['prefix' => 'order-detail', 'as' => 'order-detail.'], function(){
+        Route::post('/bulk', 'Admin\Menu\OrderDetailController@bulk')
+            ->name('bulk');
+    });
 });
 
 
