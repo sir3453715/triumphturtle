@@ -47,18 +47,25 @@
                                         <select class="form-control form-required select2" name="country" id="country" >
                                             <option value="">請選擇</option>
                                             @foreach($countries as $country)
-                                                <option value="{{$country->id}}">{{$country->title}}</option>
+                                                <option value="{{$country->id}}" >{{$country->title}}</option>
                                             @endforeach
                                         </select>
                                     </div>
                                     <div class="form-group col-md-4">
                                         <label for="img">圖片</label>
-                                        <input type="file" class="form-control-file form-required" name="img" id="img" >
-                                        <img class="cus-upload-img" id="img-show" width="100px">
+                                        <input type="file" class="form-control-file" name="img" id="img" >
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label for="for_name">收件者名稱</label>
+                                        <input type="text" class="form-control form-required" name="for_name" id="for_name" >
                                     </div>
                                     <div class="form-group col-md-4">
                                         <label for="phone">電話</label>
                                         <input type="text" class="form-control form-required" name="phone" id="phone" >
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label for="note">當地宅配資訊</label>
+                                        <input type="text" class="form-control" name="local" id="local">
                                     </div>
                                     <div class="form-group col-md-8">
                                         <label for="address">地址</label>
@@ -67,10 +74,6 @@
                                     <div class="form-group col-md-4">
                                         <label for="link">紙箱購買連結</label>
                                         <input type="text" class="form-control" name="link" id="link" >
-                                    </div>
-                                    <div class="form-group col-md-4">
-                                        <label for="notes">備註說明</label>
-                                        <textarea rows="3" class="form-control" name="notes" id="notes" ></textarea>
                                     </div>
                                 </div>
                             </div>
