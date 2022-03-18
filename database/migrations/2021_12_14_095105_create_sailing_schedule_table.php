@@ -29,6 +29,7 @@ class CreateSailingScheduleTable extends Migration
             $table->string('box_interval')->comment('箱數級距')->nullable(true);
             $table->string('discount')->comment('折扣')->nullable(true);
             $table->string('final_price')->comment('最終單價')->nullable(true);
+            $table->string('min_price')->comment('最低底價')->nullable(true);
             $table->timestamps();
         });
     }

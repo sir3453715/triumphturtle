@@ -103,6 +103,10 @@
                                         <label for="discount">折扣</label>
                                         <input type="text" id="discount" name="discount" class="form-control form-required">
                                     </div>
+                                    <div class="form-group col-md-3">
+                                        <label for="min_price">最低底價</label>
+                                        <input type="text" id="min_price" name="min_price" class="form-control form-required">
+                                    </div>
                                 </div>
                             </div>
                             <!-- /.card-body -->

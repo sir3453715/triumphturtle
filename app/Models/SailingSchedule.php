@@ -16,7 +16,7 @@ class SailingSchedule extends Model
      */
     protected $fillable = [
         'title', 'status', 'from_country', 'to_country', 'statement_time', 'parcel_deadline', 'sailing_date', 'arrival_date',
-        'on_off', 'price', 'minimum', 'box_interval', 'discount','final_price'
+        'on_off', 'price', 'minimum', 'box_interval', 'discount','final_price','min_price'
     ];
 
     public function fromCountry(){
