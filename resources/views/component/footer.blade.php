@@ -50,15 +50,12 @@
             <div class="modal-body text-left px-5 my-5">
                 <h4 class="mb-4">私人行李託運切結書</h4>
                 <h4 class="mb-4">誠實申報同意條款:</h4>
-                <p class="mb-3">本人委託鴻光國際物流有限公司運送 私人物品， 並承諾恪遵法律義務。
-                    運送物依其性質，對於人或財產有致損害之虞者，本人於 訂立契約前，應將其性質告知承攬運送人(鴻光國際物流有限公 司)，怠於告知者，對於因此所致之損害，應負賠償之責。 </p>
-                <p class="mb-4">本人對於交運貨物之名稱、數量，或其包裝之種類、個數 及標誌之通知，應向承攬運送人(鴻光國際物流有限公司)保證 其正確無訛，其因通知不正確所發生或所致之一切毀損、滅失
-                    及費用，由本人負賠償責任。 </p>
+                <p class="mb-3">本人利用凱漩國際有限公司平台運送私人物品， 並承諾恪遵法律義務。 運送物依其性質，對於人或財產有致損害之虞者，本人於訂立契約前，應將其性質告知凱漩國際有限公司，怠於告知者，對於因此所致之損害，應負賠償之責。
+                <p class="mb-4">本人對於交運貨物之名稱、數量，或其包裝之種類、個數及標誌之通知，應向凱漩國際有限公司保證其正確無訛，其因通知不正確所發生或所致之一切毀損、滅失及費用，由本人負賠償責任。</p>
                 <h4 class="mb-4">裝箱限制:</h4>
-                <p class="mb-4">(長寬高相加總和) 150CM以內, 單箱重量不超過25KG。若有超過此規格本人同意額收費用</p>
+                <p class="mb-4">(長寬高相加總和) 150CM以內, 單箱重量不超過25KG。若有超過此規格本人同意額收費用。</p>
                 <h4 class="mb-4">違禁品清單確認:</h4>
-                <p class="mb-4">本人已閱讀且了解<a class="btn-link btn-link-red mx-1" href="/embargo"
-                        target="_blank">禁運清單</a>的內容，並會遵守規定不將違禁品置入包裹，若有違反規定本人願意承擔一切賠償及法律責任</p>
+                <p class="mb-4">本人已閱讀且了解<a class="btn-link btn-link-red mx-1" href="/embargo" target="_blank">禁運清單</a>並會遵守規定不將違禁品置入包裹，若有違反規定本人願意承擔一切賠償及法律責任。</p>
                 <p class="mb-4">此致<br>凱漩國際有限公司<br>TRIUMPH INTERNATIONAL TRADING CO., LTD.</p>
                 <div class="form-check" id="TACCheckBoxDiv">
                     <input type="checkbox" class="form-check-input" id="TACCheckBox" name="TACCheckBox">
@@ -113,10 +110,10 @@
             </div>
 
 
-            <div class="d-flex mr-lg-5 mr-0 mb-3 justify-content-center"><img class="mr-2"
-                    src="/storage/image/phone-icon.svg" alt="">
-                <p>{{ app('Option')->company_tel }}</p>
-            </div>
+{{--            <div class="d-flex mr-lg-5 mr-0 mb-3 justify-content-center"><img class="mr-2"--}}
+{{--                    src="/storage/image/phone-icon.svg" alt="">--}}
+{{--                <p>{{ app('Option')->company_tel }}</p>--}}
+{{--            </div>--}}
 
 
             <div class="d-flex mb-3 justify-content-center"><img class="mr-2" src="/storage/image/mail-icon.svg"
