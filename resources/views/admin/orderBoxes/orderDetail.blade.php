@@ -68,6 +68,43 @@
                             </form>
                         </div>
                     </div>
+                    <div class="row mt-2" >
+                        <div class="col filter-form  border-top">
+                            <div class="mt-2">
+                                <h4 class="m-0">批次修改</h4>
+                            </div>
+                            <form class="form-inline filter" id="bulkForm" action="{{route('admin.order-detail.bulk')}}" method="post">
+                                @csrf
+                                <div class="form-group row">
+                                    <div class="form-group mr-3">
+                                        <label for="pay_status">付款狀態</label>
+                                        <select class="form-control ml-3" name="pay_status" id="pay_status" >
+                                            <option value="">請選擇</option>
+                                            <option value="1" {!! $html->selectSelected(1,$queried['pay_status']) !!}>未付款</option>
+                                            <option value="2" {!! $html->selectSelected(2,$queried['pay_status']) !!}>已出帳</option>
+                                            <option value="3" {!! $html->selectSelected(3,$queried['pay_status']) !!}>已付款</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group mr-3">
+                                        <label for="status">訂單狀態</label>
+                                        <select class="form-control ml-3" name="status" id="status" >
+                                            <option value="">請選擇</option>
+                                            <option value="1" {!! $html->selectSelected(1,$queried['status']) !!}>未入庫</option>
+                                            <option value="2" {!! $html->selectSelected(2,$queried['status']) !!}>已入庫</option>
+                                            <option value="3" {!! $html->selectSelected(3,$queried['status']) !!}>宅配派送中</option>
+                                            <option value="4" {!! $html->selectSelected(4,$queried['status']) !!}>完成</option>
+                                            <option value="5" {!! $html->selectSelected(5,$queried['status']) !!}>取消</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group row ml-2 mt-2">
+                                    <div class="form-group">
+                                        <button type="submit" class="form-control btn btn-danger update-confirm">執行</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
                 </div>
                 <!-- /.card-body -->
             </div>
@@ -79,6 +116,7 @@
                         <table class="table table-bordered">
                             <thead>
                             <tr>
+                                <th>#</th>
                                 <th>訂單編號</th>
                                 <th>寄件人</th>
                                 <th>電話</th>
@@ -94,6 +132,9 @@
                             <tbody>
                                 @foreach($orders as $order)
                                     <tr>
+                                        <td>
+                                            <input type="checkbox" name="order_id[]" form="bulkForm" value="{{$order->id}}">
+                                        </td>
                                         <td><a href="{{route('admin.order-detail.edit',['order_detail'=>$order->id])}}">{{$order->seccode}}</a></td>
                                         <td>{{$order->sender_name}}</td>
                                         <td>{{$order->sender_phone}}</td>
