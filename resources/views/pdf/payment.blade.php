@@ -191,6 +191,13 @@ font-weight: bold;
                 <td colspan="5">蔡宜茵</td>
             </tr>
         @endif
+        <tr>
+            <td colspan="6" class="export-header center-text">備註說明</td>
+        </tr>
+        <tr>
+            <td colspan="6">1. 若超過付款截止日後仍未付款，將會產生倉租費NT$100/每日由客戶自行負擔。<br>
+2. 匯款時請您在備註註明訂單號碼後8碼 ( 如TS220315001-1，請備註 315001-1)，<br>以利帳務人員對帳，謝謝!</td>
+        </tr>
     </table>
 </body>
 </html>

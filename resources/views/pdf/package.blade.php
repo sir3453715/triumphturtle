@@ -42,6 +42,7 @@ font-weight: bold;
         .bg-green {
             background-color: rgb(149, 215, 193);
             font-size: 18px;
+            white-space: nowrap;
         }
 
         .main-sender {
