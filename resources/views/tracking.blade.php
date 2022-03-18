@@ -25,39 +25,48 @@
                 </div>
             </div>
           @else
-              <div class="shipment">
-                  @foreach($orders as $order)
-                      <div class="card mb-2">
-                          <div class="card-top">
-                              <div class="data-header">
-                                  <div class="data-header-top">
-                                      <img class="img-circle" src="/storage/image/list-icon.svg" alt="">
-                                      <div>
-                                          <div class="data-header-title cus-row">
-                                              <p>訂單編號</p>
-                                              <span class="cus-badge cus-badge-dark-gray">{{$order->seccode}}</span>
+              @if(sizeof($orders)!=0)
+                  <div class="shipment">
+                      @foreach($orders as $order)
+                          <div class="card mb-2">
+                              <div class="card-top">
+                                  <div class="data-header">
+                                      <div class="data-header-top">
+                                          <img class="img-circle" src="/storage/image/list-icon.svg" alt="">
+                                          <div>
+                                              <div class="data-header-title cus-row">
+                                                  <p>訂單編號</p>
+                                                  <span class="cus-badge cus-badge-dark-gray">{{$order->seccode}}</span>
+                                              </div>
                                           </div>
                                       </div>
                                   </div>
+                                  <div class="detail-info detail-info-grid">
+                                      <p class="mb-3"><span class="data-label">寄件人:</span>{{$order->sender_name}}</p>
+                                      <p class="mb-3"><span class="data-label">船期狀態:</span>{!! $html->orderStatus($order,'sailing_status') !!}</p>
+                                      <p class="mb-3"><span class="data-label">訂單狀態:</span>{!! $html->orderStatus($order,'order_status') !!}</p>
+                                      <p class="mb-3"><span class="data-label">付款狀態:</span>{!! $html->orderStatus($order,'pay_status') !!}</p>
+                                      <p class="mb-3"><span class="data-label">總箱數:</span>{{count($order->box)}}箱</p>
+                                  </div>
                               </div>
-                              <div class="detail-info detail-info-grid">
-                                  <p class="mb-3"><span class="data-label">寄件人:</span>{{$order->sender_name}}</p>
-                                  <p class="mb-3"><span class="data-label">船期狀態:</span>{!! $html->orderStatus($order,'sailing_status') !!}</p>
-                                  <p class="mb-3"><span class="data-label">訂單狀態:</span>{!! $html->orderStatus($order,'order_status') !!}</p>
-                                  <p class="mb-3"><span class="data-label">付款狀態:</span>{!! $html->orderStatus($order,'pay_status') !!}</p>
-                                  <p class="mb-3"><span class="data-label">總箱數:</span>{{count($order->box)}}箱</p>
+                              <hr>
+                              <div class="card-bottom detail-info">
+                                  <p class="mb-3"><span class="data-label">收件人:</span>{{$order->for_name}}</p>
+                                  <p class="mb-3"><span class="data-label">收件電話:</span>{{$order->for_phone}}</p>
+                                  <p class="mb-3"><span class="data-label">收件地址:</span>{{$order->for_address}}</p>
+                                  <a href="{{route('tracking-captcha',['seccode'=>$order->seccode])}}" class="btn btn-lg btn-solid btn-blue btn-block mt-4" >資料修改</a>
                               </div>
                           </div>
-                          <hr>
-                          <div class="card-bottom detail-info">
-                              <p class="mb-3"><span class="data-label">收件人:</span>{{$order->for_name}}</p>
-                              <p class="mb-3"><span class="data-label">收件電話:</span>{{$order->for_phone}}</p>
-                              <p class="mb-3"><span class="data-label">收件地址:</span>{{$order->for_address}}</p>
-                              <a href="{{route('tracking-captcha',['seccode'=>$order->seccode])}}" class="btn btn-lg btn-solid btn-blue btn-block mt-4" >資料修改</a>
-                          </div>
+                      @endforeach
+                  </div>
+              @else
+                  <div class="edit-box">
+                      <div class="info-text">
+                          <p class="text-danger">無此訂單編號，請您再次確認系統通知信或聯絡客服人員，謝謝</p>
                       </div>
-                  @endforeach
-              </div>
+                  </div>
+
+              @endif
           @endif
       </div>
     </div>
