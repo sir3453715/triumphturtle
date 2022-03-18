@@ -245,11 +245,11 @@ trait BaseHtmlPresenter
                     case 3:
 
                         $text = '<a href="#" id="openTracking" onclick="($('."'#tracking_number_list'".').toggle());">宅配派送中</a>';
-                        $text .= '<ul class="list-unstyled d-hidden" id="tracking_number_list">';
+                        $text .= '<span class="list-unstyled d-hidden" id="tracking_number_list">';
                         foreach ($order->box as $box){
-                            $text .='<li>'.$box->tracking_number.'</li>';
+                            $text .='<span>'.$box->tracking_number.'</span>';
                         }
-                        $text .= '</ul>';
+                        $text .= '</span>';
                         break;
                     case 4:
                         $text = '完成';
