@@ -79,7 +79,7 @@ class HomeController extends Controller
         $queried=['keyword'=>''];
         if($request->get('keyword')) {
             $queried['keyword'] = $request->get('keyword');
-            $sailing_ids = SailingSchedule::where('status','1')->pluck('id');
+            $sailing_ids = SailingSchedule::whereNotNull('id')->pluck('id');
             $orders = Order::whereIn('sailing_id',$sailing_ids)->where(function ($query) use ($queried){
                 $query->orwhere('seccode',$queried['keyword']);
                 $query->orwhere('sender_phone',$queried['keyword']);
