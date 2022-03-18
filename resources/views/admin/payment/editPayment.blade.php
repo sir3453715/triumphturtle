@@ -112,10 +112,10 @@
                                         <span>{{\App\Models\Country::find($billing['sailing']['to_country'])->title}}</span>
                                     </div>
                                     <div class="form-group col-md-2">
-                                        <span> NT${{ $order->total_price}} </span>
+                                        <span> NT${{ number_format($order->sailing->final_price)}} </span>
                                     </div>
                                     <div class="form-group col-md-2">
-                                        <span> NT${{ $order->total_price * $billing['box_count']}} </span>
+                                        <span> NT${{ $order->sailing->final_price * $billing['box_count']}} </span>
                                     </div>
                                 </div>
 {{--                                <div class="form-group row">--}}
@@ -140,7 +140,7 @@
                                         <label> Subtotal: </label>
                                     </div>
                                     <div class="form-group col-md-2">
-                                        <span id="subtotal" data-value="{{$billing['subtotal']}}"> NT${{$billing['subtotal']}} </span>
+                                        <span id="subtotal" data-value="{{$billing['subtotal']}}"> NT${{number_format($billing['subtotal'])}} </span>
                                     </div>
                                 </div>
                                 <div class="form-group row border-top">
@@ -149,7 +149,7 @@
                                         <label> 營業稅5%: </label>
                                     </div>
                                     <div class="form-group col-md-2">
-                                        <span> NT${{$order->tax_price}} </span>
+                                        <span> NT${{number_format($order->tax_price)}} </span>
                                     </div>
                                 </div>
                                 <div class="form-group row border-top">
@@ -158,7 +158,7 @@
                                         <label> Total: </label>
                                     </div>
                                     <div class="form-group col-md-2">
-                                        <span id="total" data-value="{{$order->final_price}}"> NT${{$order->final_price}} </span>
+                                        <span id="total" data-value="{{$order->final_price}}"> NT${{number_format($order->final_price)}} </span>
                                     </div>
                                 </div>
                                 <div class="form-group row border-top">
@@ -225,8 +225,8 @@
             let total = Math.round($('#total').data('value'));
             let otherCount = Math.round($('#other_qty').val()) * Math.round($('#other_unit').val());
             $('#other_total').html('NT$'+otherCount);
-            $('#subtotal').html('NT$'+(subTotal+otherCount));
-            $('#total').html('NT$'+(total+otherCount));
+            $('#subtotal').html('NT$'+(subTotal+otherCount.numberFormat(2, '.', ',')));
+            $('#total').html('NT$'+(total+otherCount.numberFormat(2, '.', ',')));
         });
     </script>
 @endpush
