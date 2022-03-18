@@ -38,6 +38,14 @@
     font-size: 38px;
 }
 
+.border-none {
+            border:none;
+        }
+
+        #cut-line {
+            padding: 75px 0 75px;
+        }
+
 .shipment-number td {
     padding: 20px;
 }
@@ -55,13 +63,10 @@
                 <div class="wrapper-page"></div>
         @endif
             <tr class="center-text">
-                <td colspan="5"><img width="200px" src="{{url('/storage/image/triumphturtle.jpg')}}"></td>
+                <td colspan="5" class="border-none"><img width="200px" src="{{url('/storage/image/triumphturtle.jpg')}}"></td>
             </tr>
             <tr>
-                <td colspan="5">一個運單號貼一箱</td>
-            </tr>
-            <tr class="center-text">
-                <td colspan="5">寄送資訊</td>
+                <td colspan="5" class="border-none">一個運單號貼一箱</td>
             </tr>
             <tr class="export-header center-text">
                 <td colspan="3">運單號 Shipment Code</td>
@@ -72,7 +77,7 @@
                 <td class="" colspan="2">TIT</td>
             </tr>
             <tr>
-                <td colspan="5" class="center-text">============================== 裁切線 ==============================</td>
+                <td colspan="5" id="cut-line" class="center-text border-none">============================== 裁切線 ==============================</td>
             </tr>
         @endforeach
     </table>
