@@ -74,12 +74,16 @@
                                     </div>
                                     <div class="form-group col-md-3">
                                         <label for="shipment_use">目的</label>
-                                        <input type="text" class="form-control" name="shipment_use" id="shipment_use">
+                                        <select name="shipment_use" id="shipment_use" class="form-control form-required" >
+                                            <option value="" hidden>請選擇目的</option>
+                                            <option value="行李後送">行李後送</option>
+                                            <option value="私人行李">私人行李</option>
+                                            <option value="商業貨">商業貨</option>
+                                        </select>
                                     </div>
                                     <div class="form-group col-md-3">
                                         <label for="invoice">發票</label>
                                         <select id="invoice" name="invoice" class="form-control form-required">
-                                            <option value="1">不需要</option>
                                             <option value="2">二聯</option>
                                             <option value="3">三聯</option>
                                         </select>

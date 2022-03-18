@@ -226,7 +226,7 @@ class OrderDetailController extends Controller
             'invoice' => $request->get('invoice'),
             'total_price' => $total_price,
             'tax_price' => $tax_price,
-            'final_price' => $final_price,
+            'final_price' => round($final_price),
         ];
         $order->fill($data);
         ActionLog::create_log($order);
