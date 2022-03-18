@@ -44,7 +44,7 @@
                                   <div class="detail-info detail-info-grid">
                                       <p class="mb-3"><span class="data-label">寄件人:</span>{{$order->sender_name}}</p>
                                       <p class="mb-3"><span class="data-label">船期狀態:</span>{!! $html->orderStatus($order,'sailing_status') !!}</p>
-                                      <p class="mb-3"><span class="data-label">訂單狀態:</span>{!! $html->orderStatus($order,'order_status') !!}</p>
+                                      <p class="mb-3 w-100"><span class="data-label">訂單狀態:</span>{!! $html->orderStatus($order,'order_status') !!}</p>
                                       <p class="mb-3"><span class="data-label">付款狀態:</span>{!! $html->orderStatus($order,'pay_status') !!}</p>
                                       <p class="mb-3"><span class="data-label">總箱數:</span>{{count($order->box)}}箱</p>
                                   </div>
