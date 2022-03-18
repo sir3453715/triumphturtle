@@ -38,7 +38,7 @@
           <div class="col-md-4">
             <!-- 請選擇目的國家 -->
             <select class="form-control form-control-lg" name="to_country">
-                <option value="" hidden>請選擇出發國家</option>
+                <option value="" hidden>請選擇目的地國家</option>
                 @foreach($countries as $country)
                     <option value="{{$country->id}}" {!! $html->selectSelected($country->id,$queried['to_country']) !!}>{{$country->title}}-{{$country->en_title}}</option>
                 @endforeach
@@ -71,8 +71,7 @@
                   </div>
                   <div class="detail-info">
                     <p class="mb-3">
-                        <span class="data-label">成團單價:</span>
-                        <span class="unit-price">NT$ {{number_format($sailing->price)}}</span> / 箱
+                        {!! $html->nowSailingPrice($sailing) !!}
                     </p>
                       {!! $html->sailingPrice($sailing) !!}
                   </div>
