@@ -102,12 +102,15 @@ class SailingScheduleController extends Controller
             $box_count = OrderBox::whereIn('order_id',$order_ids)->count();
             $defaultPrice = $sailing->price;
             $interval = intval(floor($box_count/$box_interval));
-            for ($i = 1;$i<=$interval;$i++){
-                $defaultPrice = ($defaultPrice*$sailing->discount);//每箱單價
+            if ($interval > '1') {
+                for ($i = 1;$i<=$interval;$i++){
+                    $defaultPrice = $defaultPrice*$sailing->discount;//每箱單價
+                }
+                if($defaultPrice<=$sailing->min_price){
+                    $defaultPrice = $sailing->min_price;
+                }
             }
-            if($defaultPrice<=$sailing->min_price){
-                $defaultPrice = $sailing->min_price;
-            }
+            $defaultPrice = round($defaultPrice);
             $data['final_price'] = $defaultPrice;
             foreach ($order_ids as $order_id){
                 $price = $defaultPrice;//預設為每箱單價
@@ -139,7 +142,7 @@ class SailingScheduleController extends Controller
                     'email'=>$order->sender_email,
                     'subject'=>'【海龜集運】訂單編號 #'.$order->seccode.' 航班準備中',
                     'for_title'=>$order->sender_name,
-                    'msg'=>'訂單編號: #'.$order->seccode.'  狀態更新通知 - 航班準備中！<br/><br/><span style="color: red;">最終優惠價格: '.$defaultPrice.' TWD/箱</span><br/><br/>提醒您請於入倉截止日 '.$sailing->parcel_deadline.' 前將運單列印後貼至包裹上，並寄送至倉庫。<br/><br/>您也可以至 <a href="'.route('tracking').'">訂單查詢頁面</a> 查看訂單詳細資訊。',
+                    'msg'=>'訂單編號: #'.$order->seccode.'  狀態更新通知 - 航班準備中！<br/><br/><span style="color: red;">最終優惠價格: '.number_format($defaultPrice).' TWD/箱</span><br/><br/>提醒您請於入倉截止日 '.$sailing->parcel_deadline.' 前將運單列印後貼至包裹上，並寄送至倉庫。<br/><br/>您也可以至 <a href="'.route('tracking').'">訂單查詢頁面</a> 查看訂單詳細資訊。',
                 ];
                 dispatch(new SendMailQueueJob($mailData));
             }

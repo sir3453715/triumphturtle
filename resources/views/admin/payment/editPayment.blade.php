@@ -115,7 +115,7 @@
                                         <span> NT${{ number_format($order->sailing->final_price)}} </span>
                                     </div>
                                     <div class="form-group col-md-2">
-                                        <span> NT${{ $order->sailing->final_price * $billing['box_count']}} </span>
+                                        <span> NT${{ number_format($billing['itemTotal']) }} </span>
                                     </div>
                                 </div>
 {{--                                <div class="form-group row">--}}

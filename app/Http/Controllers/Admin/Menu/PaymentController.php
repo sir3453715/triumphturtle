@@ -76,6 +76,8 @@ class PaymentController extends Controller
         $billing['sailing']=$order->sailing->toArray();
         $billing['box_count'] = count($order->box);
         $billing['subtotal'] = $order->sailing->final_price * count($order->box);
+        $billing['itemTotal']= round($order->sailing->final_price * $billing['box_count']);
+
 
         return view('admin.payment.editPayment',[
             'order'=>$order,

@@ -162,13 +162,16 @@ trait BaseHtmlPresenter
             if ($box_count >= $minimum){
                 $price = $sailing->price;
                 $interval = intval(floor($box_count/$box_interval));
-                $margin = $box_count%$box_interval;
-                for ($i = 0;$i<=$interval;$i++){
-                    $price = ($price*$sailing->discount);
+                $margin =$box_interval - ($box_count%$box_interval);
+                if ($interval > '1'){
+                    for ($i = 0;$i<$interval;$i++){
+                        $price = ($price*$sailing->discount);
+                    }
+                    if($price<=$sailing->min_price){
+                        $price = $sailing->min_price;
+                    }
                 }
-                if($price<=$sailing->min_price){
-                    $price = $sailing->min_price;
-                }
+                $price = round($price);
                 $html = '<div><img src="/storage/image/pack-icon.svg" alt="">已成團！差 <span class="data-number">'.$margin.'</span>箱即可享有優惠</div>
                             <div class="data-extra-info"><span>NT$ '.number_format($price).'</span> / 箱</div>';
             }else{
@@ -178,11 +181,15 @@ trait BaseHtmlPresenter
         }else{
             $defaultPrice = $sailing->price;
             $interval = intval(floor($box_count/$box_interval));
-            for ($i = 1;$i<=$interval;$i++){
-                $price = ($defaultPrice*$sailing->discount);
-            }
-            if($price<=$sailing->min_price){
-                $price = $sailing->min_price;
+            if ($interval == '1'){
+                $price = $defaultPrice;
+            }else{
+                for ($i = 1;$i<$interval;$i++){
+                    $price = ($defaultPrice*$sailing->discount);
+                }
+                if($price<=$sailing->min_price){
+                    $price = $sailing->min_price;
+                }
             }
             $percentage = (($defaultPrice-$price)/$defaultPrice)*100;
             $html = '<div><img src="/storage/image/pack-icon.svg" alt="">已成團！此團最終優惠折扣為</div>
@@ -201,12 +208,15 @@ trait BaseHtmlPresenter
         $html = '';
         $price = $sailing->price;
         $interval = intval(floor($box_count/$box_interval));
-        for ($i = 1;$i<=$interval;$i++){
-            $price = ($price*$sailing->discount);
+        if ($interval > '1') {
+            for ($i = 1; $i < $interval; $i++) {
+                $price = ($price * $sailing->discount);
+            }
+            if ($price <= $sailing->min_price) {
+                $price = $sailing->min_price;
+            }
         }
-        if($price<=$sailing->min_price){
-            $price = $sailing->min_price;
-        }
+        $price = round($price);
         $html = '<span class="data-label">目前單價:</span><span class="unit-price">NT$ '.number_format($price).'</span> / 箱';
         return $html;
 
