@@ -46,7 +46,7 @@ class HomeController extends Controller
             $sailings = $sailings->where('to_country',$request->get('to_country'));
         }
 
-        $sailings = $sailings->paginate(6);
+        $sailings = $sailings->orderBy('status','ASC')->orderBy('statement_time','ASC')->paginate(6);
         return view('home',[
             'queried'=>$queried,
             'countries'=>$countries,
