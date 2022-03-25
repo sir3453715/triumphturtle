@@ -37,14 +37,16 @@
                 <p class="mb-3"><span class="data-label">地址:</span>{{$warehouse->address}}
                 </p>
               </div>
-              <div class="location-link">
-                  @if($warehouse->local)
-                      <a href="{{$warehouse->local}}" target="_blank" class="btn-link btn-link-blue">當地宅配資訊</a>
-                  @endif
-                  @if($warehouse->link)
-                      <a href="{{$warehouse->link}}" target="_blank" class="btn-link btn-link-orange">紙箱購買連結</a>
-                  @endif
-              </div>
+                @if($warehouse->local)
+                  <div class="location-link">
+                          <a href="{{$warehouse->local}}" target="_blank" class="btn-link btn-link-blue">當地宅配資訊</a>
+                  </div>
+                @endif
+                @if($warehouse->link)
+                  <div class="location-link">
+                          <a href="{{$warehouse->link}}" target="_blank" class="btn-link btn-link-orange">紙箱購買連結</a>
+                  </div>
+                @endif
             </div>
         </div>
         @endforeach
