@@ -90,15 +90,15 @@
                                     </div>
                                     <div class="form-group col-md-2">
                                         <label for="total_price">訂單總金額(不含稅)</label>
-                                        <input type="text" class="form-control form-required" name="total_price" id="total_price" value="">
+                                        <input type="text" class="form-control form-required" name="total_price" id="total_price" value="" readonly>
                                     </div>
                                     <div class="form-group col-md-2">
                                         <label for="total_price">營業稅金額</label>
-                                        <input type="text" class="form-control form-required" name="tax_price" id="tax_price" value="">
+                                        <input type="text" class="form-control form-required" name="tax_price" id="tax_price" value="" readonly>
                                     </div>
                                     <div class="form-group col-md-2">
                                         <label for="total_price">最後總金額</label>
-                                        <input type="text" class="form-control form-required" name="final_price" id="final_price" value="">
+                                        <input type="text" class="form-control form-required" name="final_price" id="final_price" value="" readonly>
                                     </div>
                                 </div>
                                 <div class="form-group row border-top">

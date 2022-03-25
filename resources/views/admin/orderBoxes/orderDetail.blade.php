@@ -26,19 +26,19 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col filter-form">
-                            <form class="form-inline filter">
+                            <form class="filter">
                                 <div class="form-group row">
                                     <div class="form-group mr-3">
                                         <label for="seccode">訂單編號</label>
-                                        <input type="text" name="seccode" class="form-control ml-3" value="{{(isset($queried['seccode'])?$queried['seccode']:'')}}">
+                                        <input type="text" name="seccode" class="form-control" value="{{(isset($queried['seccode'])?$queried['seccode']:'')}}">
                                     </div>
                                     <div class="form-group mr-3">
                                         <label for="sender">寄件人姓名/寄件人電話</label>
-                                        <input type="text" name="sender" class="form-control ml-3" placeholder="姓名，電話" value="{{(isset($queried['sender'])?$queried['sender']:'')}}">
+                                        <input type="text" name="sender" class="form-control" placeholder="姓名，電話" value="{{(isset($queried['sender'])?$queried['sender']:'')}}">
                                     </div>
                                     <div class="form-group mr-3">
                                         <label for="pay_status">付款狀態</label>
-                                        <select class="form-control ml-3" name="pay_status" id="pay_status" >
+                                        <select class="form-control" name="pay_status" id="pay_status" >
                                             <option value="">請選擇</option>
                                             <option value="1" {!! $html->selectSelected(1,$queried['pay_status']) !!}>未付款</option>
                                             <option value="2" {!! $html->selectSelected(2,$queried['pay_status']) !!}>已出帳</option>
@@ -47,7 +47,7 @@
                                     </div>
                                     <div class="form-group mr-3">
                                         <label for="status">訂單狀態</label>
-                                        <select class="form-control ml-3" name="status" id="status" >
+                                        <select class="form-control" name="status" id="status" >
                                             <option value="">請選擇</option>
                                             <option value="1" {!! $html->selectSelected(1,$queried['status']) !!}>未入庫</option>
                                             <option value="2" {!! $html->selectSelected(2,$queried['status']) !!}>已入庫</option>
@@ -56,14 +56,21 @@
                                             <option value="5" {!! $html->selectSelected(5,$queried['status']) !!}>取消</option>
                                         </select>
                                     </div>
-                                </div>
-                                <div class="form-group row ml-2">
-                                    <div class="form-group">
-                                        <button type="submit" class="form-control">篩選</button>
+                                    <div class="form-group mr-3">
+                                        <label for="sailing_id">航班</label>
+                                        <select class="form-control" name="sailing_id" id="sailing_id" >
+                                            <option value="">請選擇</option>
+                                            @foreach($sailings as $sailing)
+                                                <option value="{{$sailing->id}}" {!! $html->selectSelected($sailing->id,$queried['sailing_id']) !!}>{{$sailing->title}}</option>
+                                            @endforeach
+                                        </select>
                                     </div>
-                                </div>
-                                <div class="ml-auto">
-                                    <a href="{{route('admin.order-detail.create')}}"><button type="button" class="btn btn-primary">建立</button></a>
+                                    <div class="form-group align-self-center">
+                                        <button type="submit" class="form-control btn btn-outline-dark">篩選</button>
+                                    </div>
+                                    <div class="ml-auto">
+                                        <a href="{{route('admin.order-detail.create')}}"><button type="button" class="btn btn-primary">建立</button></a>
+                                    </div>
                                 </div>
                             </form>
                         </div>
@@ -123,7 +130,11 @@
                         <table class="table table-bordered">
                             <thead>
                             <tr>
-                                <th>#</th>
+                                <th>
+                                    <button type="button" class="btn btn-sm btn-outline-dark" id="all_check" data-tag="check">
+                                        <i class="fa fa-check"></i>
+                                    </button>
+                                </th>
                                 <th>訂單編號</th>
                                 <th>寄件人</th>
                                 <th>電話</th>
@@ -140,7 +151,7 @@
                                 @foreach($orders as $order)
                                     <tr>
                                         <td>
-                                            <input type="checkbox" name="order_id[]" form="bulkForm" value="{{$order->id}}">
+                                            <input class="chk" type="checkbox" name="order_id[]" form="bulkForm" value="{{$order->id}}">
                                         </td>
                                         <td><a href="{{route('admin.order-detail.edit',['order_detail'=>$order->id])}}">{{$order->seccode}}</a></td>
                                         <td>{{$order->sender_name}}</td>
@@ -229,6 +240,18 @@
             document.execCommand("copy");
             document.body.removeChild(sampleTextarea);
             alert('已複製連結!:'+$link);
+        });
+        $('#all_check').on('click',function (){
+            var tag = $(this).data('tag');
+            if(tag === 'check'){
+                $(".chk").prop("checked",true);
+                $(this).data('tag','uncheck');
+                $(this).html('<i class="fa fa-times"></i>');
+            }else if(tag === 'uncheck'){
+                $(".chk").prop("checked",false);
+                $(this).data('tag','check');
+                $(this).html('<i class="fa fa-check"></i>');
+            }
         });
     </script>
 @endpush

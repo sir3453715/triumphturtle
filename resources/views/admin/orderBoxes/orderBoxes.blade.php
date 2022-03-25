@@ -26,11 +26,11 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col filter-form">
-                            <form class="form-inline filter">
+                            <form class="filter">
                                 <div class="form-group row">
                                     <div class="form-group mr-3">
                                         <label for="sailing_id">船期</label>
-                                        <select class="form-control ml-3 select2" name="sailing_id" id="sailing_id" >
+                                        <select class="form-control select2" name="sailing_id" id="sailing_id" >
                                             <option value="">請選擇</option>
                                             @foreach($sailings as $sailing)
                                                 <option value="{{$sailing->id}}" {!! $html->selectSelected($sailing->id,$queried['sailing_id']) !!}>{{$sailing->title}}</option>
@@ -39,7 +39,7 @@
                                     </div>
                                     <div class="form-group mr-3">
                                         <label for="from_country">出口國家</label>
-                                        <select class="form-control ml-3 select2" name="from_country" id="from_country" >
+                                        <select class="form-control select2" name="from_country" id="from_country" >
                                             <option value="">請選擇</option>
                                             @foreach($countries as $country)
                                                 <option value="{{$country->id}}" {!! $html->selectSelected($country->id,$queried['from_country']) !!}>{{$country->title}}</option>
@@ -48,16 +48,14 @@
                                     </div>
                                     <div class="form-group mr-3">
                                         <label for="seccode">訂單編號</label>
-                                        <input type="text" name="seccode" class="form-control ml-3" value="{{(isset($queried['seccode'])?$queried['seccode']:'')}}">
+                                        <input type="text" name="seccode" class="form-control" value="{{(isset($queried['seccode'])?$queried['seccode']:'')}}">
                                     </div>
                                     <div class="form-group mr-3">
                                         <label for="sender">主寄件人</label>
-                                        <input type="text" name="sender" class="form-control ml-3" placeholder="姓名，電話，信箱" value="{{(isset($queried['sender'])?$queried['sender']:'')}}">
+                                        <input type="text" name="sender" class="form-control" placeholder="姓名，電話，信箱" value="{{(isset($queried['sender'])?$queried['sender']:'')}}">
                                     </div>
-                                </div>
-                                <div class="form-group row ml-2 mt-2">
-                                    <div class="form-group">
-                                        <button type="submit" class="form-control">篩選</button>
+                                    <div class="form-group align-self-center">
+                                        <button type="submit" class="form-control btn btn-outline-dark">篩選</button>
                                     </div>
                                 </div>
                             </form>
