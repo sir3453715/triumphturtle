@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\Menu;
 
 use App\Exports\DemoExport;
+use App\Exports\OrdersExcelExport;
 use App\Http\Controllers\Controller;
 use App\Jobs\SendMailQueueJob;
 use App\Models\ActionLog;
@@ -27,7 +28,7 @@ class OrderDetailController extends Controller
     public function index(Request $request)
     {
         $orders = Order::whereNotNull('id');
-        $queried=['seccode'=>'','sender'=>'','pay_status'=>'','status'=>''];
+        $queried=['seccode'=>'','sender'=>'','pay_status'=>'','status'=>'','sailing_id'=>''];
         if($request->get('seccode')) {
             $queried['seccode'] = $request->get('seccode');
             $orders = $orders->where('seccode','LIKE','%'.$request->get('seccode').'%');
@@ -47,9 +48,16 @@ class OrderDetailController extends Controller
                 $query->orwhere('sender_phone','LIKE','%'.$queried['sender'].'%');
             });
         }
+        if($request->get('sailing_id')) {
+            $queried['sailing_id'] = $request->get('sailing_id');
+            $orders = $orders->where('sailing_id','=',$request->get('sailing_id'));
+        }
         $orders = $orders->paginate(30);
+
+        $sailings = SailingSchedule::all();
         return view('admin.orderBoxes.orderDetail',[
             'orders'=>$orders,
+            'sailings'=>$sailings,
             'queried'=>$queried,
         ]);
     }
@@ -100,6 +108,15 @@ class OrderDetailController extends Controller
         }else{
             $captcha = null;
         }
+        $total_price = 0; $tax_price = 0;
+        foreach ($request->get('box_price') as $eachPrice){
+            $total_price += $eachPrice;
+        }
+        $final_price = $total_price;
+        if($request->get('invoice') != 1){
+            $tax_price = $total_price * 0.05;
+            $final_price += $tax_price;
+        }
 
         $data = [
             'sailing_id' => $request->get('sailing_id'),
@@ -110,7 +127,6 @@ class OrderDetailController extends Controller
             'parent_id'=>0,
             'status' => $request->get('status'),
             'pay_status' => $request->get('pay_status'),
-            'total_price' => $request->get('total_price'),
             'shipment_use' => $request->get('shipment_use'),
             'sender_name' => $request->get('sender_name'),
             'sender_phone' => $request->get('sender_phone'),
@@ -125,6 +141,9 @@ class OrderDetailController extends Controller
             'for_taxid' => $request->get('for_taxid'),
             'invoice' => $request->get('invoice'),
             'captcha'=>$captcha,
+            'total_price' => $total_price,
+            'tax_price' => $tax_price,
+            'final_price' => round($final_price),
         ];
         $order = Order::create($data);
         ActionLog::create_log($order,'create');
@@ -471,5 +490,25 @@ class OrderDetailController extends Controller
         return view('admin.orderBoxes.orderImport',[
             'orders'=>[''],
         ]);
+    }
+
+    public function excelPackage(Request $request,$id){
+        $parentOrder = Order::find($id);
+        $order_data = $parentOrder->toArray();
+        $order_data['fromCountry']=$parentOrder->sailing->fromCountry->title.' '.$parentOrder->sailing->fromCountry->en_title;
+        $order_data['toCountry']=$parentOrder->sailing->toCountry->title.' '.$parentOrder->sailing->toCountry->en_title;
+        $packageOrderIDs = Order::where('serial_number',$parentOrder['serial_number'])->orderBy('parent_id','ASC')->pluck('id')->toArray();
+        $packageBoxes = OrderBox::whereIn('order_id',$packageOrderIDs)->orderBy('box_seccode','ASC')->get();
+        foreach ($packageBoxes as $packageBox){
+            $order_data['OrderBoxes'][$packageBox->id]=$packageBox->toArray();
+            $order_data['OrderBoxes'][$packageBox->id]['OrderBoxesItems']=OrderBoxItem::where('box_id',$packageBox->id)->orderBy('id','ASC')->get()->toArray();
+            $total_value = 0;
+            foreach ($order_data['OrderBoxes'][$packageBox->id]['OrderBoxesItems'] as $key => $boxesItem){
+                $total_value += ($boxesItem['unit_price']*$boxesItem['item_num']);
+            }
+            $order_data['OrderBoxes'][$packageBox->id]['total_value'] = $total_value;
+        }
+
+        return Excel::download(new OrdersExcelExport($order_data),'宅配資訊'.date('Y-m-d_H_i_s'). '.xls');
     }
 }

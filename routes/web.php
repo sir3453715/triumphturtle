@@ -58,6 +58,7 @@ Route::get('pdf-payment/{id}', 'PdfExportController@pdfPayment')->name('pdf-paym
 
 
 
+Route::get('excel-package/{id}', 'Admin\Menu\OrderDetailController@excelPackage')->name('excel-package');//
 //Ajax
 Route::get('ajaxSailingData', 'HomeController@ajaxSailingData');
 Route::post('updateToken', 'HomeController@updateToken');

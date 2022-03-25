@@ -56,7 +56,7 @@ font-weight: bold;
         <tr>
             <td colspan="1" class="font-title">For account and risk of Messrs</td>
             <td colspan="7">陳燕樺</td>
-        </tr> 
+        </tr>
         <tr>
             <td colspan="1" class="font-title">Address</td>
             <td colspan="7">806 高雄市前鎮區民權二路522路20號</td>
@@ -73,7 +73,7 @@ font-weight: bold;
         <tr>
             <td colspan="1" class="font-title">purpose</td>
             <td colspan="7">行李後送</td>
-        </tr> 
+        </tr>
         <tr class="export-header center-text">
             <td colspan="8">list detail</td>
         </tr>
