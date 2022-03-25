@@ -52,7 +52,7 @@ class OrderDetailController extends Controller
             $queried['sailing_id'] = $request->get('sailing_id');
             $orders = $orders->where('sailing_id','=',$request->get('sailing_id'));
         }
-        $orders = $orders->paginate(30);
+        $orders = $orders->orderBy('created_at','DESC')->paginate(30);
 
         $sailings = SailingSchedule::all();
         return view('admin.orderBoxes.orderDetail',[
@@ -413,8 +413,8 @@ class OrderDetailController extends Controller
             return Excel::download(new DemoExport($data,$title,$headings),'宅配資訊'.date('Y-m-d_H_i_s'). '.xls');
         }
         if($submit == 'action'){
+            $orders = Order::whereIn('id',$order_ids)->get();
             if($request->get('pay_status')){
-                $orders = Order::whereIn('id',$order_ids)->get();
                 foreach ($orders as $order){
                     $data = ['pay_status'=>$request->get('pay_status')];
 

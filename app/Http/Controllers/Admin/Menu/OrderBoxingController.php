@@ -46,7 +46,7 @@ class OrderBoxingController extends Controller
         $countries = Country::all();
         $sailings = SailingSchedule::all();
 
-        $orders = $orders->paginate(30);
+        $orders = $orders->orderBy('created_at','DESC')->paginate(30);
         return view('admin.orderBoxes.orderBoxes',[
             'orders'=>$orders,
             'queried'=>$queried,
