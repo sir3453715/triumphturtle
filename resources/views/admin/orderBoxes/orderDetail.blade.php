@@ -56,15 +56,15 @@
                                             <option value="5" {!! $html->selectSelected(5,$queried['status']) !!}>取消</option>
                                         </select>
                                     </div>
-                                    <div class="form-group mr-3">
-                                        <label for="sailing_id">航班</label>
-                                        <select class="form-control" name="sailing_id" id="sailing_id" >
-                                            <option value="">請選擇</option>
-                                            @foreach($sailings as $sailing)
-                                                <option value="{{$sailing->id}}" {!! $html->selectSelected($sailing->id,$queried['sailing_id']) !!}>{{$sailing->title}}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
+{{--                                    <div class="form-group mr-3">--}}
+{{--                                        <label for="sailing_id">航班</label>--}}
+{{--                                        <select class="form-control" name="sailing_id" id="sailing_id" >--}}
+{{--                                            <option value="">請選擇</option>--}}
+{{--                                            @foreach($sailings as $sailing)--}}
+{{--                                                <option value="{{$sailing->id}}" {!! $html->selectSelected($sailing->id,$queried['sailing_id']) !!}>{{$sailing->title}}</option>--}}
+{{--                                            @endforeach--}}
+{{--                                        </select>--}}
+{{--                                    </div>--}}
                                     <div class="form-group align-self-center">
                                         <button type="submit" class="form-control btn btn-outline-dark">篩選</button>
                                     </div>
