@@ -159,29 +159,35 @@ trait BaseHtmlPresenter
         $box_count = OrderBox::whereIn('order_id',$order_ids)->count();
         $html = '';
         if ($status == 1){
-            if ($box_count >= $minimum){
+            if ($box_count >= $minimum){ // 滿足最低成團
                 $price = $sailing->price;
-                $interval = intval(floor($box_count/$box_interval));
+                $interval = intval(floor(($box_count-$minimum)/$box_interval));
                 $margin =$box_interval - ($box_count%$box_interval);
-                if ($interval > '1'){
+                if ($interval > '1'){ // 滿足折扣級距
                     for ($i = 0;$i<$interval;$i++){
                         $price = ($price*$sailing->discount);
                     }
-                    if($price<=$sailing->min_price){
+                    if($price<=$sailing->min_price){ // 達到最低價
                         $price = $sailing->min_price;
-                    }
-                }
-                $price = round($price);
-                $html = '<div><img src="/storage/image/pack-icon.svg" alt="">已成團！差 <span class="data-number">'.$margin.'</span>箱即可享有優惠</div>
+                        $html = '<div><img src="/storage/image/pack-icon.svg" alt="">已成團！ 已達到最低優惠價 <div class="data-extra-info"><span>NT$ '.number_format($price).'</span> / 箱</div></div>';
+                    }else{//不滿最低價
+                        $price = round($price);
+                        $html = '<div><img src="/storage/image/pack-icon.svg" alt="">已成團！差 <span class="data-number">'.$margin.'</span>箱即可享有優惠</div>
                             <div class="data-extra-info"><span>NT$ '.number_format($price).'</span> / 箱</div>';
-            }else{
+                    }
+                }else{// 不滿折扣級距
+                    $price = round($price);
+                    $html = '<div><img src="/storage/image/pack-icon.svg" alt="">已成團！差 <span class="data-number">'.$margin.'</span>箱即可享有優惠</div>
+                            <div class="data-extra-info"><span>NT$ '.number_format($price).'</span> / 箱</div>';
+                }
+            }else{ // 不滿足最低成團
                 $num = $minimum - $box_count;
                 $html = '<div><img src="/storage/image/pack-icon.svg" alt="">差 <span class="data-number">'.$num.'</span>箱即可成團</div>';
             }
         }else{
             $defaultPrice = $sailing->price;
-            $interval = intval(floor($box_count/$box_interval));
-            if ($interval == '1'){
+            $interval = intval(floor(($box_count-$minimum)/$box_interval));
+            if ($interval <= '1'){
                 $price = $defaultPrice;
             }else{
                 for ($i = 1;$i<$interval;$i++){
@@ -205,9 +211,8 @@ trait BaseHtmlPresenter
         $box_interval = $sailing->box_interval;
         $order_ids = Order::where('sailing_id',$sailing_id)->pluck('id');
         $box_count = OrderBox::whereIn('order_id',$order_ids)->count();
-        $html = '';
         $price = $sailing->price;
-        $interval = intval(floor($box_count/$box_interval));
+        $interval = intval(floor(($box_count-$minimum)/$box_interval));
         if ($interval > '1') {
             for ($i = 1; $i < $interval; $i++) {
                 $price = ($price * $sailing->discount);
