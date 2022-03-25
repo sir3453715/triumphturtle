@@ -72,23 +72,23 @@
                     <div class="row">
                         <div class="form-group col-6">
                             <label for="for_name">姓名*</label>
-                            <input type="text" class="form-control form-required" name="for_name" id="for_name" placeholder="請填寫中文姓名">
+                            <input type="text" class="form-control " name="for_name" id="for_name" placeholder="請填寫中文姓名">
                         </div>
                         <div class="form-group col-6">
                             <label for="for_phone">聯絡電話*</label>
-                            <input type="text" class="form-control form-required" name="for_phone" id="for_phone" placeholder="聯絡電話">
+                            <input type="text" class="form-control " name="for_phone" id="for_phone" placeholder="聯絡電話">
                         </div>
                         <div class="form-group col-12">
                             <label for="for_address">地址*</label>
-                            <input type="text" class="form-control form-required" name="for_address" id="for_address" placeholder="請填寫中文地址">
+                            <input type="text" class="form-control " name="for_address" id="for_address" placeholder="請填寫中文地址">
                         </div>
                         <div class="form-group col-6 d-hidden">
                             <label for="for_company">公司名稱*</label>
-                            <input type="text" class="form-control hidden-form-required" name="for_company" id="for_company" placeholder="公司名稱跟統編是商業貨才顯示">
+                            <input type="text" class="form-control " name="for_company" id="for_company" placeholder="公司名稱跟統編是商業貨才顯示">
                         </div>
                         <div class="form-group col-6 d-hidden">
                             <label for="for_taxid">統編*</label>
-                            <input type="text" class="form-control hidden-form-required" name="for_taxid" id="for_taxid" placeholder="公司名稱跟統編是商業貨才顯示">
+                            <input type="text" class="form-control " name="for_taxid" id="for_taxid" placeholder="公司名稱跟統編是商業貨才顯示">
                         </div>
                     </div>
                 </fieldset>
