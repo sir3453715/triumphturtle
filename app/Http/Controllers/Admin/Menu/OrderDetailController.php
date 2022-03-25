@@ -303,9 +303,9 @@ class OrderDetailController extends Controller
                 'is_admin'=>false,
                 'template'=>'email-order-info',
                 'email'=>$order->sender_email,
-                'subject'=>'【海龜集運】訂單編號 #'.$order->seccode.' 包裹已入倉',
+                'subject'=>'【海龜集運】'.$order->seccode.' 包裹已入倉',
                 'for_title'=>$order->sender_name,
-                'msg'=>'訂單編號: #'.$order->seccode.'  狀態更新通知 - 您的包裹已入倉！<br/><br/>您也可以至 <a href="'.route('tracking').'">訂單查詢頁面</a> 查看訂單詳細資訊。',
+                'msg'=>'訂單編號: '.$order->seccode.'  狀態更新通知 - 您的包裹已入倉！<br/><br/>您也可以至 <a href="'.route('tracking').'">訂單查詢頁面</a> 查看訂單詳細資訊。',
             ];
             dispatch(new SendMailQueueJob($mailData));
         }
@@ -319,7 +319,7 @@ class OrderDetailController extends Controller
                 'email'=>$order->sender_email,
                 'subject'=>'【海龜集運】宅配單號已更新',
                 'for_title'=>$order->sender_name,
-                'msg'=>'訂單編號: #'.$order->seccode.'  狀態更新通知 - 宅配單號已更新！<br/><br/>您也可以至 <a href="'.route('tracking').'">訂單查詢頁面</a> 查看訂單詳細資訊。',
+                'msg'=>'訂單編號: '.$order->seccode.'  狀態更新通知 - 宅配單號已更新！<br/><br/>您也可以至 <a href="'.route('tracking').'">訂單查詢頁面</a> 查看訂單詳細資訊。',
             ];
             dispatch(new SendMailQueueJob($mailData));
         }
@@ -426,7 +426,7 @@ class OrderDetailController extends Controller
                             'email' => $order->sender_email,
                             'subject' => '【海龜集運】您的款項已確認',
                             'for_title' => $order->sender_name,
-                            'msg' => '訂單編號: #' . $order->seccode . '<br/><br/>您的訂單已確認付款，我們會盡快為您安排出貨，您可隨時至<a href="' . route('tracking') . '">訂單查詢頁面</a> 查看最新的寄送進度，謝謝！',
+                            'msg' => '訂單編號: ' . $order->seccode . '<br/><br/>您的訂單已確認付款，我們會盡快為您安排出貨，您可隨時至<a href="' . route('tracking') . '">訂單查詢頁面</a> 查看最新的寄送進度，謝謝！',
                         ];
                         dispatch(new SendMailQueueJob($mailData));
                     }
@@ -448,7 +448,7 @@ class OrderDetailController extends Controller
                             'email'=>$order->sender_email,
                             'subject'=>'【海龜集運】訂單編號 #'.$order->seccode.' 包裹已入倉',
                             'for_title'=>$order->sender_name,
-                            'msg'=>'訂單編號: #'.$order->seccode.'  狀態更新通知 - 您的包裹已入倉！<br/><br/>您也可以至 <a href="'.route('tracking').'">訂單查詢頁面</a> 查看訂單詳細資訊。',
+                            'msg'=>'訂單編號: '.$order->seccode.'  狀態更新通知 - 您的包裹已入倉！<br/><br/>您也可以至 <a href="'.route('tracking').'">訂單查詢頁面</a> 查看訂單詳細資訊。',
                         ];
                         dispatch(new SendMailQueueJob($mailData));
                     }

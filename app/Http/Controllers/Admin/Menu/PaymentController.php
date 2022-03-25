@@ -137,7 +137,7 @@ class PaymentController extends Controller
         /** 用戶收信-請款通知 */
         $to = ['email'=>$order->sender_email,'name'=>$order->sender_name];
         $data = [
-            'msg'=>'訂單編號: #'.$order->seccode.' <br/><br/>附件為此票寄送的帳單，再請您儘速確認付款，以利加速您出貨的進度。<br/>對於帳單有任何疑問，歡迎與我們客服直接聯絡，謝謝！<br/>',
+            'msg'=>'訂單編號: '.$order->seccode.' <br/><br/>附件為此票寄送的帳單，再請您儘速確認付款，以利加速您出貨的進度。<br/>對於帳單有任何疑問，歡迎與我們客服直接聯絡，謝謝！<br/>',
             'for_title'=>$order->sender_name,
         ];
         //寄出信件
@@ -177,7 +177,7 @@ class PaymentController extends Controller
                 'email'=>$order->sender_email,
                 'subject'=>'【海龜集運】您的款項已確認',
                 'for_title'=>$order->sender_name,
-                'msg'=>'訂單編號: #'.$order->seccode.'<br/><br/>您的訂單已確認付款，我們會盡快為您安排出貨，您可隨時至<a href="'.route('tracking').'">訂單查詢頁面</a> 查看最新的寄送進度，謝謝！',
+                'msg'=>'訂單編號: '.$order->seccode.'<br/><br/>您的訂單已確認付款，我們會盡快為您安排出貨，您可隨時至<a href="'.route('tracking').'">訂單查詢頁面</a> 查看最新的寄送進度，謝謝！',
             ];
             dispatch(new SendMailQueueJob($mailData));
 
