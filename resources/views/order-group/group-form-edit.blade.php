@@ -176,8 +176,8 @@
                     <div class="form-group col-12">
                         <label for="invoice">發票選擇*<small class="help">(需額外加5%)</small></label>
                         <select class="form-control form-required" name="invoice" id="invoice">
-                            <option value="3" {!! $html->selectSelected($order->invoice,3) !!}>三聯</option>
-                            <option value="2" {!! $html->selectSelected($order->invoice,2) !!}>二聯</option>
+                            <option value="3" {!! $html->selectSelected($order->invoice,3) !!}>三聯 - 公司戶</option>
+                            <option value="2" {!! $html->selectSelected($order->invoice,2) !!}>二聯 - 個人戶</option>
                         </select>
                     </div>
                 </div>

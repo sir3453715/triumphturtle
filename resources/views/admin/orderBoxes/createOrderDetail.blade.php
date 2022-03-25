@@ -84,8 +84,8 @@
                                     <div class="form-group col-md-3">
                                         <label for="invoice">發票</label>
                                         <select id="invoice" name="invoice" class="form-control form-required">
-                                            <option value="2">二聯</option>
-                                            <option value="3">三聯</option>
+                                            <option value="2">二聯 - 個人戶</option>
+                                            <option value="3">三聯 - 公司戶</option>
                                         </select>
                                     </div>
                                     <div class="form-group col-md-2">

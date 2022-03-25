@@ -83,8 +83,8 @@
                                     <div class="form-group col-md-3">
                                         <label for="invoice">發票</label>
                                         <select id="invoice" name="invoice" class="form-control form-required">
-                                            <option value="2" {!! $html->selectSelected(2,$order->invoice) !!}>二聯</option>
-                                            <option value="3" {!! $html->selectSelected(3,$order->invoice) !!}>三聯</option>
+                                            <option value="2" {!! $html->selectSelected(2,$order->invoice) !!}>二聯 - 個人戶</option>
+                                            <option value="3" {!! $html->selectSelected(3,$order->invoice) !!}>三聯 - 公司戶</option>
                                         </select>
                                     </div>
                                 </div>
