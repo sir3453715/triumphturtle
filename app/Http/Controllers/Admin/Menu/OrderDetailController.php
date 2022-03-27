@@ -193,11 +193,17 @@ class OrderDetailController extends Controller
     public function edit($id)
     {
         $order = Order::find($id);
-        $other_price = unserialize($order->other_price);
+        $other_total = 0;
+        if($order->other_price){
+            $other_price = unserialize($order->other_price);
+            foreach ($other_price as $other){
+                $other_total += $other['other_qty']*$other['other_unit'];
+            }
+        }
 
         return view('admin.orderBoxes.editOrderDetail',[
             'order'=>$order,
-            'other_price'=>$other_price,
+            'other_total'=>$other_total,
         ]);
 
     }
@@ -227,7 +233,9 @@ class OrderDetailController extends Controller
         }
         $other_price = unserialize($order->other_price);
         if($other_price){
-            $final_price = $final_price + ($other_price['other_qty']*$other_price['other_unit']);
+            foreach ($other_price as $other){
+                $final_price += $other['other_qty']*$other['other_unit'];
+            }
         }
         $data = [
             'status' => $request->get('status'),

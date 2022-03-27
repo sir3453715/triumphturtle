@@ -97,12 +97,18 @@ class PaymentController extends Controller
     {
         $order = Order::find($id);
         $originalname = $order->seccode.' 出帳帳單.pdf';
-        $other_price = [
-            'other_title'=>$request->get('other_title'),
-            'other_qty'=>$request->get('other_qty'),
-            'other_unit'=>$request->get('other_unit'),
-        ];
-        $final_price = $order->final_price + ($other_price['other_qty']*$other_price['other_unit']);
+        $other_title = $request->get('other_title');
+        $other_qty = $request->get('other_qty');
+        $other_unit = $request->get('other_unit');
+        $final_price = $order->total_price + $order->tax_price;
+        foreach ($other_title as $key => $title){
+            $other_price[] = [
+                'other_title'=>$title,
+                'other_qty'=>$other_qty[$key],
+                'other_unit'=>$other_unit[$key],
+            ];
+            $final_price += ($other_qty[$key]*$other_unit[$key]);
+        }
 
         $data = [
             'pay_status'=>2,
@@ -120,7 +126,9 @@ class PaymentController extends Controller
         if($order_data['other_price']){
             $other_price = unserialize($order_data['other_price']);
             $order_data['other_price']=$other_price;
-            $other_total = $other_price['other_qty']*$other_price['other_unit'];
+            foreach ($other_price as $other){
+                $other_total += $other['other_qty']*$other['other_unit'];
+            }
         }
         $order_data['subtotal'] = $order_data['sailing']['final_price'] * count($order->box);
         if($other_total > 0 ){

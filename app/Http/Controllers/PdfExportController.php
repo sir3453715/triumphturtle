@@ -58,13 +58,16 @@ class PdfExportController extends Controller
         if($order_data['other_price']){
             $other_price = unserialize($order_data['other_price']);
             $order_data['other_price']=$other_price;
-            $other_total = $other_price['other_qty']*$other_price['other_unit'];
+            foreach ($other_price as $other){
+                $other_total += $other['other_qty']*$other['other_unit'];
+            }
         }
         $order_data['subtotal'] = $order_data['sailing']['final_price'] * count($order->box);
         if($other_total > 0 ){
             $order_data['subtotal'] += $other_total;
         }
         $order_data['tax_value'] = ($order_data['invoice'] != 1)? $order_data['sailing']['final_price'] * 0.05 * count($order->box) :0 ;
+
         $pdf = App::make('dompdf.wrapper');
         $pdf->loadView('pdf.payment',$order_data)->setPaper('a4')->setOptions(['dpi' => 140, 'defaultFont' => 'msyh' , 'isFontSubsettingEnabled'=>true ,'isRemoteEnabled'=>true]);
         return $pdf->stream();

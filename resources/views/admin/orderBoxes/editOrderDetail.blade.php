@@ -97,10 +97,10 @@
                                         <label for="total_price">營業稅金額</label>
                                         <input type="text" class="form-control form-required" name="tax_price" id="tax_price" value="{{$order->tax_price}}" readonly>
                                     </div>
-{{--                                    <div class="form-group col-md-3">--}}
-{{--                                        <label for="total_price">額外費用-總價</label>--}}
-{{--                                        <input type="text" class="form-control" name="final_price" id="final_price" value="{{($other_price)?$other_price['other_qty']*$other_price['other_unit']:''}}" readonly>--}}
-{{--                                    </div>--}}
+                                    <div class="form-group col-md-3">
+                                        <label for="total_price">額外費用-總價</label>
+                                        <input type="text" class="form-control" name="final_price" id="final_price" value="{{$other_total}}" readonly>
+                                    </div>
                                     <div class="form-group col-md-3">
                                         <label for="total_price">最後總金額</label>
                                         <input type="text" class="form-control form-required" name="final_price" id="final_price" value="{{$order->final_price}}" readonly>

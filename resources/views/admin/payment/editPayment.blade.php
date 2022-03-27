@@ -77,6 +77,7 @@
                                 </div>
                                 <div class="form-group row border-top">
                                     <h5>Payment detail</h5>
+                                    <button type="button" class="ml-2 btn btn-sm btn-outline-primary" id="add-other">增加額外項目</button>
                                 </div>
                                 <div class="form-group row">
                                     <div class="form-group col-md-2">
@@ -118,22 +119,47 @@
                                         <span> NT${{ number_format($billing['itemTotal']) }} </span>
                                     </div>
                                 </div>
-{{--                                <div class="form-group row">--}}
-{{--                                    <div class="form-group col-md-2">--}}
-{{--                                        <input type="text" class="form-control" name="other_title" id="other_title">--}}
-{{--                                    </div>--}}
-{{--                                    <div class="form-group col-md-2">--}}
-{{--                                        <input type="number" class="form-control other-price" name="other_qty" id="other_qty" min="1">--}}
-{{--                                    </div>--}}
-{{--                                    <div class="form-group col-md-2"></div>--}}
-{{--                                    <div class="form-group col-md-2"></div>--}}
-{{--                                    <div class="form-group col-md-2">--}}
-{{--                                        <input type="number" class="form-control other-price" name="other_unit" id="other_unit" min="0">--}}
-{{--                                    </div>--}}
-{{--                                    <div class="form-group col-md-2">--}}
-{{--                                        <span id="other_total"> NT$0 </span>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
+                                <div id="other-section">
+                                    @if($order->other_price)
+                                        @foreach(unserialize($order->other_price) as $other)
+                                            <div class="other-wrapper form-group row">
+                                                <div class="form-group col-md-2 row">
+                                                    <button type="button" class="btn btn-sm btn-outline-danger col-2 mr-2 remove-other">X</button>
+                                                    <input type="text" class="form-control col-9" name="other_title[]" id="other_title" value="{{$other['other_title']}}">
+                                                </div>
+                                                <div class="form-group col-md-2">
+                                                    <input type="number" class="form-control other-price other-qty" name="other_qty[]"  value="{{$other['other_qty']}}" min="1">
+                                                </div>
+                                                <div class="form-group col-md-2"></div>
+                                                <div class="form-group col-md-2"></div>
+                                                <div class="form-group col-md-2">
+                                                    <input type="number" class="form-control other-price other-unit" name="other_unit[]" value="{{$other['other_unit']}}" min="0">
+                                                </div>
+                                                <div class="form-group col-md-2">
+                                                    <span class="other_total"> NT${{number_format($other['other_qty']*$other['other_unit'])}} </span>
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                    @else
+                                        <div class="other-wrapper form-group row">
+                                            <div class="form-group col-md-2 row">
+                                                <button type="button" class="btn btn-sm btn-outline-danger col-2 mr-2 remove-other">X</button>
+                                                <input type="text" class="form-control col-9" name="other_title[]" id="other_title">
+                                            </div>
+                                            <div class="form-group col-md-2">
+                                                <input type="number" class="form-control other-price other-qty" name="other_qty[]"  min="1">
+                                            </div>
+                                            <div class="form-group col-md-2"></div>
+                                            <div class="form-group col-md-2"></div>
+                                            <div class="form-group col-md-2">
+                                                <input type="number" class="form-control other-price other-unit" name="other_unit[]" min="0">
+                                            </div>
+                                            <div class="form-group col-md-2">
+                                                <span class="other_total"> NT$0 </span>
+                                            </div>
+                                        </div>
+                                    @endif
+                                </div>
                                 <div class="form-group row border-top">
                                     <div class="form-group col-md-8"></div>
                                     <div class="form-group col-md-2">
@@ -146,6 +172,8 @@
                                 <div class="form-group row border-top">
                                     <div class="form-group col-md-8"></div>
                                     <div class="form-group col-md-2">
+                                        <small>(不含額外費用)</small>
+                                        <br/>
                                         <label> 營業稅5%: </label>
                                     </div>
                                     <div class="form-group col-md-2">
@@ -219,14 +247,48 @@
 @endsection
 
 @push('admin-app-scripts')
+    <script type="text/template" id="other-template">
+        <div class="other-wrapper form-group row">
+            <div class="form-group col-md-2 row">
+                <button type="button" class="btn btn-sm btn-outline-danger col-2 mr-2 remove-other">X</button>
+                <input type="text" class="form-control col-9" name="other_title[]" >
+            </div>
+            <div class="form-group col-md-2">
+                <input type="number" class="form-control other-price other-qty" name="other_qty[]"  min="1">
+            </div>
+            <div class="form-group col-md-2"></div>
+            <div class="form-group col-md-2"></div>
+            <div class="form-group col-md-2">
+                <input type="number" class="form-control other-price other-unit" name="other_unit[]" min="0">
+            </div>
+            <div class="form-group col-md-2">
+                <span class="other_total"> NT$0 </span>
+            </div>
+        </div>
+    </script>
     <script type="text/javascript">
         $(document.body).on('change','.other-price',function (){
+            priceCount();
+        });
+        $(document.body).on('click','#add-other',function (){
+            let otherTemplate = $('#other-template').text();
+            $('#other-section').append(otherTemplate);
+        });
+        $(document.body).on('click','.remove-other',function (){
+            $(this).closest('.other-wrapper').remove();
+            priceCount();
+        });
+        function priceCount(){
             let subTotal = Math.round($('#subtotal').data('value'));
             let total = Math.round($('#total').data('value'));
-            let otherCount = Math.round($('#other_qty').val()) * Math.round($('#other_unit').val());
-            $('#other_total').html('NT$'+otherCount);
-            $('#subtotal').html('NT$'+(subTotal+otherCount.numberFormat(2, '.', ',')));
-            $('#total').html('NT$'+(total+otherCount.numberFormat(2, '.', ',')));
-        });
+            let otherCount = 0;
+            $('.other-wrapper').each(function (index){
+                let thisOtherPrice = Math.round($(this).find('.other-qty').val() ) * Math.round($(this).find('.other-unit').val());
+                otherCount += thisOtherPrice;
+                $(this).find('.other_total').html('NT$'+thisOtherPrice);
+            });
+            $('#subtotal').html('NT$'+ parseInt(subTotal+otherCount).toLocaleString());
+            $('#total').html('NT$'+parseInt(total+otherCount).toLocaleString());
+        }
     </script>
 @endpush

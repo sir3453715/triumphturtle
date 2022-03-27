@@ -136,16 +136,18 @@ font-weight: bold;
             <td>NT${{number_format($sailing['final_price'])}}</td>
             <td>NT${{number_format($sailing['final_price'] * $box_count) }}</td>
         </tr>
-{{--        @if($other_price)--}}
-{{--            <tr class="center-text">--}}
-{{--                <td>{{$other_price['other_title']}}</td>--}}
-{{--                <td>{{$other_price['other_qty']}}</td>--}}
-{{--                <td></td>--}}
-{{--                <td></td>--}}
-{{--                <td>NT${{number_format($other_price['other_unit'])}}</td>--}}
-{{--                <td>NT${{number_format($other_price['other_qty'] * $other_price['other_unit']) }}</td>--}}
-{{--            </tr>--}}
-{{--        @endif--}}
+        @if($other_price)
+            @foreach($other_price as $other)
+            <tr class="center-text">
+                <td>{{$other['other_title']}}</td>
+                <td>{{$other['other_qty']}}</td>
+                <td></td>
+                <td></td>
+                <td>NT${{number_format($other['other_unit'])}}</td>
+                <td>NT${{number_format($other['other_qty'] * $other['other_unit']) }}</td>
+            </tr>
+            @endforeach
+        @endif
         <tr class="center-text">
             <td colspan="4"></td>
             <td colspan="1" class="bg-gray font-title ">Subtotal:</td>
@@ -159,7 +161,7 @@ font-weight: bold;
         <tr class="center-text">
             <td colspan="4"></td>
             <td colspan="1" class="bg-green font-title ">Total:</td>
-            <td colspan="1" class="bg-green">NT${{number_format($total_price)}}</td>
+            <td colspan="1" class="bg-green">NT${{number_format($final_price)}}</td>
         </tr>
         <tr class="export-header center-text">
             <td colspan="6">匯款資訊</td>
