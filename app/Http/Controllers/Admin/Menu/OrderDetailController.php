@@ -517,6 +517,6 @@ class OrderDetailController extends Controller
             $order_data['OrderBoxes'][$packageBox->id]['total_value'] = $total_value;
         }
 
-        return Excel::download(new OrdersExcelExport($order_data),'宅配資訊'.date('Y-m-d_H_i_s'). '.xls');
+        return Excel::download(new OrdersExcelExport($order_data),$parentOrder->serial_number.' 裝箱單'.date('Y-m-d_H_i_s'). '.xls');
     }
 }

@@ -24,10 +24,10 @@ class OrdersExcelExport implements FromView
      */
     public function view(): View
     {
-        return view('pdf.default-package');
-//        return view('pdf.package',[
-//            'data'=>$this->data,
-//        ]);
+        return view('pdf.excel-package',[
+            'order_data'=>$this->data,
+        ]);
+
     }
 
     public function title(): string
