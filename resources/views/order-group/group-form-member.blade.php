@@ -140,7 +140,7 @@
                             <div class="row mb-3 item-section">
                                 <div class="form-group col-12">
                                     <label for="">商品描述</label>
-                                    <input type="text" class="form-control form-required" name="item_name[]" id="item_name">
+                                    <input type="text" class="form-control form-required" name="item_name[]" id="item_name" placeholder="請填寫英文">
                                 </div>
                                 <div class="form-group col-6 col-md-3">
                                     <label for="">數量</label>
