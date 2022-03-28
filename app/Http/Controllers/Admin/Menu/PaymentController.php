@@ -75,8 +75,14 @@ class PaymentController extends Controller
 
         $billing['sailing']=$order->sailing->toArray();
         $billing['box_count'] = count($order->box);
-        $billing['subtotal'] = $order->sailing->final_price * count($order->box);
         $billing['itemTotal']= round($order->sailing->final_price * $billing['box_count']);
+        $other_total = 0;
+        if($order->other_price){
+            foreach (unserialize($order->other_price) as $other){
+                $other_total += $other['other_qty']*$other['other_unit'];
+            }
+        }
+        $billing['subtotal'] = $order->sailing->final_price * count($order->box) +$other_total;
 
 
         return view('admin.payment.editPayment',[
@@ -100,7 +106,7 @@ class PaymentController extends Controller
         $other_title = $request->get('other_title');
         $other_qty = $request->get('other_qty');
         $other_unit = $request->get('other_unit');
-        $final_price = $order->total_price + $order->tax_price;
+        $final_price = $order->total_price;
         foreach ($other_title as $key => $title){
             $other_price[] = [
                 'other_title'=>$title,
@@ -109,10 +115,12 @@ class PaymentController extends Controller
             ];
             $final_price += ($other_qty[$key]*$other_unit[$key]);
         }
-
+        $tax_price = round($final_price*0.05);
+        $final_price += $tax_price;
         $data = [
             'pay_status'=>2,
             'other_price'=>serialize($other_price),
+            'tax_price' => $tax_price,
             'final_price'=>$final_price,
         ];
         $order->fill($data);

@@ -116,7 +116,7 @@
                                         <span> NT${{ number_format($order->sailing->final_price)}} </span>
                                     </div>
                                     <div class="form-group col-md-2">
-                                        <span> NT${{ number_format($billing['itemTotal']) }} </span>
+                                        <span id="itemTotal" data-value="{{$billing['itemTotal']}}"> NT${{ number_format($billing['itemTotal']) }} </span>
                                     </div>
                                 </div>
                                 <div id="other-section">
@@ -166,18 +166,16 @@
                                         <label> Subtotal: </label>
                                     </div>
                                     <div class="form-group col-md-2">
-                                        <span id="subtotal" data-value="{{$billing['subtotal']}}"> NT${{number_format($billing['subtotal'])}} </span>
+                                        <span id="subtotal"> NT${{number_format($billing['subtotal'])}} </span>
                                     </div>
                                 </div>
                                 <div class="form-group row border-top">
                                     <div class="form-group col-md-8"></div>
                                     <div class="form-group col-md-2">
-                                        <small>(不含額外費用)</small>
-                                        <br/>
                                         <label> 營業稅5%: </label>
                                     </div>
                                     <div class="form-group col-md-2">
-                                        <span> NT${{number_format($order->tax_price)}} </span>
+                                        <span id="tax"> NT${{number_format($order->tax_price)}} </span>
                                     </div>
                                 </div>
                                 <div class="form-group row border-top">
@@ -279,16 +277,16 @@
             priceCount();
         });
         function priceCount(){
-            let subTotal = Math.round($('#subtotal').data('value'));
-            let total = Math.round($('#total').data('value'));
+            let itemTotal = Math.round($('#itemTotal').data('value'));
             let otherCount = 0;
             $('.other-wrapper').each(function (index){
                 let thisOtherPrice = Math.round($(this).find('.other-qty').val() ) * Math.round($(this).find('.other-unit').val());
                 otherCount += thisOtherPrice;
                 $(this).find('.other_total').html('NT$'+thisOtherPrice);
             });
-            $('#subtotal').html('NT$'+ parseInt(subTotal+otherCount).toLocaleString());
-            $('#total').html('NT$'+parseInt(total+otherCount).toLocaleString());
+            $('#subtotal').html('NT$'+ parseInt(itemTotal+otherCount).toLocaleString());
+            $('#tax').html('NT$'+ parseInt( Math.round((itemTotal+otherCount)*0.05) ).toLocaleString());
+            $('#total').html('NT$'+parseInt(itemTotal+otherCount+Math.round((itemTotal+otherCount)*0.05)).toLocaleString());
         }
     </script>
 @endpush
