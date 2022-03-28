@@ -70,7 +70,7 @@
                                     <td>{{$order->sender_name}}</td>
                                     <td>{{$order->sender_phone}}</td>
                                     <td>{{sizeof($order->box)}}</td>
-                                    <td>{{$order->total_price}}</td>
+                                    <td>{{number_format($order->final_price)}}</td>
                                     <td>
                                         @switch($order->pay_status)
                                             @case(1)
