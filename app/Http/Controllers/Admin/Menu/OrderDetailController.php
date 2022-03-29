@@ -227,15 +227,15 @@ class OrderDetailController extends Controller
             $total_price += $eachPrice;
         }
         $final_price = $total_price;
-        if($request->get('invoice') != 1){
-            $tax_price = $total_price * 0.05;
-            $final_price += $tax_price;
-        }
         $other_price = unserialize($order->other_price);
         if($other_price){
             foreach ($other_price as $other){
                 $final_price += $other['other_qty']*$other['other_unit'];
             }
+        }
+        if($request->get('invoice') != 1){
+            $tax_price = $total_price * 0.05;
+            $final_price += $tax_price;
         }
         $data = [
             'status' => $request->get('status'),
