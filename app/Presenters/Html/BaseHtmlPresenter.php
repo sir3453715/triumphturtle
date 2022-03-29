@@ -164,7 +164,7 @@ trait BaseHtmlPresenter
                 $interval = intval(floor(($box_count-$minimum)/$box_interval));
                 $margin =$box_interval - ($box_count%$box_interval);
                 if ($interval > '1'){ // 滿足折扣級距
-                    for ($i = 0;$i<$interval;$i++){
+                    for ($i = 0;$i<=$interval;$i++){
                         $price = ($price*$sailing->discount);
                     }
                     if($price<=$sailing->min_price){ // 達到最低價
@@ -188,17 +188,19 @@ trait BaseHtmlPresenter
             if ($box_count >= $minimum){ // 滿足最低成團
                 $defaultPrice = $sailing->price;
                 $interval = intval(floor(($box_count-$minimum)/$box_interval));
-                if ($interval <= '1'){
-                    $price = $defaultPrice;
-                }else{
-                    for ($i = 1;$i<$interval;$i++){
-                        $price = ($defaultPrice*$sailing->discount);
+
+                $price = $defaultPrice;
+                if ($interval > '1'){ // 滿足折扣級距
+                    for ($i = 1;$i<=$interval;$i++){
+                        $price = ($price*$sailing->discount);
                     }
-                    if($price<=$sailing->min_price){
+                    if($price<=$sailing->min_price){ // 達到最低價
                         $price = $sailing->min_price;
                     }
                 }
+                $price = round($price);
                 $percentage = (($defaultPrice-$price)/$defaultPrice)*100;
+//                $percentage = round((($defaultPrice-$price)/$defaultPrice)*100);
                 $html = '<div><img src="/storage/image/pack-icon.svg" alt="">已成團！此團最終優惠折扣為</div>
                             <div class="data-extra-info"><span>'.$percentage.'</span>% OFF</div>';
             }else{ // 不滿足最低成團
@@ -213,22 +215,21 @@ trait BaseHtmlPresenter
     }
     public function nowSailingPrice($sailing){
         $sailing_id = $sailing->id;
-        $status = $sailing->status;
         $minimum = $sailing->minimum;
         $box_interval = $sailing->box_interval;
         $order_ids = Order::where('sailing_id',$sailing_id)->pluck('id');
         $box_count = OrderBox::whereIn('order_id',$order_ids)->count();
         $price = $sailing->price;
         $interval = intval(floor(($box_count-$minimum)/$box_interval));
-        if ($interval > '1') {
-            for ($i = 1; $i < $interval; $i++) {
-                $price = ($price * $sailing->discount);
+        if ($interval > '1'){ // 滿足折扣級距
+            for ($i = 1;$i<=$interval;$i++){
+                $price = ($price*$sailing->discount);
             }
-            if ($price <= $sailing->min_price) {
+            if($price<=$sailing->min_price){ // 達到最低價
                 $price = $sailing->min_price;
-            }
+           }
+            $price = round($price);
         }
-        $price = round($price);
         $html = '<span class="data-label">目前單價:</span><span class="unit-price">NT$ '.number_format($price).'</span> / 箱(未稅)';
         return $html;
 
