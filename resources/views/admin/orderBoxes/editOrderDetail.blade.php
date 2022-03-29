@@ -91,11 +91,11 @@
                                 <div class="form-group row">
                                     <div class="form-group col-md-3">
                                         <label for="total_price">訂單總金額(不含稅)</label>
-                                        <input type="text" class="form-control form-required" name="total_price" id="total_price" value="{{$order->total_price}}" readonly>
+                                        <input type="text" class="form-control" name="total_price" id="total_price" value="{{$order->total_price}}" readonly>
                                     </div>
                                     <div class="form-group col-md-3">
                                         <label for="total_price">營業稅金額</label>
-                                        <input type="text" class="form-control form-required" name="tax_price" id="tax_price" value="{{$order->tax_price}}" readonly>
+                                        <input type="text" class="form-control" name="tax_price" id="tax_price" value="{{$order->tax_price}}" readonly>
                                     </div>
                                     <div class="form-group col-md-3">
                                         <label for="total_price">額外費用-總價</label>
@@ -103,7 +103,7 @@
                                     </div>
                                     <div class="form-group col-md-3">
                                         <label for="total_price">最後總金額</label>
-                                        <input type="text" class="form-control form-required" name="final_price" id="final_price" value="{{$order->final_price}}" readonly>
+                                        <input type="text" class="form-control " name="final_price" id="final_price" value="{{$order->final_price}}" readonly>
                                     </div>
                                 </div>
                                 <div class="form-group row border-top">
@@ -141,15 +141,15 @@
                                 <div class="form-group row">
                                     <div class="form-group col-md-3">
                                         <label for="for_name">收件者姓名</label>
-                                        <input type="text" class="form-control form-required" name="for_name" id="for_name" value="{{$order->for_name}}">
+                                        <input type="text" class="form-control" name="for_name" id="for_name" value="{{$order->for_name}}">
                                     </div>
                                     <div class="form-group col-md-3">
                                         <label for="for_phone">收件者電話</label>
-                                        <input type="text" class="form-control form-required" name="for_phone" id="for_phone" value="{{$order->for_phone}}">
+                                        <input type="text" class="form-control" name="for_phone" id="for_phone" value="{{$order->for_phone}}">
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label for="for_address">收件者地址</label>
-                                        <input type="text" class="form-control form-required" name="for_address" id="for_address" value="{{$order->for_address}}">
+                                        <input type="text" class="form-control" name="for_address" id="for_address" value="{{$order->for_address}}">
                                     </div>
                                     <div class="form-group col-md-3">
                                         <label for="for_company">收件者公司名稱</label>
@@ -182,26 +182,26 @@
                                         <div class="form-group row">
                                             <div class="form-group col-md-2">
                                                 <label for="box_weight">GW 毛重(KG)</label>
-                                                <input type="number" class="form-control form-required" name="box_weight[]" id="box_weight" min="0" step="0.1" value="{{$box->box_weight}}">
+                                                <input type="number" class="form-control " name="box_weight[]" id="box_weight" min="0" step="0.1" value="{{$box->box_weight}}">
                                             </div>
                                             <div class="form-group col-md-1 align-self-center">
                                                 <label>材積(CM) :</label>
                                             </div>
                                             <div class="form-group col-md-1">
                                                 <label for="box_length">長</label>
-                                                <input type="number" class="form-control form-required" name="box_length[]" id="box_length" min="0" step="0.1" value="{{$box->box_length}}">
+                                                <input type="number" class="form-control" name="box_length[]" id="box_length" min="0" step="0.1" value="{{$box->box_length}}">
                                             </div>
                                             <div class="form-group col-md-1">
                                                 <label for="box_width">寬</label>
-                                                <input type="number" class="form-control form-required" name="box_width[]" id="box_width" min="0" step="0.1" value="{{$box->box_width}}">
+                                                <input type="number" class="form-control " name="box_width[]" id="box_width" min="0" step="0.1" value="{{$box->box_width}}">
                                             </div>
                                             <div class="form-group col-md-1">
                                                 <label for="box_height">高</label>
-                                                <input type="number" class="form-control form-required" name="box_height[]" id="box_height" min="0" step="0.1" value="{{$box->box_height}}">
+                                                <input type="number" class="form-control " name="box_height[]" id="box_height" min="0" step="0.1" value="{{$box->box_height}}">
                                             </div>
                                             <div class="form-group col-md-2">
                                                 <label for="box_price">箱子費用(未稅)</label>
-                                                <input type="number" class="form-control form-required" name="box_price[]" id="box_price" value="{{$box->box_price}}">
+                                                <input type="number" class="form-control" name="box_price[]" id="box_price" value="{{$box->box_price}}">
                                             </div>
                                             <div class="form-group col-md-4">
                                                 <label for="tracking_number">宅配單號</label>
@@ -220,15 +220,15 @@
                                                 <div class="form-group row item-section">
                                                     <div class="form-group col-md-3">
                                                         <label for="item_name">商品描述</label>
-                                                        <input type="text" class="form-control form-required" name="item_name[]" id="item_name" value="{{$item->item_name}}" placeholder="請填寫英文">
+                                                        <input type="text" class="form-control" name="item_name[]" id="item_name" value="{{$item->item_name}}" placeholder="請填寫英文">
                                                     </div>
                                                     <div class="form-group col-md-3">
                                                         <label for="item_num">數量</label>
-                                                        <input type="number" class="form-control form-required" name="item_num[]" id="item_num" value="{{$item->item_num}}">
+                                                        <input type="number" class="form-control" name="item_num[]" id="item_num" value="{{$item->item_num}}">
                                                     </div>
                                                     <div class="form-group col-md-3">
                                                         <label for="unit_price">單價(USD)</label>
-                                                        <input type="number" class="form-control form-required" name="unit_price[]" id="unit_price" min="0" step="0.1" value="{{$item->unit_price}}">
+                                                        <input type="number" class="form-control" name="unit_price[]" id="unit_price" min="0" step="0.1" value="{{$item->unit_price}}">
                                                     </div>
                                                     <div class="form-group col-md-1">
                                                         <a href="javascript:void(0);" class="delete-item btn btn-sm btn-danger ml-3">
