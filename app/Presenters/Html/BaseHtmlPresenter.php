@@ -199,8 +199,7 @@ trait BaseHtmlPresenter
                     }
                 }
                 $price = round($price);
-                $percentage = (($defaultPrice-$price)/$defaultPrice)*100;
-//                $percentage = round((($defaultPrice-$price)/$defaultPrice)*100);
+                $percentage = round((($defaultPrice-$price)/$defaultPrice)*100);
                 $html = '<div><img src="/storage/image/pack-icon.svg" alt="">已成團！此團最終優惠折扣為</div>
                             <div class="data-extra-info"><span>'.$percentage.'</span>% OFF</div>';
             }else{ // 不滿足最低成團
