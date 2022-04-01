@@ -100,13 +100,14 @@ class SailingScheduleController extends Controller
             $box_interval = $sailing->box_interval;
             $order_ids = Order::where('sailing_id',$id)->pluck('id');
             $box_count = OrderBox::whereIn('order_id',$order_ids)->count();
+            $minimum = $sailing->minimum;
             $defaultPrice = $sailing->price;
-            $interval = intval(floor($box_count/$box_interval));
-            if ($interval > '1') {
+            $interval = intval(floor(($box_count-$minimum)/$box_interval));
+            if ($interval > '1'){ // 滿足折扣級距
                 for ($i = 1;$i<=$interval;$i++){
-                    $defaultPrice = $defaultPrice*$sailing->discount;//每箱單價
+                    $defaultPrice = ($defaultPrice*$sailing->discount);
                 }
-                if($defaultPrice<=$sailing->min_price){
+                if($defaultPrice<=$sailing->min_price){ // 達到最低價
                     $defaultPrice = $sailing->min_price;
                 }
             }
