@@ -133,7 +133,7 @@
                                                 <div class="form-group col-md-2"></div>
                                                 <div class="form-group col-md-2"></div>
                                                 <div class="form-group col-md-2">
-                                                    <input type="number" class="form-control other-price other-unit" name="other_unit[]" value="{{$other['other_unit']}}" min="0">
+                                                    <input type="number" class="form-control other-price other-unit" name="other_unit[]" value="{{$other['other_unit']}}" >
                                                 </div>
                                                 <div class="form-group col-md-2">
                                                     <span class="other_total"> NT${{number_format($other['other_qty']*$other['other_unit'])}} </span>
@@ -152,7 +152,7 @@
                                             <div class="form-group col-md-2"></div>
                                             <div class="form-group col-md-2"></div>
                                             <div class="form-group col-md-2">
-                                                <input type="number" class="form-control other-price other-unit" name="other_unit[]" min="0">
+                                                <input type="number" class="form-control other-price other-unit" name="other_unit[]" >
                                             </div>
                                             <div class="form-group col-md-2">
                                                 <span class="other_total"> NT$0 </span>
@@ -257,7 +257,7 @@
             <div class="form-group col-md-2"></div>
             <div class="form-group col-md-2"></div>
             <div class="form-group col-md-2">
-                <input type="number" class="form-control other-price other-unit" name="other_unit[]" min="0">
+                <input type="number" class="form-control other-price other-unit" name="other_unit[]" >
             </div>
             <div class="form-group col-md-2">
                 <span class="other_total"> NT$0 </span>
