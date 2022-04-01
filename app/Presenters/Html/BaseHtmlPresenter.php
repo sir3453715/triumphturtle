@@ -162,23 +162,17 @@ trait BaseHtmlPresenter
             if ($box_count >= $minimum){ // 滿足最低成團
                 $price = $sailing->price;
                 $interval = intval(floor(($box_count-$minimum)/$box_interval));
-                $margin =$box_interval - ($box_count%$box_interval);
-                if ($interval > '1'){ // 滿足折扣級距
-                    for ($i = 0;$i<=$interval;$i++){
-                        $price = ($price*$sailing->discount);
-                    }
-                    if($price<=$sailing->min_price){ // 達到最低價
-                        $price = $sailing->min_price;
-                        $html = '<div><img src="/storage/image/pack-icon.svg" alt="">已成團！ 已達到最低優惠價 <div class="data-extra-info"><span>NT$ '.number_format($price).'</span> / 箱(未稅)</div></div>';
-                    }else{//不滿最低價
-                        $price = round($price);
-                        $html = '<div><img src="/storage/image/pack-icon.svg" alt="">已成團！差 <span class="data-number">'.$margin.'</span>箱即可享有優惠</div>
-                            <div class="data-extra-info"><span>NT$ '.number_format($price).'</span> / 箱(未稅)</div>';
-                    }
-                }else{// 不滿折扣級距
+                $margin =$box_interval - (($box_count-$minimum)%$box_interval);
+                for ($i = 0;$i<=$interval;$i++){
+                    $price = ($price*$sailing->discount);
+                }
+                if($price<=$sailing->min_price){ // 達到最低價
+                    $price = $sailing->min_price;
+                    $html = '<div><img src="/storage/image/pack-icon.svg" alt="">已成團！ 已達到最低優惠價 <div class="data-extra-info"><span>NT$ '.number_format($price).'</span> / 箱(未稅)</div></div>';
+                }else{//不滿最低價
                     $price = round($price);
                     $html = '<div><img src="/storage/image/pack-icon.svg" alt="">已成團！差 <span class="data-number">'.$margin.'</span>箱即可享有優惠</div>
-                            <div class="data-extra-info"><span>NT$ '.number_format($price).'</span> / 箱(未稅)</div>';
+                        <div class="data-extra-info"><span>NT$ '.number_format($price).'</span> / 箱(未稅)</div>';
                 }
             }else{ // 不滿足最低成團
                 $num = $minimum - $box_count;
@@ -226,7 +220,7 @@ trait BaseHtmlPresenter
             }
             if($price<=$sailing->min_price){ // 達到最低價
                 $price = $sailing->min_price;
-           }
+            }
             $price = round($price);
         }
         $html = '<span class="data-label">目前單價:</span><span class="unit-price">NT$ '.number_format($price).'</span> / 箱(未稅)';
