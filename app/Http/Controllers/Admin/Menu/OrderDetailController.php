@@ -109,8 +109,10 @@ class OrderDetailController extends Controller
             $captcha = null;
         }
         $total_price = 0; $tax_price = 0;
-        foreach ($request->get('box_price') as $eachPrice){
-            $total_price += $eachPrice;
+        if($request->get('box_price')){
+            foreach ($request->get('box_price') as $eachPrice){
+                $total_price += $eachPrice;
+            }
         }
         $final_price = $total_price;
         if($request->get('invoice') != 1){
@@ -151,7 +153,7 @@ class OrderDetailController extends Controller
         /* 儲存新箱子資料 */
         $start_item = 0;
         $total_items_num = 0;
-        $boxSize = sizeof($request->get('box_weight'));
+        $boxSize = ($request->get('box_weight'))?sizeof($request->get('box_weight')):0;
         for($i = 0; $i<$boxSize; $i++){
             $boxData = [
                 'order_id'=>$order->id,
@@ -223,8 +225,10 @@ class OrderDetailController extends Controller
         $old_status = $order->status;
         $new_status = $request->get('status');
         $total_price = 0; $tax_price = 0; $final_price = 0;
-        foreach ($request->get('box_price') as $eachPrice){
-            $total_price += $eachPrice;
+        if($request->get('box_price')){
+            foreach ($request->get('box_price') as $eachPrice){
+                $total_price += $eachPrice;
+            }
         }
         $final_price = $total_price;
         $other_price = unserialize($order->other_price);
@@ -274,7 +278,7 @@ class OrderDetailController extends Controller
         /* 儲存新箱子資料 */
         $start_item = 0;
         $total_items_num = 0;
-        $boxSize = sizeof($request->get('box_weight'));
+        $boxSize = ($request->get('box_weight'))?sizeof($request->get('box_weight')):0;
         for($i = 0; $i<$boxSize; $i++){
             $boxData = [
                 'order_id'=>$order->id,
@@ -317,19 +321,20 @@ class OrderDetailController extends Controller
             ];
             dispatch(new SendMailQueueJob($mailData));
         }
-
-        $trackingNumberDifferent = array_diff($request->get('tracking_number'),$oldBoxTrackingNumber);
-        if($trackingNumberDifferent){
-            /** 用戶收信-宅配單號 */
-            $mailData = [
-                'is_admin'=>false,
-                'template'=>'email-order-info',
-                'email'=>$order->sender_email,
-                'subject'=>'【海龜集運】宅配單號已更新',
-                'for_title'=>$order->sender_name,
-                'msg'=>'訂單編號: '.$order->seccode.'  狀態更新通知 - 宅配單號已更新！<br/><br/>您也可以至 <a href="'.route('tracking').'">訂單查詢頁面</a> 查看訂單詳細資訊。',
-            ];
-            dispatch(new SendMailQueueJob($mailData));
+        if($request->get('tracking_number')){
+            $trackingNumberDifferent = array_diff($request->get('tracking_number'),$oldBoxTrackingNumber);
+            if($trackingNumberDifferent){
+                /** 用戶收信-宅配單號 */
+                $mailData = [
+                    'is_admin'=>false,
+                    'template'=>'email-order-info',
+                    'email'=>$order->sender_email,
+                    'subject'=>'【海龜集運】宅配單號已更新',
+                    'for_title'=>$order->sender_name,
+                    'msg'=>'訂單編號: '.$order->seccode.'  狀態更新通知 - 宅配單號已更新！<br/><br/>您也可以至 <a href="'.route('tracking').'">訂單查詢頁面</a> 查看訂單詳細資訊。',
+                ];
+                dispatch(new SendMailQueueJob($mailData));
+            }
         }
 
         return redirect(route('admin.order-detail.index'))->with('message', '訂單 '.$order->seccode.'已完成修改');
