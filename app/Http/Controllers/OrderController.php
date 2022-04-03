@@ -188,7 +188,7 @@ class OrderController extends Controller
         /* 儲存新箱子資料 */
         $start_item = 0;
         $total_items_num = 0;
-        $boxSize = sizeof($request->get('box_weight'));
+        $boxSize = ($request->get('box_weight'))?sizeof($request->get('box_weight')):0;
         for($i = 0; $i<$boxSize; $i++){
             $boxData = [
                 'order_id'=>$order->id,
@@ -302,7 +302,7 @@ class OrderController extends Controller
         /* 儲存新箱子資料 */
         $start_item = 0;
         $total_items_num = 0;
-        $boxSize = sizeof($request->get('box_weight'));
+        $boxSize = ($request->get('box_weight'))?sizeof($request->get('box_weight')):0;
         for($i = 0; $i<$boxSize; $i++){
             $boxData = [
                 'order_id'=>$order->id,
