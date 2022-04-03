@@ -103,13 +103,11 @@ class SailingScheduleController extends Controller
             $minimum = $sailing->minimum;
             $defaultPrice = $sailing->price;
             $interval = intval(floor(($box_count-$minimum)/$box_interval));
-            if ($interval > '1'){ // 滿足折扣級距
-                for ($i = 1;$i<=$interval;$i++){
-                    $defaultPrice = ($defaultPrice*$sailing->discount);
-                }
-                if($defaultPrice<=$sailing->min_price){ // 達到最低價
-                    $defaultPrice = $sailing->min_price;
-                }
+            for ($i = 1;$i<=$interval;$i++){
+                $defaultPrice = ($defaultPrice*$sailing->discount);
+            }
+            if($defaultPrice<=$sailing->min_price){ // 達到最低價
+                $defaultPrice = $sailing->min_price;
             }
             $defaultPrice = round($defaultPrice);
             $data['final_price'] = $defaultPrice;
