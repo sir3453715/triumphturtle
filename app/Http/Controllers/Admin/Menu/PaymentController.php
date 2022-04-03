@@ -139,10 +139,8 @@ class PaymentController extends Controller
             }
         }
         $order_data['subtotal'] = $order_data['sailing']['final_price'] * count($order->box);
-        if($other_total > 0 ){
-            $order_data['subtotal'] += $other_total;
-        }
-        $order_data['tax_value'] = ($order_data['invoice'] != 1)? $order_data['subtotal'] * 0.05 * count($order->box) :0 ;
+        $order_data['subtotal'] += $other_total;
+        $order_data['tax_value'] = ($order_data['invoice'] != 1)? $order_data['subtotal'] * 0.05 :0 ;
 
         $pdf = App::make('dompdf.wrapper');
         $pdf->loadView('pdf.payment',$order_data)->setPaper('a4')->setOptions(['dpi' => 140, 'defaultFont' => 'msyh' , 'isFontSubsettingEnabled'=>true ,'isRemoteEnabled'=>true]);
