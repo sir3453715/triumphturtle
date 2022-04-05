@@ -104,7 +104,7 @@
                 <!-- 裝箱卡 -->
                 <div class="box-wrapper">
                     <div class="add-box box-section">
-                        <button type="button" class="btn btn-md btn-red mb-3 remove-box">刪除箱子</button>
+{{--                        <button type="button" class="btn btn-md btn-red mb-3 remove-box">刪除箱子</button>--}}
                         <div class="row">
                             <div class="form-group col-12">
                                 <label for="">毛重 <small class="help">(kg)</small></label>
