@@ -95,7 +95,7 @@ class WarehouseController extends Controller
         $warehouse = Warehouse::find($id);
         $img = $warehouse->img;
         if($request->hasFile('img')){//有圖檔上傳
-            if($img){
+            if($img && file_exists(storage_path('app/public/customer/'.$img))){
                 unlink(storage_path('app/public/customer/'.$img));
             }
             $img = date('ymdhis').rand(0,9).rand(0,9).'.'.$request->file('img')->getClientOriginalExtension();
