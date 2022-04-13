@@ -98,7 +98,7 @@ class SailingScheduleController extends Controller
         unset($data['_token']);
         if($data['status'] ==2 && $sailing->status == 1){//集貨轉準備 更動金額
             $box_interval = $sailing->box_interval;
-            $order_ids = Order::where('sailing_id',$id)->pluck('id');
+            $order_ids = Order::where('sailing_id',$id)->where('status','!=','5')->pluck('id');
             $box_count = OrderBox::whereIn('order_id',$order_ids)->count();
             $minimum = $sailing->minimum;
             $defaultPrice = $sailing->price;
@@ -146,7 +146,7 @@ class SailingScheduleController extends Controller
                 dispatch(new SendMailQueueJob($mailData));
             }
         }elseif($data['status'] == '3' && $sailing->status != 3) {
-            $orders = Order::where('sailing_id',$id)->get();
+            $orders = Order::where('sailing_id',$id)->where('status','!=','5')->get();
             foreach ($orders as $order){
                 /** 用戶收信-航班航行 */
                 $mailData = [

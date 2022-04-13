@@ -155,7 +155,7 @@ trait BaseHtmlPresenter
         $status = $sailing->status;
         $minimum = $sailing->minimum;
         $box_interval = $sailing->box_interval;
-        $order_ids = Order::where('sailing_id',$sailing_id)->pluck('id');
+        $order_ids = Order::where('sailing_id',$sailing_id)->where('status','!=','5')->pluck('id');
         $box_count = OrderBox::whereIn('order_id',$order_ids)->count();
         $html = '';
         if ($status == 1){
@@ -212,7 +212,7 @@ trait BaseHtmlPresenter
         $sailing_id = $sailing->id;
         $minimum = $sailing->minimum;
         $box_interval = $sailing->box_interval;
-        $order_ids = Order::where('sailing_id',$sailing_id)->pluck('id');
+        $order_ids = Order::where('sailing_id',$sailing_id)->where('status','!=','5')->pluck('id');
         $box_count = OrderBox::whereIn('order_id',$order_ids)->count();
         $price = $sailing->price;
         $interval = intval(floor(($box_count-$minimum)/$box_interval));

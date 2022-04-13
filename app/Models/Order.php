@@ -44,8 +44,8 @@ class Order extends Model
 
         $boxListData = DB::table('orders')
             ->select(DB::raw('count(orders.person_number) as person, SUM(orders.total_price) as price'))
-            ->where('serial_number', '=', $this->serial_number)->first();
-        $order_ids = Order::where('serial_number', '=', $this->serial_number)->pluck('id');
+            ->where('serial_number', '=', $this->serial_number)->where('status','!=','5')->first();
+        $order_ids = Order::where('serial_number', '=', $this->serial_number)->where('status','!=','5')->pluck('id');
         $box_count = OrderBox::whereIn('order_id',$order_ids)->count();
 
         $data = [

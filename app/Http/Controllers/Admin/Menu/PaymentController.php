@@ -23,7 +23,7 @@ class PaymentController extends Controller
     function index(Request $request){
         $queried=['seccode'=>'','sender'=>''];
 
-        $orders = Order::where('pay_status',2);
+        $orders = Order::where('pay_status',2)->where('status','!=','5');
         if($request->get('seccode')) {
             $queried['seccode'] = $request->get('seccode');
             $orders = $orders->where('seccode','LIKE','%'.$request->get('seccode').'%');
