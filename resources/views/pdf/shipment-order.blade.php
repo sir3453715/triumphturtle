@@ -56,6 +56,7 @@
     </style>
 </head>
 <body>
+    @if($OrderBoxes)
     <table>
         @foreach($OrderBoxes as $num => $box)
         @if($num!=0 && $num%4 ==0)
@@ -81,5 +82,6 @@
             </tr>
         @endforeach
     </table>
+    @endif
 </body>
 </html>
