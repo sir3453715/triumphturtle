@@ -59,9 +59,10 @@
     @if($OrderBoxes)
     <table>
         @foreach($OrderBoxes as $num => $box)
-        @if($num!=0 && $num%4 ==0)
+        @if($num!=0 && $num%3 ==0)
             </table>
                 <div class="wrapper-page"></div>
+            <table>
         @endif
             <tr class="center-text">
                 <td colspan="5" class="border-none"><img width="200px" src="{{url('/storage/image/triumphturtle.jpg')}}"></td>
