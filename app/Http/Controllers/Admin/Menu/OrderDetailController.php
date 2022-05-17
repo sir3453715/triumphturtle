@@ -510,7 +510,7 @@ class OrderDetailController extends Controller
         $order_data = $parentOrder->toArray();
         $order_data['fromCountry']=$parentOrder->sailing->fromCountry->title.' '.$parentOrder->sailing->fromCountry->en_title;
         $order_data['toCountry']=$parentOrder->sailing->toCountry->title.' '.$parentOrder->sailing->toCountry->en_title;
-        $packageOrderIDs = Order::where('serial_number',$parentOrder['serial_number'])->orderBy('parent_id','ASC')->pluck('id')->toArray();
+        $packageOrderIDs = Order::where('serial_number',$parentOrder['serial_number'])->where('status','!=',5)->orderBy('parent_id','ASC')->pluck('id')->toArray();
         $packageBoxes = OrderBox::whereIn('order_id',$packageOrderIDs)->orderBy('box_seccode','ASC')->get();
         foreach ($packageBoxes as $packageBox){
             $order_data['OrderBoxes'][$packageBox->id]=$packageBox->toArray();
