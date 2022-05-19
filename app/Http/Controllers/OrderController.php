@@ -279,6 +279,28 @@ class OrderController extends Controller
     {
         $id = $request->get('order_id');
         $order = Order::find($id);
+        $sailingFinalPrice = $order->sailing->final_price;
+//        $boxSize = ($request->get('box_weight'))?sizeof($request->get('box_weight')):0;
+//        $tax_price = 0; $final_price = 0;
+//        $total_price = $sailingFinalPrice * $boxSize;
+//        $final_price = $total_price;
+//        $other_price = unserialize($order->other_price);
+//        if($other_price){
+//            foreach ($other_price as $other){
+//                $final_price += $other['other_qty']*$other['other_unit'];
+//            }
+//        }
+//        if($request->get('invoice') != 1){
+//            $tax_price = $total_price * 0.05;
+//            $final_price += $tax_price;
+//        }
+//        $data = [
+//            'total_price' => $total_price,
+//            'tax_price' => $tax_price,
+//            'final_price' => round($final_price),
+//        ];
+//
+
         $data = [
             'for_name' => $request->get('for_name'),
             'for_phone' => $request->get('for_phone'),
@@ -311,6 +333,7 @@ class OrderController extends Controller
                 'box_length'=>$request->get('box_length')[$i],
                 'box_width'=>$request->get('box_width')[$i],
                 'box_height'=>$request->get('box_height')[$i],
+//                'box_price'=>$sailingFinalPrice,
             ];
             $box = OrderBox::create($boxData);
 
