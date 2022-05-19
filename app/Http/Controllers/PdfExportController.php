@@ -24,7 +24,7 @@ class PdfExportController extends Controller
     }
 
     function pdfShipment(Request $request,$id){
-        $pdfData['OrderBoxes'] = OrderBox::where('order_id',$id)->orderBy('box_seccode','ASC')->get()->toArray();
+        $pdfData['OrderBoxes'] = OrderBox::where('order_id',$id)->orderBy('id','ASC')->orderBy('box_seccode','ASC')->get()->toArray();
         $pdf = App::make('dompdf.wrapper');
         $pdf->loadView('pdf.shipment-order',$pdfData)->setPaper('a4')->setOptions(['dpi' => 140, 'defaultFont' => 'msyh' , 'isFontSubsettingEnabled'=>true ,'isRemoteEnabled'=>true]);
         return $pdf->stream();
