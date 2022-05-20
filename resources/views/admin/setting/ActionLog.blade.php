@@ -24,6 +24,24 @@
     <!-- Main content -->
     <section class="content">
         <div class="container-fluid">
+            <div class="card card-default color-palette-box">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col d-flex filter-form">
+                            <form class="form-inline filter">
+                                <div class="form-group mr-3">
+                                    <label for="">更動ID</label>
+                                    <input type="text" name="id" class="form-control ml-3" placeholder="id" value="{{(isset($queried['id'])?$queried['id']:'')}}">
+                                </div>
+                                <div class="form-group">
+                                    <button type="submit" class="form-control">篩選</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.card-body -->
+            </div>
             <!-- Main row -->
             <div class="col-12">
                 <div class="card">
