@@ -181,7 +181,7 @@
                         </select>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-lg btn-solid btn-blue btn-block mt-4 mb-4">填寫完畢送出</button>
+                <button type="submit" class="btn btn-lg btn-solid btn-blue btn-block mt-4 mb-4 order-submit">填寫完畢送出</button>
             </fieldset>
         </form>
 
