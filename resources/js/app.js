@@ -81,6 +81,11 @@ $(() => {
         }
         if(invalid) {
             return false;
+        }else{
+            if($('.order-submit').length > 0 ){
+                $('.order-submit').attr('disabled',true);
+                $('.order-submit').html('正在送出...');
+            }
         }
     });
 
@@ -135,6 +140,7 @@ $(() => {
                 });
             }
         });
+
     });
 
 
