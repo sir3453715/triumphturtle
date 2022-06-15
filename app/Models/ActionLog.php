@@ -24,6 +24,7 @@ class ActionLog extends Model
     }
 
     public static function create_log( $model=null , $action='update' ){
+        $change_column = '';
         if($action == 'update'){
             $new_array=$model->getDirty();
             $change_array = array();
@@ -32,16 +33,20 @@ class ActionLog extends Model
             }
             $change_column = json_encode($change_array);
         }else{
-            $change_column = json_encode($model->toArray());
+            if(!empty($model->toArray())){
+                $change_column = json_encode($model->toArray());
+            }
         }
-        $data=[
-            'user_id'=>Auth::id(),
-            'action_table'=>get_class($model),
-            'action_id'=>$model->id,
-            'change_column'=>$change_column,
-            'action'=>$action,
-        ];
-        ActionLog::create($data);
+        if($change_column != ''){
+            $data=[
+                'user_id'=>Auth::id(),
+                'action_table'=>get_class($model),
+                'action_id'=>$model->id,
+                'change_column'=>$change_column,
+                'action'=>$action,
+            ];
+            ActionLog::create($data);
+        }
     }
 
 }

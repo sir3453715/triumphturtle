@@ -353,11 +353,11 @@ class OrderDetailController extends Controller
         $orderBoxItems = OrderBoxItem::where('order_id',$id);
         if($orderBoxItems){
             $orderBoxItems->delete();
-            ActionLog::create_log($orderBoxItems,'delete');
+            ActionLog::create_log($orderBoxItems->get(),'delete');
         }
         if($orderBox){
             $orderBox->delete();
-            ActionLog::create_log($orderBox,'delete');
+            ActionLog::create_log($orderBox->get(),'delete');
         }
         if($order){
             $order->delete();
