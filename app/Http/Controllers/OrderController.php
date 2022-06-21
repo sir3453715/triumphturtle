@@ -17,16 +17,26 @@ class OrderController extends Controller
     //
     public function option(Request $request,$sailing_id)
     {
-        return view('option',[
-            'sailing_id'=>$sailing_id,
-        ]);
+        $sailing = SailingSchedule::find($sailing_id);
+        if($sailing->status != 1){
+            return redirect(route('index'));
+        }else{
+            return view('option',[
+                'sailing_id'=>$sailing_id,
+            ]);
+        }
     }
     //
     public function individualForm($sailing_id)
     {
-        return view('order-individual.individual-form',[
-            'sailing_id'=>$sailing_id,
-        ]);
+        $sailing = SailingSchedule::find($sailing_id);
+        if($sailing->status != 1){
+            return redirect(route('index'));
+        }else {
+            return view('order-individual.individual-form', [
+                'sailing_id' => $sailing_id,
+            ]);
+        }
     }
     public function individualFormComplete(Request $request,$parameter)
     {
@@ -43,16 +53,20 @@ class OrderController extends Controller
     public function groupFormInitiator($sailing_id)
     {
         $sailing = SailingSchedule::find($sailing_id);
-        return view('order-group.group-form-initiator',[
-            'sailing'=>$sailing,
-        ]);
+        if($sailing->status != 1){
+            return redirect(route('index'));
+        }else {
+            return view('order-group.group-form-initiator', [
+                'sailing' => $sailing,
+            ]);
+        }
     }
     public function groupFormMember($parent_id)
     {
         $parent_order = Order::find($parent_id);
         if ($parent_order->type == 2 && $parent_order->parent_id ==0){
-            return view('order-group.group-form-member',[
-                'parent_order'=>$parent_order,
+            return view('order-group.group-form-member', [
+                'parent_order' => $parent_order,
             ]);
         }else{
             return redirect(route('index'));
