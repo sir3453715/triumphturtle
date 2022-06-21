@@ -64,7 +64,7 @@ Route::get('ajaxSailingData', 'HomeController@ajaxSailingData');
 Route::post('updateToken', 'HomeController@updateToken');
 Route::post('confirmToken', 'OrderController@confirmToken');
 
-
+//Route::get('mailTEST','TestController@mailTEST');
 /**
  * 後台 Route
  */
