@@ -102,7 +102,7 @@ class PaymentController extends Controller
     public function update(Request $request, $id)
     {
         $order = Order::find($id);
-        $originalname = $order->seccode.' 出帳帳單.pdf';
+        $originalname = $order->seccode.'出帳帳單.pdf';
         $other_title = $request->get('other_title');
         $other_qty = $request->get('other_qty');
         $other_unit = $request->get('other_unit');
@@ -159,7 +159,7 @@ class PaymentController extends Controller
             $message->from(env('MAIL_USERNAME'),  env('MAIL_FROM_NAME'));
             $message->to($to['email'], $to['name'])
                 ->subject('【海龜集運】付款通知');
-            $message->attach(storage_path('app/public/billing').'/'.$originalname);
+            $message->attach(storage_path().'/app/public/billing'.'/'.$originalname);
         });
         Storage::disk('billing')->delete($originalname);
 
