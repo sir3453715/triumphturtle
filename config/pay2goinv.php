@@ -2,7 +2,7 @@
 
 return [
 
-    'Debug' => env('INVOICE_STORE_DEBUG'),
+    'Debug' => 0,
 
     // 商店代號
     'MerchantID' => '330186780',

@@ -531,7 +531,7 @@ class OrderDetailController extends Controller
                 Storage::disk('billing')->put($originalname,$content);
 
                 /** 用戶收信-請款通知 */
-                $to = ['email'=>'han.nomadots@gmail.com','name'=>$order->sender_name];
+                $to = ['email'=>$order->sender_email,'name'=>$order->sender_name];
                 $data = [
                     'msg'=>'訂單編號: '.$order->seccode.' <br/><br/>附件為此票寄送的帳單，再請您儘速確認付款，以利加速您出貨的進度。<br/>對於帳單有任何疑問，歡迎與我們客服直接聯絡，謝謝！<br/>',
                     'for_title'=>$order->sender_name,
