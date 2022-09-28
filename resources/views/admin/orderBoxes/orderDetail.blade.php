@@ -56,18 +56,23 @@
                                             <option value="5" {!! $html->selectSelected(5,$queried['status']) !!}>取消</option>
                                         </select>
                                     </div>
-{{--                                    <div class="form-group mr-3">--}}
-{{--                                        <label for="sailing_id">航班</label>--}}
-{{--                                        <select class="form-control" name="sailing_id" id="sailing_id" >--}}
-{{--                                            <option value="">請選擇</option>--}}
-{{--                                            @foreach($sailings as $sailing)--}}
-{{--                                                <option value="{{$sailing->id}}" {!! $html->selectSelected($sailing->id,$queried['sailing_id']) !!}>{{$sailing->title}}</option>--}}
-{{--                                            @endforeach--}}
-{{--                                        </select>--}}
-{{--                                    </div>--}}
-                                    <div class="form-group align-self-center">
-                                        <button type="submit" class="form-control btn btn-outline-dark">篩選</button>
+                                    <div class="form-group mr-3">
+                                        <label for="sailing_id">航班</label>
+                                        <select class="form-control" name="sailing_id" id="sailing_id" >
+                                            <option value="">請選擇</option>
+                                            @foreach($sailings as $sailing)
+                                                <option value="{{$sailing->id}}" {!! $html->selectSelected($sailing->id,$queried['sailing_id']) !!}>{{$sailing->title}}</option>
+                                            @endforeach
+                                        </select>
                                     </div>
+                                    <div class="form-group align-self-center mr-3">
+                                        <button type="submit" class="form-control btn btn-outline-dark" name="submit" value="submit">篩選</button>
+                                    </div>
+
+{{--                                    <div class="form-group align-self-center">--}}
+{{--                                        <button type="submit" class="form-control btn btn-success" name="submit" value="export" form="filterForm">下載全部(所有分頁)</button>--}}
+{{--                                    </div>--}}
+
                                     <div class="ml-auto">
                                         <a href="{{route('admin.order-detail.create')}}"><button type="button" class="btn btn-primary">建立</button></a>
                                     </div>

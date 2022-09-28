@@ -52,14 +52,73 @@ class OrderDetailController extends Controller
             $queried['sailing_id'] = $request->get('sailing_id');
             $orders = $orders->where('sailing_id','=',$request->get('sailing_id'));
         }
-        $orders = $orders->orderBy('created_at','DESC')->paginate(30);
 
-        $sailings = SailingSchedule::all();
-        return view('admin.orderBoxes.orderDetail',[
-            'orders'=>$orders,
-            'sailings'=>$sailings,
-            'queried'=>$queried,
-        ]);
+        if($request->get('submit') == 'export'){
+            $data = array();
+            $orders = $orders->get();
+            foreach ($orders as $order){
+                foreach ($order->box as $key => $box){
+                    if($key == 0){
+                        $data[]=[
+                            'sender_name'=>$order->sender_name,
+                            'sender_phone'=>$order->sender_phone,
+                            'sender_address'=>$order->sender_address,
+                            'sender_company'=>$order->sender_company,
+                            'sender_taxid'=>$order->sender_taxid,
+                            'for_name'=>$order->for_name,
+                            'for_phone'=>$order->for_phone,
+                            'for_address'=>$order->for_address,
+                            'for_company'=>$order->for_company,
+                            'for_taxid'=>$order->for_taxid,
+                            'box_seccode'=>$box->box_seccode,
+                            'tracking_number'=>$box->tracking_number,
+                        ];
+                    }else{
+                        $data[]=[
+                            'sender_name'=>'',
+                            'sender_phone'=>'',
+                            'sender_address'=>'',
+                            'sender_company'=>'',
+                            'sender_taxid'=>'',
+                            'for_name'=>'',
+                            'for_phone'=>'',
+                            'for_address'=>'',
+                            'for_company'=>'',
+                            'for_taxid'=>'',
+                            'box_seccode'=>$box->box_seccode,
+                            'tracking_number'=>$box->tracking_number,
+                        ];
+                    }
+                }
+            }
+            $title = '下載宅配資訊';
+
+            $headings = [
+                'sender_name'=>"寄件者姓名",
+                'sender_phone'=>"寄件者電話",
+                'sender_address'=>"寄件者地址",
+                'sender_company'=>"公司名稱",
+                'sender_taxid'=>"統編",
+                'for_name'=>"收件者姓名",
+                'for_phone'=>"收件者電話",
+                'for_address'=>"收件者地址",
+                'for_company'=>"公司名稱",
+                'for_taxid'=>"統編",
+                'box_seccode'=>"運單號",
+                'tracking_number'=>"宅配單號",
+            ];
+
+            return Excel::download(new DemoExport($data,$title,$headings),'宅配資訊'.date('Y-m-d_H_i_s'). '.xls');
+        }else{
+            $orders = $orders->orderBy('created_at','DESC')->paginate(30);
+            $sailings = SailingSchedule::all();
+            return view('admin.orderBoxes.orderDetail',[
+                'orders'=>$orders,
+                'sailings'=>$sailings,
+                'queried'=>$queried,
+            ]);
+        }
+
     }
 
     /**
