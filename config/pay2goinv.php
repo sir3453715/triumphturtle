@@ -5,13 +5,13 @@ return [
     'Debug' => env('INVOICE_STORE_DEBUG'),
 
     // 商店代號
-    'MerchantID' => env('INVOICE_STORE_ID'),
+    'MerchantID' => '330186780',
 
     // HashKey
-    'HashKey' => env('INVOICE_HashKey'),
+    'HashKey' => 'v5d5bHn6760pU03W2GOYE1mvLHBlIjxS',
 
     // HashIv
-    'HashIV' => env('INVOICE_HashIV'),
+    'HashIV' => 'PcvJEDNa2Wt0f6BC',
 
     // 回傳格式：JSON / String
     'RespondType' => 'JSON',
