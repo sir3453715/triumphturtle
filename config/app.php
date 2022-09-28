@@ -180,6 +180,7 @@ return [
 
         Maatwebsite\Excel\ExcelServiceProvider::class,
 
+        Treerful\Invoice\Pay2goInvoiceServiceProvider::class,
     ],
 
     /*
