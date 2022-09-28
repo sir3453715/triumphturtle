@@ -26,7 +26,7 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col filter-form">
-                            <form class="filter">
+                            <form class="filter" id="filterForm">
                                 <div class="form-group row">
                                     <div class="form-group mr-3">
                                         <label for="seccode">訂單編號</label>
@@ -115,8 +115,11 @@
                                         <button type="submit" class="d-none" id="bulkSubmit" name="submit" value="action"></button>
                                     </div>
                                     <div class="form-group">
-                                        <button type="submit" class="form-control btn btn-outline-success" name="submit" value="delivery" formtarget="_blank">下載宅配資訊</button>
+                                        <button type="submit" class="form-control btn btn-outline-success mr-3" name="submit" value="delivery" formtarget="_blank">下載宅配資訊</button>
                                     </div>
+{{--                                    <div class="form-group">--}}
+{{--                                        <button type="submit" class="form-control btn btn-danger mr-3" name="submit" value="payment" >批次發送請款單</button>--}}
+{{--                                    </div>--}}
                                 </div>
                             </form>
                             <div class="ml-auto mt-2 border-top">

@@ -15,7 +15,10 @@ use App\Models\SailingSchedule;
 use Facebook\Facebook;
 use Facebook\FacebookRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -489,6 +492,61 @@ class OrderDetailController extends Controller
             ];
 
             return Excel::download(new DemoExport($data,$title,$headings),'宅配資訊'.date('Y-m-d_H_i_s'). '.xls');
+        }
+        if($submit == 'payment'){
+            $orders = Order::whereIn('id',$order_ids)->orderBy('seccode','ASC')->get();
+            foreach ($orders as $order){
+                $originalname = $order->seccode.'出帳帳單.pdf';
+                $final_price = $order->total_price;
+                $tax_price = round($final_price*0.05);
+                $final_price += $tax_price;
+                $data = [
+                    'pay_status'=>2,
+                    'tax_price' => $tax_price,
+                    'final_price'=>$final_price,
+                ];
+                $order->fill($data);
+                $order->save();
+
+                $order = Order::find($order->id);
+
+                $other_total = 0;
+                $order_data = $order->toArray();
+                $order_data['sailing']=$order->sailing->toArray();
+                $order_data['box_count'] = count($order->box);
+                if($order_data['other_price']){
+                    $other_price = unserialize($order_data['other_price']);
+                    $order_data['other_price']=$other_price;
+                    foreach ($other_price as $other){
+                        $other_total += $other['other_qty']*$other['other_unit'];
+                    }
+                }
+                $order_data['subtotal'] = $order_data['sailing']['final_price'] * count($order->box);
+                $order_data['subtotal'] += $other_total;
+                $order_data['tax_value'] = ($order_data['invoice'] != 1)? $order_data['subtotal'] * 0.05 :0 ;
+
+                $pdf = App::make('dompdf.wrapper');
+                $pdf->loadView('pdf.payment',$order_data)->setPaper('a4')->setOptions(['dpi' => 140, 'defaultFont' => 'msyh' , 'isFontSubsettingEnabled'=>true ,'isRemoteEnabled'=>true]);
+                $content = $pdf->download()->getOriginalContent();
+                Storage::disk('billing')->put($originalname,$content);
+
+                /** 用戶收信-請款通知 */
+                $to = ['email'=>'han.nomadots@gmail.com','name'=>$order->sender_name];
+                $data = [
+                    'msg'=>'訂單編號: '.$order->seccode.' <br/><br/>附件為此票寄送的帳單，再請您儘速確認付款，以利加速您出貨的進度。<br/>對於帳單有任何疑問，歡迎與我們客服直接聯絡，謝謝！<br/>',
+                    'for_title'=>$order->sender_name,
+                ];
+                //寄出信件
+                Mail::send('email.email-pay-info', $data, function($message) use ($to,$originalname) {
+                    $message->from(env('MAIL_USERNAME'),  env('MAIL_FROM_NAME'));
+                    $message->to($to['email'], $to['name'])
+                        ->subject('【海龜集運】付款通知');
+                    $message->attach(storage_path().'/app/public/billing'.'/'.$originalname);
+                });
+                Storage::disk('billing')->delete($originalname);
+            }
+
+            return redirect(route('admin.order-detail.index'))->with('message', '訂單已批次發送請款單!');
         }
         if($submit == 'action'){
             $orders = Order::whereIn('id',$order_ids)->get();
