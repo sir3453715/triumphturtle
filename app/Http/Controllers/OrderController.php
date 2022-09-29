@@ -195,6 +195,8 @@ class OrderController extends Controller
             'for_company' => $request->get('for_company'),
             'for_taxid' => $request->get('for_taxid'),
             'invoice' => $request->get('invoice'),
+            'reback' => $request->get('reback'),
+            'reback_time' => $request->get('reback_time'),
             'captcha' => $captcha,
         ];
         $order = Order::create($data);

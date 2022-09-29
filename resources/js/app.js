@@ -71,6 +71,19 @@ $(() => {
                 }
             });
         }
+        if ($('.reback-form-required').length > 0){
+            $('.reback-form-required').each((index, ele) => {
+                let style = $(ele).closest('.reback-required').css('display');
+                if (style !== 'none') {
+                    if(!$(ele).val()) {
+                        invalid = true;
+                        focusField(ele);
+                        showValidationMessage(ele, '此欄位必填');
+                        return false;
+                    }
+                }
+            });
+        }
         if ($('#sender_emailConfirm').length >0){
             var mail = $('#sender_email').val();
             if ($('#sender_emailConfirm').val() !== mail){

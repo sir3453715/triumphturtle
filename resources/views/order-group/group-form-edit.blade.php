@@ -52,6 +52,18 @@
                         <label for="sender_email">電子信箱*</label>
                         <input type="text" class="form-control form-required" name="sender_email" id="sender_email" placeholder="輸入電子信箱" value="{{$order->sender_email}}">
                     </div>
+                    <div class="form-group col-6"></div>
+                    <div class="form-group col-6 {{($order->shipment_use!='商業貨')?'':'d-hidden'}}">
+                        <label for="reback">是否寄回台灣*</label>
+                        <select class="form-control hidden-form-required" name="reback" id="reback">
+                            <option value="1" {!! $html->selectSelected($order->reback,'1') !!}>是</option>
+                            <option value="2" {!! $html->selectSelected($order->reback,'2') !!}>否</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-6 {{($order->shipment_use!='商業貨' && $order->reback=='1')?'':'d-hidden'}}">
+                        <label for="reback_time">寄回台灣時間*</label>
+                        <input type="date" class="form-control hidden-form-required" name="reback_time" id="reback_time" value="{{$order->reback_time}}">
+                    </div>
                 </div>
             </fieldset>
             <fieldset class="cus-form-info container-fluid cus-form-wrap">

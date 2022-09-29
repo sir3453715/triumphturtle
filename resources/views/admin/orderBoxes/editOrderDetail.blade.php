@@ -134,6 +134,17 @@
                                         <label for="sender_email">寄件者信箱</label>
                                         <input type="text" class="form-control form-required" name="sender_email" id="sender_email" value="{{$order->sender_email}}">
                                     </div>
+                                    <div class="form-group col-md-3">
+                                        <label for="reback">是否寄回台灣*</label>
+                                        <select class="form-control form-required" name="reback" id="reback">
+                                            <option value="1" {!! $html->selectSelected($order->reback,'1') !!}>是</option>
+                                            <option value="2" {!! $html->selectSelected($order->reback,'2') !!}>否</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-md-3">
+                                        <label for="reback_time">寄回台灣時間*</label>
+                                        <input type="date" class="form-control form-required" name="reback_time" id="reback_time" value="{{$order->reback_time}}">
+                                    </div>
                                 </div>
                                 <div class="form-group row border-top">
                                     <h5>收件資訊</h5>

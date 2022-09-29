@@ -75,6 +75,8 @@ class OrderDetailController extends Controller
                             'for_taxid'=>$order->for_taxid,
                             'box_seccode'=>$box->box_seccode,
                             'tracking_number'=>$box->tracking_number,
+                            'reback'=>($order->reback==1)?'是':'否',
+                            'reback_time'=>$order->reback_time,
                         ];
                     }else{
                         $data[]=[
@@ -90,6 +92,8 @@ class OrderDetailController extends Controller
                             'for_taxid'=>'',
                             'box_seccode'=>$box->box_seccode,
                             'tracking_number'=>$box->tracking_number,
+                            'reback'=>'',
+                            'reback_time'=>'',
                         ];
                     }
                 }
@@ -109,6 +113,8 @@ class OrderDetailController extends Controller
                 'for_taxid'=>"統編",
                 'box_seccode'=>"運單號",
                 'tracking_number'=>"宅配單號",
+                'reback'=>"是否寄回台灣",
+                'reback_time'=>"寄回時間",
             ];
 
             return Excel::download(new DemoExport($data,$title,$headings),'宅配資訊'.date('Y-m-d_H_i_s'). '.xls');
@@ -182,6 +188,10 @@ class OrderDetailController extends Controller
             $final_price += $tax_price;
         }
 
+        $reback_time = '';
+        if($request->get('reback') == 1){
+            $reback_time = $request->get('reback_time');
+        }
         $data = [
             'sailing_id' => $request->get('sailing_id'),
             'type' => $request->get('type'),
@@ -204,6 +214,8 @@ class OrderDetailController extends Controller
             'for_company' => $request->get('for_company'),
             'for_taxid' => $request->get('for_taxid'),
             'invoice' => $request->get('invoice'),
+            'reback' => $request->get('reback'),
+            'reback_time' => $reback_time,
             'captcha'=>$captcha,
             'total_price' => $total_price,
             'tax_price' => $tax_price,
@@ -303,6 +315,10 @@ class OrderDetailController extends Controller
             $tax_price = $total_price * 0.05;
             $final_price += $tax_price;
         }
+        $reback_time = '';
+        if($request->get('reback') == 1){
+            $reback_time = $request->get('reback_time');
+        }
         $data = [
             'status' => $request->get('status'),
             'pay_status' => $request->get('pay_status'),
@@ -319,6 +335,8 @@ class OrderDetailController extends Controller
             'for_company' => $request->get('for_company'),
             'for_taxid' => $request->get('for_taxid'),
             'invoice' => $request->get('invoice'),
+            'reback' => $request->get('reback'),
+            'reback_time' => $reback_time,
             'total_price' => $total_price,
             'tax_price' => $tax_price,
             'final_price' => round($final_price),
@@ -455,6 +473,8 @@ class OrderDetailController extends Controller
                             'for_taxid'=>$order->for_taxid,
                             'box_seccode'=>$box->box_seccode,
                             'tracking_number'=>$box->tracking_number,
+                            'reback'=>($order->reback==1)?'是':'否',
+                            'reback_time'=>$order->reback_time,
                         ];
                     }else{
                         $data[]=[
@@ -470,6 +490,8 @@ class OrderDetailController extends Controller
                             'for_taxid'=>'',
                             'box_seccode'=>$box->box_seccode,
                             'tracking_number'=>$box->tracking_number,
+                            'reback'=>'',
+                            'reback_time'=>'',
                         ];
                     }
                 }
@@ -489,6 +511,8 @@ class OrderDetailController extends Controller
                 'for_taxid'=>"統編",
                 'box_seccode'=>"運單號",
                 'tracking_number'=>"宅配單號",
+                'reback'=>'是否寄回台灣',
+                'reback_time'=>'寄回時間',
             ];
 
             return Excel::download(new DemoExport($data,$title,$headings),'宅配資訊'.date('Y-m-d_H_i_s'). '.xls');
