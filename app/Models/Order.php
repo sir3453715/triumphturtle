@@ -20,7 +20,8 @@ class Order extends Model
         'user_id', 'sailing_id', 'seccode', 'serial_number', 'person_number', 'type', 'parent_id', 'status', 'pay_status',
         'total_price','tax_price','final_price','shipment_use', 'sender_name', 'sender_phone', 'sender_address', 'sender_company',
         'sender_taxid', 'sender_email','for_name', 'for_phone', 'for_address', 'for_company', 'for_taxid', 'invoice', 'captcha',
-        'updateToken','other_price'
+        'updateToken','other_price','invoice_status','invoice_code','invoice_cancel_reason','invoice_result','invoice_time',
+        'reback','reback_time'
     ];
 
     public function user(){
