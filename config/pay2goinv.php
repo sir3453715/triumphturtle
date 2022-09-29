@@ -2,16 +2,21 @@
 
 return [
 
-    'Debug' => 0,
+//    'Debug' => 0,//正式
+    'Debug' => '1',//測試
 
     // 商店代號
-    'MerchantID' => '330186780',
+//    'MerchantID' => 330186780,//正式
+    'MerchantID' => '34680280',//測試
 
     // HashKey
-    'HashKey' => 'v5d5bHn6760pU03W2GOYE1mvLHBlIjxS',
+//    'HashKey' => 'v5d5bHn6760pU03W2GOYE1mvLHBlIjxS',//正式
+    'HashKey' => 'Q2ppAXlSQHisuGkrQN0Qtd5eiTQb9AE3',//測試
 
     // HashIv
-    'HashIV' => 'PcvJEDNa2Wt0f6BC',
+//    'HashIV' => 'PcvJEDNa2Wt0f6BC',//正式
+    'HashIV' => 'CJgaprArIvbgCBUP',//測試
+
 
     // 回傳格式：JSON / String
     'RespondType' => 'JSON',

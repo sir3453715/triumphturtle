@@ -100,6 +100,10 @@ Route::group(['prefix'=>'admin', 'middleware' => ['web', 'admin.area'],'as'=>'ad
             ->name('importList');
         Route::post('/import', 'Admin\Menu\OrderDetailController@import')
             ->name('import');
+        Route::get('/issueInvoice/{id}', 'Admin\Menu\OrderDetailController@issueInvoice')
+            ->name('issueInvoice');
+        Route::post('/invalidInvoice/{id}', 'Admin\Menu\OrderDetailController@invalidInvoice')
+            ->name('invalidInvoice');
     });
 });
 

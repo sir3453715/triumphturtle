@@ -143,7 +143,7 @@
                                     </div>
                                     <div class="form-group col-md-3">
                                         <label for="reback_time">寄回台灣時間*</label>
-                                        <input type="date" class="form-control form-required" name="reback_time" id="reback_time" value="{{$order->reback_time}}">
+                                        <input type="date" class="form-control" name="reback_time" id="reback_time" value="{{$order->reback_time}}">
                                     </div>
                                 </div>
                                 <div class="form-group row border-top">

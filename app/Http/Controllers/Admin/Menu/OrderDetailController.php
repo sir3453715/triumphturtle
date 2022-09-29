@@ -21,6 +21,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Maatwebsite\Excel\Facades\Excel;
+use Treerful\Invoice\Pay2goInvoice\Invoice;
 
 class OrderDetailController extends Controller
 {
@@ -670,5 +671,68 @@ class OrderDetailController extends Controller
         }
 
         return Excel::download(new OrdersExcelExport($order_data),$parentOrder->serial_number.' 裝箱單'.date('Y-m-d_H_i_s'). '.xls');
+    }
+
+
+    /**
+     * 發票開立 & 作廢
+    */
+
+    public function issueInvoice($id){
+        $order = Order::find($id);
+        $data = [
+            'BuyerType' => '0', // B2C
+            'MerchantOrderNo' => str_replace('-','_',$order->seccode).substr(md5(uniqid(rand())),0,3),  ##產生隨機字串避免重複號碼開立,
+            'BuyerName' => $order->sender_name,
+            'BuyerEmail' => $order->sender_email,
+            'CarrierType' => '', // 0:手機條碼, 1:自然人憑證條碼載具 2:智付寶載具
+            'CarrierNum' => '',
+            'ItemName' => '物流費用',
+            'ItemCount' => '1',
+            'ItemPrice' => $order->final_price,
+            'ItemUnit' => '個',
+        ];
+
+        $invoice = new Invoice();
+        $result = $invoice->create($data);
+
+
+        $data = [
+            'invoice_status'=>1,
+            'invoice_code'=>$result['InvoiceNumber'],
+            'invoice_result'=>json_encode($result),
+            'invoice_time'=>$result['CreateTime'],
+        ];
+        $order->fill($data);
+        ActionLog::create_log($order);
+        $order->save();
+
+        return redirect(route('admin.order-detail.index'))->with('message', '發票開立成功!');
+    }
+    public function invalidInvoice(Request $request,$id){
+        $order = Order::find($id);
+
+        $data = [
+            'InvoiceNumber' => $order->invoice_code,
+            'InvalidReason' => $request->get('reason'),
+        ];
+        $invoice = new Invoice();
+        $result = $invoice->void($data);
+
+        if($result['Status'] == 'LIB10005'){
+            return redirect(route('admin.order-detail.index'))->with('error', $result['Message']);
+        }else{
+            $data = [
+                'invoice_status'=>2,
+                'invoice_code'=>$result['InvoiceNumber'],
+                'invoice_result'=>json_encode($result),
+                'invoice_cancel_reason'=>$request->get('reason'),
+                'invoice_time'=>$result['CreateTime'],
+            ];
+            $order->fill($data);
+            ActionLog::create_log($order);
+            $order->save();
+            return redirect(route('admin.order-detail.index'))->with('message', '發票作廢成功!');
+        }
     }
 }
