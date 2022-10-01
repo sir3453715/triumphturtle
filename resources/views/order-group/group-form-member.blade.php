@@ -59,7 +59,7 @@
                         <input type="text" class="form-control form-required" name="sender_emailConfirm" id="sender_emailConfirm" placeholder="再次輸入電子信箱">
                     </div>
                     <div class="form-group col-6 d-none reback-required" id="reback-filed">
-                        <label for="reback">是否寄回台灣*</label>
+                        <label for="reback">是否回台灣*</label>
                         <select class="form-control reback-form-required" name="reback" id="reback">
                             <option value="" hidden>請選擇</option>
                             <option value="1">是</option>
@@ -67,7 +67,7 @@
                         </select>
                     </div>
                     <div class="form-group col-6 d-none reback-required" id="reback-time-field">
-                        <label for="reback_time">寄回時間*</label>
+                        <label for="reback_time">回台時間*</label>
                         <input type="date" class="form-control reback-form-required" name="reback_time" id="reback_time">
                     </div>
                 </div>
@@ -255,7 +255,7 @@
                     }
                 }
             });
-            /** 220929 寄回台灣判斷*/
+            /** 220929 回台灣判斷*/
             $('#reback').on('change',function (){
                 if ($(this).val() === '1'){
                     $('#reback-time-field').removeClass('d-none');

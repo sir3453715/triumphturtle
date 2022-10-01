@@ -14,8 +14,8 @@ class AddOrderRebackField extends Migration
     public function up()
     {
         Schema::table('orders', function (Blueprint $table) {
-            $table->string('reback')->comment('是否寄回台灣[1:是,2:否]')->nullable();
-            $table->string('reback_time')->comment('寄回時間')->nullable();
+            $table->string('reback')->comment('是否回台灣[1:是,2:否]')->nullable();
+            $table->string('reback_time')->comment('回台時間')->nullable();
             $table->string('invoice_time')->comment('發票時間')->nullable();//補發票時間
         });
     }

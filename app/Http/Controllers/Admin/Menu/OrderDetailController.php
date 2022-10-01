@@ -114,8 +114,8 @@ class OrderDetailController extends Controller
                 'for_taxid'=>"統編",
                 'box_seccode'=>"運單號",
                 'tracking_number'=>"宅配單號",
-                'reback'=>"是否寄回台灣",
-                'reback_time'=>"寄回時間",
+                'reback'=>"是否回台灣",
+                'reback_time'=>"回台時間",
             ];
 
             return Excel::download(new DemoExport($data,$title,$headings),'宅配資訊'.date('Y-m-d_H_i_s'). '.xls');
@@ -512,8 +512,8 @@ class OrderDetailController extends Controller
                 'for_taxid'=>"統編",
                 'box_seccode'=>"運單號",
                 'tracking_number'=>"宅配單號",
-                'reback'=>'是否寄回台灣',
-                'reback_time'=>'寄回時間',
+                'reback'=>'是否回台灣',
+                'reback_time'=>'回台時間',
             ];
 
             return Excel::download(new DemoExport($data,$title,$headings),'宅配資訊'.date('Y-m-d_H_i_s'). '.xls');
