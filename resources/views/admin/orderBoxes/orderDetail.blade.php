@@ -68,12 +68,9 @@
                                     <div class="form-group align-self-center mr-3">
                                         <button type="submit" class="form-control btn btn-outline-dark" name="submit" value="submit">篩選</button>
                                     </div>
-
-                                    @if(\Illuminate\Support\Facades\Auth::id() == 1)
-                                        <div class="form-group align-self-center">
-                                            <button type="submit" class="form-control btn btn-success" name="submit" value="export" form="filterForm">下載全部(所有分頁)</button>
-                                        </div>
-                                    @endif
+                                    <div class="form-group align-self-center">
+                                        <button type="submit" class="form-control btn btn-success" name="submit" value="export" form="filterForm">下載全部(所有分頁)</button>
+                                    </div>
 
                                     <div class="ml-auto">
                                         <a href="{{route('admin.order-detail.create')}}"><button type="button" class="btn btn-primary">建立</button></a>
@@ -120,11 +117,9 @@
                                         <button type="submit" class="form-control btn btn-outline-success mr-3" name="submit" value="delivery" formtarget="_blank">下載宅配資訊</button>
                                     </div>
 
-                                    @if(\Illuminate\Support\Facades\Auth::id() == 1)
-                                        <div class="form-group">
-                                            <button type="submit" class="form-control btn btn-danger mr-3" name="submit" value="payment" >批次發送請款單</button>
-                                        </div>
-                                    @endif
+                                    <div class="form-group">
+                                        <button type="submit" class="form-control btn btn-danger mr-3" name="submit" value="payment" >批次發送請款單</button>
+                                    </div>
                                 </div>
                             </form>
                             <div class="ml-auto mt-2 border-top">
@@ -159,9 +154,7 @@
                                 <th>運單</th>
                                 <th>請款單</th>
                                 <th>動作</th>
-                                @if(\Illuminate\Support\Facades\Auth::id() == 1)
-                                    <th width="10%">電子發票</th>
-                                @endif
+                                <th width="10%">電子發票</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -240,28 +233,26 @@
                                                 </form>
                                             @endif
                                         </td>
-                                        @if(\Illuminate\Support\Facades\Auth::id() == 1)
-                                            <td >
-                                                <div style="display: inline-grid;place-items: center;">
-                                                    @if($order->invoice_status == 1)
-                                                        <span> 發票號碼 : {{$order->invoice_code}} </span>
-                                                        <span> 開立時間 : {{$order->invoice_time}} </span>
+                                        <td >
+                                            <div style="display: inline-grid;place-items: center;">
+                                                @if($order->invoice_status == 1)
+                                                    <span> 發票號碼 : {{$order->invoice_code}} </span>
+                                                    <span> 開立時間 : {{$order->invoice_time}} </span>
 
-                                                        <form action="{{ route('admin.order-detail.invalidInvoice', ['id' => $order->id]) }}" method="post" class="form-btn">
-                                                            @csrf
-                                                            <input type="text" id="reason" name="reason" class="d-none">
-                                                            <button class="btn btn-sm btn-outline-danger invalid-confirm">發票作廢</button>
-                                                        </form>
-                                                    @elseif($order->invoice_status ==2)
-                                                        <span class="text-danger"> 已作廢發票 : {{$order->invoice_code}} </span>
-                                                        <span class="text-danger"> 作廢時間 : {{$order->invoice_time}} </span>
-                                                        <a href="{{route('admin.order-detail.issueInvoice',['id'=>$order->id])}}" class="btn btn-sm btn-outline-success">重新開立</a>
-                                                    @else
-                                                        <a href="{{route('admin.order-detail.issueInvoice',['id'=>$order->id])}}" class="btn btn-sm btn-outline-success">開立發票</a>
-                                                    @endif
-                                                </div>
-                                            </td>
-                                        @endif
+                                                    <form action="{{ route('admin.order-detail.invalidInvoice', ['id' => $order->id]) }}" method="post" class="form-btn">
+                                                        @csrf
+                                                        <input type="text" id="reason" name="reason" class="d-none">
+                                                        <button class="btn btn-sm btn-outline-danger invalid-confirm">發票作廢</button>
+                                                    </form>
+                                                @elseif($order->invoice_status ==2)
+                                                    <span class="text-danger"> 已作廢發票 : {{$order->invoice_code}} </span>
+                                                    <span class="text-danger"> 作廢時間 : {{$order->invoice_time}} </span>
+                                                    <a href="{{route('admin.order-detail.issueInvoice',['id'=>$order->id])}}" class="btn btn-sm btn-outline-success">重新開立</a>
+                                                @else
+                                                    <a href="{{route('admin.order-detail.issueInvoice',['id'=>$order->id])}}" class="btn btn-sm btn-outline-success">開立發票</a>
+                                                @endif
+                                            </div>
+                                        </td>
                                     </tr>
                                 @endforeach
                             </tbody>
