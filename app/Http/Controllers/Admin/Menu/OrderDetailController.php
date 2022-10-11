@@ -121,7 +121,7 @@ class OrderDetailController extends Controller
             return Excel::download(new DemoExport($data,$title,$headings),'宅配資訊'.date('Y-m-d_H_i_s'). '.xls');
         }else{
             $orders = $orders->orderBy('created_at','DESC')->paginate(30);
-            $sailings = SailingSchedule::all();
+            $sailings = SailingSchedule::whereNotNull('id')->orderBy('created_at','DESC')->get();
             return view('admin.orderBoxes.orderDetail',[
                 'orders'=>$orders,
                 'sailings'=>$sailings,
