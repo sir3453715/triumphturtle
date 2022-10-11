@@ -77,7 +77,7 @@ class OrderDetailController extends Controller
                             'box_seccode'=>$box->box_seccode,
                             'tracking_number'=>$box->tracking_number,
                             'reback'=>($order->reback==1)?'是':'否',
-                            'reback_time'=>$order->reback_time,
+                            'reback_time'=>($order->reback==1)?$order->reback_time:'',
                         ];
                     }else{
                         $data[]=[
@@ -475,7 +475,7 @@ class OrderDetailController extends Controller
                             'box_seccode'=>$box->box_seccode,
                             'tracking_number'=>$box->tracking_number,
                             'reback'=>($order->reback==1)?'是':'否',
-                            'reback_time'=>$order->reback_time,
+                            'reback_time'=>($order->reback==1)?$order->reback_time:'',
                         ];
                     }else{
                         $data[]=[
@@ -718,7 +718,6 @@ class OrderDetailController extends Controller
         ];
         $invoice = new Invoice();
         $result = $invoice->void($data);
-
         if($result['Status'] == 'LIB10005'){
             return redirect(route('admin.order-detail.index'))->with('error', $result['Message']);
         }else{
