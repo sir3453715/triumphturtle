@@ -682,7 +682,7 @@ class OrderDetailController extends Controller
         $order = Order::find($id);
         $data = [
             'BuyerType' => '0', // B2C
-            'MerchantOrderNo' => str_replace('-','_',$order->seccode).substr(md5(uniqid(rand())),0,3),  ##產生隨機字串避免重複號碼開立,
+            'MerchantOrderNo' => str_replace('-','_',$order->seccode).chr(rand(97,122)).chr(rand(97,122)),  ##產生隨機字串避免重複號碼開立,
             'BuyerName' => $order->sender_name,
             'BuyerEmail' => $order->sender_email,
             'CarrierType' => '', // 0:手機條碼, 1:自然人憑證條碼載具 2:智付寶載具
