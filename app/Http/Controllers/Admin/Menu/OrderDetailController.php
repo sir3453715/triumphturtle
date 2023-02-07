@@ -687,7 +687,7 @@ class OrderDetailController extends Controller
             'BuyerEmail' => $order->sender_email,
             'CarrierType' => '', // 0:手機條碼, 1:自然人憑證條碼載具 2:智付寶載具
             'CarrierNum' => '',
-            'ItemName' => '物流費用',
+            'ItemName' => '理貨費',
             'ItemCount' => '1',
             'ItemPrice' => $order->final_price,
             'ItemUnit' => '個',
