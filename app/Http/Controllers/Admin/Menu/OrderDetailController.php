@@ -313,7 +313,7 @@ class OrderDetailController extends Controller
             }
         }
         if($request->get('invoice') != 1){
-            $tax_price = $total_price * 0.05;
+            $tax_price = $final_price * 0.05;
             $final_price += $tax_price;
         }
         $reback_time = '';
