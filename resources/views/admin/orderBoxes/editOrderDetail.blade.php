@@ -99,7 +99,7 @@
                                     </div>
                                     <div class="form-group col-md-3">
                                         <label for="total_price">額外費用-總價</label>
-                                        <input type="text" class="form-control" name="final_price" id="final_price" value="{{$other_total}}" readonly>
+                                        <input type="text" class="form-control" name="other_total" id="other_total" value="{{$other_total}}" readonly>
                                     </div>
                                     <div class="form-group col-md-3">
                                         <label for="total_price">最後總金額</label>
