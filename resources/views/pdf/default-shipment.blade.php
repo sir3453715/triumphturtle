@@ -3,7 +3,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="viewport" content="width=device-width">
-    <title>海龜集運運貨單</title>
+    <title>揪揪運運貨單</title>
     <link rel="shortcut icon" href="{{url('/storage/image/favicon.ico')}}">
     <link href="" rel="stylesheet">
     <style>
@@ -47,7 +47,7 @@
 <body>
     <table>
         <tr class="center-text">
-            <td colspan="5"><img width="200px" src="{{url('/storage/image/triumphturtle.jpg')}}"></td>
+            <td colspan="5"><img width="200px" src="{{url('/storage/image/NewLogo.svg')}}"></td>
         </tr>
         <tr>
             <td colspan="5">一個運單號貼一箱</td>

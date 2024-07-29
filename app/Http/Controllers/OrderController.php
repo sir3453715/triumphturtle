@@ -233,14 +233,14 @@ class OrderController extends Controller
         $parameter = ['id'=>$order->id,'flag'=>true];
         $parameter = base64_encode(serialize($parameter));
         if($request->get('type') == 1){
-           $subject = '【海龜集運】個人寄送 - 訂單已成立';
+           $subject = '【揪揪運】個人寄送 - 訂單已成立';
            $msg = '訂單編號: '.$order->seccode.'<br/>寄件人: '.$order->sender_name.'<br/><br/>請將運單列印後貼至包裹上，並於入倉截止日: '.date('Y/m/d',strtotime($order->sailing->parcel_deadline)).' 前將包裹寄送到倉庫。<br/>請點擊此處: <a href="'.route('pdf-shipment',['id'=>$order->id]).'" target="_blank">下載運單</a><br/><br/>如需查看訂單資訊或修改訂單內容，請前往<a href="'.route('tracking').'">訂單查詢頁面</a>。<br/>';
         }else if($request->get('type') == 2){
             if ($request->get('parent_id') == 0){
-                $subject = '【海龜集運】揪團集運 (主揪) - 訂單已成立';
+                $subject = '【揪揪運】揪團集運 (主揪) - 訂單已成立';
                 $msg = '訂單編號: '.$order->seccode.'<br/>寄件人: '.$order->sender_name.'<br/><br/>請將下列連結及驗證碼分享給您的同團成員，並於訂單截止日: '.date('Y/m/d',strtotime($order->sailing->statement_time)).' 前完成所有寄送資訊與裝箱資料。<br/>分享連結: <a href="'.route('group-member-join',['base64_id'=>base64_encode($order->id)]).'" target="_blank">分享連結</a><br/>驗證碼: '.$order->captcha.'<br/><br/>請將運單列印後貼至包裹上，並於入倉截止日: '.date('Y/m/d',strtotime($order->sailing->parcel_deadline)).' 前將包裹寄送到倉庫。<br/>請點擊此處:  <a href="'.route('pdf-shipment',['id'=>$order->id]).'" target="_blank">下載運單</a><br/><br/>如需查看訂單資訊或修改訂單內容，請前往<a href="'.route('tracking').'">訂單查詢頁面</a>。';
             }else{
-                $subject = '【海龜集運】揪團集運 (跟團) - 訂單已成立';
+                $subject = '【揪揪運】揪團集運 (跟團) - 訂單已成立';
                 $msg = '訂單編號: '.$order->seccode.'<br/>寄件人: '.$order->sender_name.'<br/><br/>請將運單列印後貼至包裹上，並於入倉截止日: '.date('Y/m/d',strtotime($order->sailing->parcel_deadline)).' 前將包裹寄送到倉庫。<br/>請點擊此處: <a href="'.route('pdf-shipment',['id'=>$order->id]).'" target="_blank">下載運單</a><br/>如需查看訂單資訊或修改訂單內容，請前往<a href="'.route('tracking').'">訂單查詢頁面</a>。<br/>';
             }
         }
@@ -258,7 +258,7 @@ class OrderController extends Controller
         $adminMailData = [
             'is_admin'=>true,
             'template'=>'email-order-finish',
-            'subject'=>'【海龜集運】您收到一筆新訂單!',
+            'subject'=>'【揪揪運】您收到一筆新訂單!',
             'for_title'=>'網站管理員',
             'msg'=>'訂單編號: #'.$order->seccode.'<br/>寄件人: '.$order->sender_name.'<br/>寄件人電話: '.$order->sender_phone.'<br/><br/>您也可以至 <a href="'.route('admin.index').'">網站後台</a> 查看訂單詳細資訊。',
         ];
@@ -371,7 +371,7 @@ class OrderController extends Controller
         $adminMailData = [
             'is_admin'=>true,
             'template'=>'email-order-info',
-            'subject'=>'【海龜集運】訂單編號 '.$order->seccode.' 異動通知',
+            'subject'=>'【揪揪運】訂單編號 '.$order->seccode.' 異動通知',
             'for_title'=>'網站管理員',
             'msg'=>'訂單編號: '.$order->seccode.' 訂單資料有更新，請至 <a href="'.route('admin.index').'">網站後台</a> 查看訂單詳細資訊。',
         ];

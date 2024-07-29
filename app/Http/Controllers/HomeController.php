@@ -129,7 +129,7 @@ class HomeController extends Controller
                 'is_admin'=>true,
                 'template'=>'email-order-info',
                 'email'=>$order->sender_email,
-                'subject'=>'【海龜集運】驗證碼',
+                'subject'=>'【揪揪運】驗證碼',
                 'for_title'=>$order->sender_name,
                 'msg'=>'您的訂單修改驗證碼為: '.$updateToken.'<br/><br/>請透過網站進行驗證，或點擊下方連結完成驗證手續:<br/><a target="_blank" href="'.route('tracking-captcha',['seccode'=>$order->seccode]).'">訂單修改驗證</a><br/><br/><span style="color: red;">注意: 如果此活動不是您本人操作，請停止操作並寫信至 service@triumphturtle.com 或撥打客服專線 (02) 2978-0058 聯繫客服人員。</span>',
             ];

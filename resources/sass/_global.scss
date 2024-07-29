@@ -249,7 +249,7 @@ p {
     overflow-y: scroll;
 }
 
-// service page 
+// service page
 #shipping-des {
     background: $color-white;
     margin: 100px auto;
@@ -311,7 +311,7 @@ p {
 // about page
 
 #about {
-    background-image: url(/storage/image/about-bg.svg);
+    background-image: url(/storage/image/new-about-bg.jpg);
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center right;
@@ -319,9 +319,9 @@ p {
 }
 
 .about-content {
-    max-width: 480px;
+    max-width: 80%;
     padding: 5% 20px 0;
-    margin-right: 30%;
+    //margin-right: 30%;
     margin-left: auto;
 
     @media (max-width: 768px) {

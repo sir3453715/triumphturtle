@@ -37,23 +37,23 @@
     @include('component.footer')
 </div>
 
-<div class="fb-customerchat" page_id="106600427558278" greeting_dialog_display="hide"></div>
-<script>
-    window.fbAsyncInit = function() {
-        FB.init({
-            xfbml            : true,
-            version          : 'v6.0'
-        });
-    };
+{{--<div class="fb-customerchat" page_id="106600427558278" greeting_dialog_display="hide"></div>--}}
+{{--<script>--}}
+{{--    window.fbAsyncInit = function() {--}}
+{{--        FB.init({--}}
+{{--            xfbml            : true,--}}
+{{--            version          : 'v6.0'--}}
+{{--        });--}}
+{{--    };--}}
 
-    (function(d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) return;
-        js = d.createElement(s); js.id = id;
-        js.src = "https://connect.facebook.net/zh_TW/sdk/xfbml.customerchat.js";
-        fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));
-</script>
+{{--    (function(d, s, id) {--}}
+{{--        var js, fjs = d.getElementsByTagName(s)[0];--}}
+{{--        if (d.getElementById(id)) return;--}}
+{{--        js = d.createElement(s); js.id = id;--}}
+{{--        js.src = "https://connect.facebook.net/zh_TW/sdk/xfbml.customerchat.js";--}}
+{{--        fjs.parentNode.insertBefore(js, fjs);--}}
+{{--    }(document, 'script', 'facebook-jssdk'));--}}
+{{--</script>--}}
 
 @section('app-scripts')
     <script src="{{ asset('js/app.js') }}"></script>

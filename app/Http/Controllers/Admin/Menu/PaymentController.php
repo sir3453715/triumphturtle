@@ -158,7 +158,7 @@ class PaymentController extends Controller
         Mail::send('email.email-pay-info', $data, function($message) use ($to,$originalname) {
             $message->from(env('MAIL_USERNAME'),  env('MAIL_FROM_NAME'));
             $message->to($to['email'], $to['name'])
-                ->subject('【海龜集運】付款通知');
+                ->subject('【揪揪運】付款通知');
             $message->attach(storage_path().'/app/public/billing'.'/'.$originalname);
         });
         Storage::disk('billing')->delete($originalname);
@@ -189,7 +189,7 @@ class PaymentController extends Controller
                 'is_admin'=>false,
                 'template'=>'email-pay-info',
                 'email'=>$order->sender_email,
-                'subject'=>'【海龜集運】您的款項已確認',
+                'subject'=>'【揪揪運】您的款項已確認',
                 'for_title'=>$order->sender_name,
                 'msg'=>'訂單編號: '.$order->seccode.'<br/><br/>您的訂單已確認付款，我們會盡快為您安排出貨，您可隨時至<a href="'.route('tracking').'">訂單查詢頁面</a> 查看最新的寄送進度，謝謝！',
             ];

@@ -139,7 +139,7 @@ class SailingScheduleController extends Controller
                     'is_admin'=>false,
                     'template'=>'email-order-info',
                     'email'=>$order->sender_email,
-                    'subject'=>'【海龜集運】訂單編號 '.$order->seccode.' 航班準備中',
+                    'subject'=>'【揪揪運】訂單編號 '.$order->seccode.' 航班準備中',
                     'for_title'=>$order->sender_name,
                     'msg'=>'訂單編號: '.$order->seccode.'  狀態更新通知 - 航班準備中！<br/><br/><span style="color: red;">最終優惠價格: '.number_format($defaultPrice).' TWD/箱 (未稅)</span><br/><br/>提醒您請於入倉截止日 '.$sailing->parcel_deadline.' 前將運單列印後貼至包裹上，並寄送至倉庫。<br/><br/>您也可以至 <a href="'.route('tracking').'">訂單查詢頁面</a> 查看訂單詳細資訊。',
                 ];
@@ -153,7 +153,7 @@ class SailingScheduleController extends Controller
                     'is_admin'=>false,
                     'template'=>'email-order-info',
                     'email'=>$order->sender_email,
-                    'subject'=>'【海龜集運】訂單編號 '.$order->seccode.' 航班航行中',
+                    'subject'=>'【揪揪運】訂單編號 '.$order->seccode.' 航班航行中',
                     'for_title'=>$order->sender_name,
                     'msg'=>'訂單編號: '.$order->seccode.'  狀態更新通知 - 航班航行中！<br/><br/>您也可以至 <a href="'.route('tracking').'">訂單查詢頁面</a> 查看訂單詳細資訊。',
                 ];

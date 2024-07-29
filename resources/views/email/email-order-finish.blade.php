@@ -11,7 +11,7 @@
 <table class="mainTable" cellspacing="0" cellpadding="0" style="width: 100%;background-color: #ffffff;font-size: 16px;height: 38px;line-height: 38px;border-collapse: collapse;">
     <tbody>
     <tr>
-        <td><a href="{{route('index')}}" target="_blank"><img width="300px" src="{{url('/storage/image/triumphturtle.jpg')}}"></a></td>
+        <td><a href="{{route('index')}}" target="_blank"><img width="300px" src="{{url('/storage/image/NewLogo.svg')}}"></a></td>
     </tr>
     <tr>
         <td style="padding: 35px 30px;">
@@ -32,12 +32,11 @@
                 </tr>
                 <tr>
                     <td>
-                        海龜集運<br/>
+                        揪揪運<br/>
                         <br/>
                         客服官方信箱：service@triumphturtle.com<br/>
-                        官方臉書專頁：https://www.facebook.com/triumphturtle<br/>
-                        官方Messenger諮詢：https://www.messenger.com/t/triumphturtle<br/>
-                        官方LINE諮詢：@865udsia<br/>
+                        官方臉書專頁：https://www.facebook.com/joinmeship<br/>
+                        官方LINE諮詢：@863wtrdh<br/>
                     </td>
                 </tr>
                 </tbody>

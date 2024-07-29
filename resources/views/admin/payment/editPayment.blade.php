@@ -193,33 +193,33 @@
                                 @if($order->invoice != 1)
                                 <div class="form-group row text-left">
                                     <div class="form-group col-md-3">
-                                        <label for="sender_name">國泰世華銀行 013</label>
+                                        <label for="sender_name">中國信託 822</label>
                                     </div>
                                 </div>
                                 <div class="form-group row text-left">
                                     <div class="form-group col-md-3">
-                                        <label for="sender_taxid">帳號 220-03-500712-1</label>
+                                        <label for="sender_taxid">帳號: 290540054669</label>
                                     </div>
                                 </div>
                                 <div class="form-group row text-left">
                                     <div class="form-group col-md-3">
-                                        <label for="sender_name">戶名：凱漩國際有限公司</label>
+                                        <label for="sender_name">戶名：奧瑞國際有限公司</label>
                                     </div>
                                 </div>
                                 @else
                                     <div class="form-group row text-left">
                                         <div class="form-group col-md-3">
-                                            <label for="sender_name">國泰013</label>
+                                            <label for="sender_name">中國信託 822</label>
                                         </div>
                                     </div>
                                     <div class="form-group row text-left">
                                         <div class="form-group col-md-3">
-                                            <label for="sender_taxid">帳號: 017589515170</label>
+                                            <label for="sender_taxid">帳號: 290540054669</label>
                                         </div>
                                     </div>
                                     <div class="form-group row text-left">
                                         <div class="form-group col-md-3">
-                                            <label for="sender_name">蔡宜茵</label>
+                                            <label for="sender_name">戶名：奧瑞國際有限公司</label>
                                         </div>
                                     </div>
                                 @endif

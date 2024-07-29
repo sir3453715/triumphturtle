@@ -9,8 +9,8 @@
         <img class="d-block d-md-none" src="/storage/image/slide-1-mb.jpg" alt="">
         <div class="slide-caption-wrapper">
              <div class="slide-caption">
-            <h1>海龜集運</h1>
-            <h2 class="deco-line">TRIUMPH TURTLE</h2>
+            <h1>揪揪運</h1>
+            <h2 class="deco-line">Join me shipping!!</h2>
             <p>突破海運的限制!!<br>首創揪團集運平台</p>
             <a class="btn btn-lg btn-solid btn-green" href="{{route('location')}}">查詢倉庫位置</a>
           </div>

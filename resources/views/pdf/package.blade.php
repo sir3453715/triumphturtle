@@ -3,7 +3,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="viewport" content="width=device-width">
-    <title>海龜集運裝箱單</title>
+    <title>揪揪運裝箱單</title>
     <link rel="shortcut icon" href="{{url('/storage/image/favicon.ico')}}">
     <link href="" rel="stylesheet">
     <style>

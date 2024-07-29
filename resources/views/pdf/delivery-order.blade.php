@@ -3,7 +3,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="viewport" content="width=device-width">
-    <title>海龜集運運貨單</title>
+    <title>揪揪運運貨單</title>
     <link rel="shortcut icon" href="{{url('/storage/image/favicon.ico')}}">
     <link href="" rel="stylesheet">
     <style>
@@ -46,7 +46,7 @@
 <body>
 <table>
     <tr class="center-text">
-        <td colspan="4"><img width="200px" src="{{url('/storage/image/triumphturtle.jpg')}}"></td>
+        <td colspan="4"><img width="200px" src="{{url('/storage/image/NewLogo.svg')}}"></td>
     </tr>
     @foreach($OrderBoxes as $num => $box)
             @if($num!=0 && $num%3 ==0)
@@ -54,7 +54,7 @@
             <div class="wrapper-page"></div>
             <table>
                 <tr class="center-text">
-                    <td colspan="4"><img width="200px" src="{{url('/storage/image/triumphturtle.jpg')}}"></td>
+                    <td colspan="4"><img width="200px" src="{{url('/storage/image/NewLogo.svg')}}"></td>
                 </tr>
             @endif
                 <tr>
@@ -87,7 +87,7 @@
                     <td>{{$for_phone}}</td>
                 </tr>
                 <tr>
-                    <td colspan="2" rowspan="2">凱漩國際有限公司<br>TRIUMPH INTERNATIONAL TRADING CO, LTD</td>
+                    <td colspan="2" rowspan="2">奧瑞國際有限公司<br>FF SOLUTION CO LTD.</td>
                     <td colspan="2">地址 Address</td>
                 </tr>
                 <tr>
