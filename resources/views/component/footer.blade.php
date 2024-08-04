@@ -121,7 +121,7 @@
 
         </div>
         <div class="row justify-content-lg-start justify-content-center">
-            <p>© 2021 揪揪運 All Right Reserved. | Design by <a href="https://nomadots.com/" target="_blank"
+            <p>© 2024 揪揪運 All Right Reserved. | Design by <a href="https://nomadots.com/" target="_blank"
                     class="font-weight-bold">Nomadot</a></p>
         </div>
     </div>
