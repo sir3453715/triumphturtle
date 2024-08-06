@@ -11,7 +11,7 @@
 <table class="mainTable" cellspacing="0" cellpadding="0" style="width: 100%;background-color: #ffffff;font-size: 16px;height: 38px;line-height: 38px;border-collapse: collapse;">
     <tbody>
     <tr>
-        <td><a href="{{route('index')}}" target="_blank"><img width="300px" src="{{url('/storage/image/NewLogo.svg')}}"></a></td>
+        <td><a href="{{route('index')}}" target="_blank"><img width="300px" src="{{url('/storage/image/NewLogo.png')}}"></a></td>
     </tr>
     <tr>
         <td style="padding: 35px 30px;">
