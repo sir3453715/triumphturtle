@@ -85,9 +85,6 @@ font-weight: bold;
                 Taipei City 100028, Taiwan (R.O.C.)</td>
         </tr>
         <tr>
-            <td colspan="4" class="border-none text-right">+886 2 29780058</td>
-        </tr>
-        <tr>
             <td colspan="4" class="border-none text-right pb-30">www.triumphturtle.com</td>
         </tr>
         <tr class="export-header center-text">
