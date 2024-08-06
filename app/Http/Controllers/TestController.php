@@ -28,7 +28,7 @@ class TestController extends Controller
         $mailData = [
             'is_admin'=>false,
             'template'=>'email-order-info',
-            'email'=>'han.nomadots@gmail.com',
+            'email'=>'han.nomadot@gmail.com',
             'subject'=>'TEST FOR MAIL SEND',
             'for_title'=>'Han',
             'msg'=>'TEST FOR MAIL SEND CONTENT',
