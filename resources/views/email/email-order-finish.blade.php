@@ -34,7 +34,7 @@
                     <td>
                         揪揪運<br/>
                         <br/>
-                        客服官方信箱：service@triumphturtle.com<br/>
+                        客服官方信箱：service@joinmeship.com<br/>
                         官方臉書專頁：https://www.facebook.com/joinmeship<br/>
                         官方LINE諮詢：@863wtrdh<br/>
                     </td>

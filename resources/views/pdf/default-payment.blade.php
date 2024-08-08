@@ -79,7 +79,7 @@ font-weight: bold;
             </td>
         </tr>
         <tr>
-            <td colspan="4" class="border-none text-right pb-30">www.triumphturtle.com</td>
+            <td colspan="4" class="border-none text-right pb-30">www.joinmeship.com</td>
         </tr>
         <tr class="export-header center-text">
             <td colspan="6">BILL TO</td>
