@@ -81,6 +81,7 @@ Route::group(['prefix'=>'admin', 'middleware' => ['web', 'admin.area'],'as'=>'ad
         Artisan::call('route:clear');
         Artisan::call('config:clear');
         Artisan::call('view:clear');
+        Artisan::call('optimize:clear');
         return redirect()->back()->with('message', '快取已清除!');
     })->name('clear-cache');
 

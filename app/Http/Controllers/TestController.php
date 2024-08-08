@@ -29,9 +29,9 @@ class TestController extends Controller
             'is_admin'=>false,
             'template'=>'email-order-info',
             'email'=>'han.nomadot@gmail.com',
-            'subject'=>'TEST FOR MAIL SEND',
+            'subject'=>'TEST FOR MAIL SEND 12',
             'for_title'=>'Han',
-            'msg'=>'TEST FOR MAIL SEND CONTENT',
+            'msg'=>'TEST FOR MAIL SEND CONTENT 12',
         ];
         dispatch(new SendMailQueueJob($mailData));
         print_r('success');
