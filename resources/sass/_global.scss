@@ -311,35 +311,53 @@ p {
 // about page
 
 #about {
-    background-image: url(/storage/image/new-about-bg.jpg);
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center right;
-    height: 100vh;
+background-color: #f1fbff;
+}
+
+.about-mb-img {
+display: none;
+width: 100%;
+@media (max-width: 768px) {
+    display: block;
+}
 }
 
 .about-content {
-    max-width: 80%;
-    padding: 5% 20px 0;
-    //margin-right: 30%;
-    margin-left: auto;
+    padding: 5%;
+    background-image: url(/storage/image/about-bg-3.png);
+    background-size: 50%;
+    background-repeat: no-repeat;
+    background-position: bottom right;
 
     @media (max-width: 768px) {
         margin-right: auto;
         margin-left: auto;
+        background-image: unset;
     }
 
     h1 {
-        font-size: 50px;
+        font-size: 34px;
         font-weight: 500;
-        color: $blue;
-        margin-bottom: 30px;
 
         @media (max-width: 768px) {
-            font-size: 40px;
+            font-size: 26px;
         }
     }
 
+    h2 {
+            font-size: 30px;
+            @media (max-width: 768px) {
+                font-size: 26px;
+            }
+        }
+
+        h3{
+            font-size: 30px; 
+            color: $blue;
+            @media (max-width: 768px) {
+                font-size: 26px;
+            }
+        }
     p {
         font-size: 16px;
         font-weight: 400;
@@ -348,6 +366,10 @@ p {
         margin-bottom: 20px;
         color: #1E2E38;
     }
+}
+
+.about-text {
+    max-width: 1000px;
 }
 
 // embargo page
