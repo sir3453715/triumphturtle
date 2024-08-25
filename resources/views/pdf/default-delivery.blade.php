@@ -45,7 +45,7 @@
 <body>
 <table>
     <tr class="center-text">
-        <td colspan="5"><img width="200px" src="{{url('/storage/image/NewLogo.svg')}}"></td>
+        <td colspan="5"><img width="200px" src="{{url('/storage/image/NewLogo.png')}}"></td>
     </tr>
     <tr>
         <td colspan="1">運單號 Shipment Code</td>

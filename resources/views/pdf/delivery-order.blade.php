@@ -46,7 +46,7 @@
 <body>
 <table>
     <tr class="center-text">
-        <td colspan="4"><img width="200px" src="{{url('/storage/image/NewLogo.svg')}}"></td>
+        <td colspan="4"><img width="200px" src="{{url('/storage/image/NewLogo.png')}}"></td>
     </tr>
     @foreach($OrderBoxes as $num => $box)
             @if($num!=0 && $num%3 ==0)
@@ -54,7 +54,7 @@
             <div class="wrapper-page"></div>
             <table>
                 <tr class="center-text">
-                    <td colspan="4"><img width="200px" src="{{url('/storage/image/NewLogo.svg')}}"></td>
+                    <td colspan="4"><img width="200px" src="{{url('/storage/image/NewLogo.png')}}"></td>
                 </tr>
             @endif
                 <tr>

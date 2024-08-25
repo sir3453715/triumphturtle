@@ -98,8 +98,9 @@
                 </div>
             </div>
             <div class="col-4 d-flex justify-content-lg-end justify-content-center mb-lg-0 mb-3 pl-1">
-                <a href="{{ app('Option')->line }}" target="_blank" class="mr-2"><img src="/storage/image/line-icon.svg" alt=""></a>
-                <a href="{{ app('Option')->facebook }}" target="blank" class="ml-2"><img src="/storage/image/fb-icon.svg" alt=""></a>
+                <a href="{{ app('Option')->line }}" target="_blank" class="mr-3"><img src="/storage/image/line-icon.svg" alt=""></a>
+                <a href="{{ app('Option')->facebook }}" target="blank" class="mr-3"><img src="/storage/image/fb-icon.svg" alt=""></a>
+                <a href="https://www.instagram.com/joinmeship" target="blank"><img src="/storage/image/ig-icon.svg" alt=""></a>
             </div>
         </div>
         <div class="row flex-lg-row flex-column">
