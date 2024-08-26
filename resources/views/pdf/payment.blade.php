@@ -74,7 +74,7 @@ font-weight: bold;
 <body>
     <table>
         <tr>
-            <td colspan="2" rowspan="5" class="font-title border-none"><img id="payment-logo" src="{{url('/storage/image/NewLogo.svg')}}"></td>
+            <td colspan="2" rowspan="5" class="font-title border-none"><img id="payment-logo" src="{{url('/storage/image/NewLogo.png')}}"></td>
             <td colspan="4" class="font-title border-none text-right" style="font-size: 28px;">奧瑞國際有限公司</td>
         </tr>
         <tr>

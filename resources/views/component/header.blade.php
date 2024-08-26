@@ -1,7 +1,7 @@
 <!-- NAVBAR -->
 <nav class="navbar navbar-expand-xl fixed-top">
     <div class="container">
-    <a class="navbar-brand" href="/"><img class="img-fluid" src="/storage/image/NewLogo.svg" alt="logo"></a>
+    <a class="navbar-brand" href="/"><img class="img-fluid" src="/storage/image/NewLogo.png" alt="logo"></a>
         <button class="navbar-toggler" type="button">
             <span class="navbar-toggler-icon"></span>
         </button>
