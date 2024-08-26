@@ -34,6 +34,7 @@
                         客服官方信箱：service@joinmeship.com<br/>
                         官方臉書專頁：https://www.facebook.com/joinmeship<br/>
                         官方LINE諮詢：@863wtrdh<br/>
+                        官方Instagram：https://www.instagram.com/joinmeship<br/>
                     </td>
                 </tr>
                 </tbody>
