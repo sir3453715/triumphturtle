@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="Colorlib">
+    <link rel="icon" href="{{url('/storage/image/favicon.ico')}}">
     <title>後台系統</title>
     <style>
         .login-bg {

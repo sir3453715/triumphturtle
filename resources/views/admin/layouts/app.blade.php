@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- CSRF Token -->
         <meta name="csrf-token" content="{{ csrf_token() }}">
-        <link rel="shortcut icon" href="{{url('/storage/image/favicon.ico')}}">
+        <link rel="icon" href="{{url('/storage/image/favicon.ico')}}">
         @include('admin.component.title')
         @stack('admin-app-head-scripts')
         @section('admin-app-styles')
