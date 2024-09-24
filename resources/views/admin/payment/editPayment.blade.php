@@ -113,7 +113,11 @@
                                         <span>{{\App\Models\Country::find($billing['sailing']['to_country'])->title}}</span>
                                     </div>
                                     <div class="form-group col-md-2">
-                                        <span> NT${{ number_format($order->sailing->final_price)}} </span>
+                                        @if($order->sailing)
+                                            <span> NT${{ number_format($order->sailing->final_price)}} </span>
+                                        @else
+                                            <span> 航班已移除，查無最終價格 </span>
+                                        @endif
                                     </div>
                                     <div class="form-group col-md-2">
                                         <span id="itemTotal" data-value="{{$billing['itemTotal']}}"> NT${{ number_format($billing['itemTotal']) }} </span>

@@ -43,7 +43,7 @@
                                     <div class="form-group col-md-3">
                                         <label for="sailing_id">船班</label>
                                         <select id="sailing_id" name="sailing_id" class="form-control form-required" disabled>
-                                            <option value="{{$order->sailing_id}}">{{$order->sailing->title}}</option>
+                                            <option value="{{$order->sailing_id}}">{{($order->sailing)?$order->sailing->title:'航班已移除'}}</option>
                                         </select>
                                     </div>
                                     <div class="form-group col-md-3">

@@ -87,8 +87,12 @@
                                 @foreach($orders as $order)
                                     <tr>
                                         <td>{{$order->serial_number}}</td>
-                                        <td>{{$order->sailing->title}}</td>
-                                        <td>{{$order->sailing->fromCountry->title}}</td>
+                                        <td>{{($order->sailing)?$order->sailing->title:'航班已移除'}}</td>
+                                        @if($order->sailing)
+                                            <td>{{($order->sailing->fromCountry)?$order->sailing->fromCountry->title:'航班已移除'}}</td>
+                                        @else
+                                            <td>航班已移除</td>
+                                        @endif
                                         <td>{{$order->sender_name}}</td>
                                         <td>{{$order->boxListData()['price']}}</td>
                                         <td>{{$order->boxListData()['box_count']}}</td>

@@ -143,8 +143,8 @@
                                                 <span class="fa-1x badge badge-danger">下架</span>
                                             @endif
                                         </td>
-                                        <td>{{$sailing->fromCountry->title}}</td>
-                                        <td>{{$sailing->toCountry->title}}</td>
+                                        <td>{{($sailing->fromCountry)?$sailing->fromCountry->title:'國家已移除'}}</td>
+                                        <td>{{($sailing->toCountry)?$sailing->toCountry->title:'國家已移除'}}</td>
                                         <td>{{$sailing->statement_time}}</td>
                                         <td>{{$sailing->parcel_deadline}}</td>
                                         <td>{{$sailing->sailing_date}}</td>
